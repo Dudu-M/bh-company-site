@@ -1,11 +1,56 @@
 ---
 import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import CTASection from '../components/ui/CTASection.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Home - MiningCo">
+  <!-- Hero Section -->
+  <section class="section-spacing bg-gradient-to-br from-neutral-50 to-neutral-100">
+    <div class="container-custom">
+      <div class="max-w-4xl slide-up">
+        <h1 class="mb-6">
+          Powering the Future of Mining
+        </h1>
+        <p class="text-xl text-neutral-600 mb-8 slide-up slide-up-delay-1">
+          Leading provider of innovative mining solutions with over 20 years of excellence in the industry.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 slide-up slide-up-delay-2">
+          <Button href="/services" size="lg">Explore Services</Button>
+          <Button href="/contact" variant="outline" size="lg">Contact Us</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Preview -->
+  <section class="section-spacing">
+    <div class="container-custom">
+      <h2 class="text-center mb-12 slide-up">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[1, 2, 3].map((i) => (
+          <div class="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow slide-up" style={`animation-delay: ${i * 0.1}s`}>
+            <h3 class="mb-4">Service {i}</h3>
+            <p class="text-neutral-600 mb-4">
+              Description of mining service goes here.
+            </p>
+            <Button href="/services" variant="outline">Learn More</Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection 
+    title="Ready to Start Your Project?"
+    description="Get in touch with our team to discuss how we can help bring your mining vision to life."
+    primaryButtonText="Get a Quote"
+    secondaryButtonText="View Projects"
+    secondaryButtonHref="/projects"
+  />
+</BaseLayout>

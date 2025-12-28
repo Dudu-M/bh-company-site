@@ -1,0 +1,81 @@
+---
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Contact', href: '/contact' },
+];
+---
+
+<nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+  <div class="container-custom">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+          <span class="text-white font-bold text-xl">M</span>
+        </div>
+        <span class="font-display font-bold text-xl text-neutral-900">MiningCo</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center space-x-8">
+        {navItems.map((item) => (
+          <li>
+            <a 
+              href={item.href}
+              class="text-neutral-700 hover:text-primary-600 font-medium transition-colors relative group"
+            >
+              {item.name}
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300"></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- CTA Button -->
+      <div class="hidden md:block">
+        <a href="/contact" class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-all hover:scale-105">
+          Get Quote
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <ul class="container-custom py-4 space-y-4">
+      {navItems.map((item) => (
+        <li>
+          <a href={item.href} class="block py-2 text-neutral-700 hover:text-primary-600 font-medium">
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>
+
+<style>
+  /* Add padding to body to account for fixed navbar */
+  :global(body) {
+    padding-top: 5rem;
+  }
+</style>
