@@ -8,6 +8,7 @@ interface Props {
   primaryButtonHref?: string;
   secondaryButtonText?: string;
   secondaryButtonHref?: string;
+  backgroundImage?: string;
 }
 
 const { 
@@ -16,22 +17,36 @@ const {
   primaryButtonText = 'Get Started',
   primaryButtonHref = '/contact',
   secondaryButtonText,
-  secondaryButtonHref
+  secondaryButtonHref,
+  backgroundImage = '/mining.jpg'
 } = Astro.props;
 ---
 
-<section class="section-spacing bg-gradient-to-br from-primary-600 to-primary-800">
-  <div class="container-custom text-center">
-    <h2 class="text-white mb-6">{title}</h2>
+<section class="relative section-spacing overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={backgroundImage} 
+      alt="Background" 
+      class="w-full h-full object-cover"
+    />
+  </div>
+  
+  <!-- Gradient Overlay - Top to bottom -->
+  <div class="absolute inset-0 z-10 bg-gradient-to-b from-primary-900/50 via-primary-900/80 to-primary-900/90"></div>
+  
+  <!-- Content -->
+  <div class="container-custom text-center relative z-20">
+    <h2 class="text-white mb-6 !text-white">{title}</h2>
     <p class="text-white/90 text-xl max-w-3xl mx-auto mb-8">
       {description}
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <Button href={primaryButtonHref} variant="secondary" size="lg">
+      <Button href={primaryButtonHref} variant="primary" size="lg">
         {primaryButtonText}
       </Button>
       {secondaryButtonText && (
-        <Button href={secondaryButtonHref} variant="outline" size="lg" class="!text-white !border-white hover:!bg-white hover:!text-primary-600">
+        <Button href={secondaryButtonHref} variant="outline" size="lg" class="!text-white !border-white hover:!bg-white hover:!text-primary-900">
           {secondaryButtonText}
         </Button>
       )}

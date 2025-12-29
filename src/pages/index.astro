@@ -3,47 +3,133 @@ import Welcome from '../components/Welcome.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import CTASection from '../components/ui/CTASection.astro';
+import ImageTextSection from '../components/sections/ImageTextSection.astro';
+import ValuesGrid from '../components/sections/ValuesGrid.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <BaseLayout title="Home - MiningCo">
-  <!-- Hero Section -->
-  <section class="section-spacing bg-gradient-to-br from-neutral-50 to-neutral-100">
-    <div class="container-custom">
-      <div class="max-w-4xl slide-up">
-        <h1 class="mb-6">
-          Powering the Future of Mining
-        </h1>
-        <p class="text-xl text-neutral-600 mb-8 slide-up slide-up-delay-1">
-          Leading provider of innovative mining solutions with over 20 years of excellence in the industry.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 slide-up slide-up-delay-2">
-          <Button href="/services" size="lg">Explore Services</Button>
-          <Button href="/contact" variant="outline" size="lg">Contact Us</Button>
-        </div>
+ <!-- Hero Section -->
+<section class="relative min-h-[600px] md:min-h-[700px] overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/mining.jpg" 
+      alt="Mining operations" 
+      class="w-full h-full object-cover"
+    />
+  </div>
+  
+  <!-- Gradient Overlay - Dark left to transparent right -->
+  <div class="absolute inset-0 z-10 bg-gradient-to-r from-primary-900 via-primary-900/70 to-transparent"></div>
+  
+  <!-- Content -->
+  <div class="container-custom relative z-20  section-spacing">
+    <div class="max-w-2xl slide-up">
+      <h1 class="mb-6">
+        Powering Sustainable Mining Solutions
+      </h1>
+      <p class="text-xl text-neutral-100 mb-8 slide-up slide-up-delay-1">
+        Driving economic growth through sustainable mine rehabilitation, greenfield development, and agricultural innovation, with every stakeholder included.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 slide-up slide-up-delay-2">
+        <Button href="/operations" size="lg">Explore Operations</Button>
+        <Button href="/contact" variant="outline" size="lg" class="!text-white !border-white hover:!bg-white hover:!text-primary-900">Contact Us</Button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Services Preview -->
-  <section class="section-spacing">
-    <div class="container-custom">
-      <h2 class="text-center mb-12 slide-up">Our Services</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {[1, 2, 3].map((i) => (
-          <div class="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow slide-up" style={`animation-delay: ${i * 0.1}s`}>
-            <h3 class="mb-4">Service {i}</h3>
-            <p class="text-neutral-600 mb-4">
-              Description of mining service goes here.
-            </p>
-            <Button href="/services" variant="outline">Learn More</Button>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+ <!-- Content Sections -->
+<!-- Who We are Section  -->
+<ImageTextSection
+  imageSrc="/man-spraying-machine.jpg"
+  imageAlt="Team collaboration"
+  imagePosition="right"
+  background="white"
+  label="Who We Are"
+  heading="Trusted Solutions for Economic Growth"
+  buttonText="Learn More"
+  buttonHref="/about"
+  buttonVariant="primary"
+>
+  <p>
+    Beth Hakkerem (BH) initiates the implementation of economic growth through strategic 
+    initiatives designed to assimilate all stakeholders and their individual needs. 
+    Through sustainable rehabilitation of derelict mines and mine development from 
+    green fields, BH serves to provide value/wealth all encompassing of the mining and 
+    agricultural initiatives. We aim to achieve community development and empowerment by encompassing 
+    the informal (ASM sector).
+  </p>
+</ImageTextSection>
+
+<!-- What we do Section  -->
+<ImageTextSection
+  imageSrc="/machine-digging.jpg"
+  imageAlt="Mining equipment"
+  imagePosition="left"
+  background="grey"
+  label="Our Expertise"
+  heading="Responsible mining focused on long-term value."
+  buttonText="Our Operations"
+  buttonHref="/operations"
+  buttonVariant="outline"
+>
+  <p>
+    We develop and rehabilitate mining projects through sustainable practices that unlock 
+    economic growth. From restoring derelict sites to developing new opportunities, we 
+    work with communities, partners, and stakeholders to create shared value across the 
+    mining lifecycle.
+  </p>
+</ImageTextSection>
+
+<!-- Sustainability Section -->
+<ImageTextSection
+  imageSrc="/man-digging.jpg"
+  imageAlt="Safety first"
+  imagePosition="right"
+  background="white"
+  label="Sustainability"
+  heading="Mining with care for people, land, and the future."
+  buttonText="Learn More"
+  buttonHref="/sustainability"
+  buttonVariant="primary"
+>
+  <p>
+    Sustainability is central to how we operate. We prioritise environmental rehabilitation, 
+    responsible resource use, and community empowerment — ensuring mining activities leave 
+    a positive, lasting impact beyond extraction.
+  </p>
+</ImageTextSection>
+
+  <!-- VALUES GRID  -->
+  <ValuesGrid
+    background = 'dark'
+    items={[
+      {
+        icon: 'unlock',
+        title: 'Unlocking Land Through Rehabilitation',
+      },
+      {
+        icon: 'handshake',
+        title: 'Strategic Mining Partnerships',
+      },
+      {
+        icon: 'leaf',
+        title: 'Sustainable Environmental Stewardship',
+      },
+      {
+        icon: 'shield',
+        title: 'Protecting Custodians & Investors',
+      }
+    ]}
+  />
+
+  <!-- NEWS SECTION - Add it here -->
+  <NewsSection limit={3} />
 
   <!-- CTA -->
   <CTASection 

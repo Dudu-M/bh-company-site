@@ -1,0 +1,108 @@
+---
+interface Props {
+  imageSrc: string;
+  imageAlt: string;
+  imagePosition?: 'left' | 'right';
+  background?: 'white' | 'grey' | 'dark';
+  label?: string;
+  heading: string;
+  buttonText?: string;
+  buttonHref?: string;
+  buttonVariant?: 'primary' | 'secondary' | 'outline';
+  class?: string;
+}
+
+const { 
+  imageSrc,
+  imageAlt,
+  imagePosition = 'left',
+  background = 'white',
+  label,
+  heading,
+  buttonText,
+  buttonHref,
+  buttonVariant = 'primary',
+  class: className = ''
+} = Astro.props;
+
+import Button from '../ui/Button.astro';
+
+// Background classes
+const backgrounds = {
+  white: 'bg-white',
+  grey: 'bg-neutral-100',
+  dark: 'bg-primary-500'
+};
+
+// Text colors based on background
+const textColors = {
+  white: 'text-primary-500',
+  grey: 'text-primary-500',
+  dark: 'text-white'
+};
+
+const bodyTextColors = {
+  white: 'text-neutral-600',
+  grey: 'text-neutral-600',
+  dark: 'text-neutral-100'
+};
+
+const labelColors = {
+  white: 'text-accent-500',
+  grey: 'text-accent-500',
+  dark: 'text-accent-400'
+};
+
+// Layout order
+const imageOrder = imagePosition === 'left' ? 'order-1' : 'order-2';
+const textOrder = imagePosition === 'left' ? 'order-2' : 'order-1';
+---
+
+<section class={`section-spacing ${backgrounds[background]} ${className}`}>
+  <div class="container-custom">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      <!-- Image -->
+        <div class={`${imageOrder} slide-up`}>
+        <div class="relative h-[400px] md:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-2xl shadow-lg">
+            <img 
+            src={imageSrc} 
+            alt={imageAlt}
+            class="absolute inset-0 w-full h-full object-cover"
+            />
+        </div>
+        </div>
+
+      <!-- Text Content -->
+      <div class={`${textOrder} slide-up slide-up-delay-1`}>
+        {label && (
+          <p class={`${labelColors[background]} font-semibold text-lg mb-4`}>
+            {label}
+          </p>
+        )}
+        
+        <h2 class={`${textColors[background]} mb-6 !${textColors[background]}`}>
+          {heading}
+        </h2>
+        
+        <div class={`${bodyTextColors[background]} text-lg leading-relaxed space-y-4`}>
+          <slot />
+        </div>
+
+        {buttonText && buttonHref && (
+          <div class="mt-8"> {/* flex justify-end  - to align button right*/}
+            <Button 
+              href={buttonHref} 
+              variant={buttonVariant}
+              size="lg"
+              class={background === 'dark' ? '!text-white !border-white hover:!bg-white hover:!text-primary-900' : ''}
+            >
+              {buttonText}
+            </Button>
+          </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+</section>
