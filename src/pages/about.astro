@@ -1,8 +1,224 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import ImageTextSection from '../components/sections/ImageTextSection.astro';
+import ValuesGrid from '../components/sections/ValuesGrid.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import ObjectivesSection from '../components/sections/ObjectivesSection.astro';
+import FounderSection from '../components/sections/FounderSection.astro';
+import USPSection from '../components/sections/USPSection.astro';
+import { Eye, Target } from 'lucide-astro';
 ---
 
-<BaseLayout title="About Us - Beth Hakkerem">
-  <h1>About Us</h1>
-  <p>Welcome to the About Us page of Beth Hakkerem. Learn more about our mission, values, and team.</p>
+<BaseLayout title="About Us - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
+  
+  <!-- Page Hero -->
+  <PageHero 
+    title="About Beth Hakkerem"
+    subtitle="Leading the future of sustainable mining with integrity, innovation, and impact."
+    backgroundImage="/mining.jpg"
+  />
+
+  <!-- Who We Are -->
+  <ImageTextSection
+    imageSrc="/mining.jpg"
+    imageAlt="Our operations"
+    imagePosition="right"
+    background="white"
+    label="Who We Are"
+    heading="Dedicated to Building a Sustainable Future"
+  >
+    <p>
+      Our marketing team is expert in creating smart strategies that help you 
+      grow and connect with audiences. Our marketing team is expert in creating 
+      smart strategies that help you grow and connect with audiences.
+      Our marketing team is expert in creating smart strategies that help you 
+      grow and connect with audiences. Our marketing team is expert in creating 
+      smart strategies that help you grow and connect with audiences.
+    </p>
+    <p>
+      Our marketing team is expert in creating smart strategies that help you 
+      grow and connect with audiences. Our marketing team is expert in creating 
+      smart strategies that help you grow and connect with audiences.
+    </p>
+    <!-- <ul class="space-y-3 mt-4">
+      <li class="flex items-start gap-3">
+        <svg class="w-6 h-6 text-accent-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Strategic consulting from top experts</span>
+      </li>
+      <li class="flex items-start gap-3">
+        <svg class="w-6 h-6 text-accent-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Trusted by startups and global brands</span>
+      </li>
+      <li class="flex items-start gap-3">
+        <svg class="w-6 h-6 text-accent-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>End-to-end marketing solutions</span>
+      </li>
+    </ul> -->
+  </ImageTextSection>
+
+  <!-- Unique Selling Point  -->
+
+  <USPSection
+  label="Unique selling point"
+  background="blue"
+  content={[
+    { text: 'At Beth Hakkerem (BH) we have successfully mapped a strategy outlay that will ' },
+    { text: 'build a "Modern Competitive Economy"', highlighted: true },
+    { text: ', starting from a shallow level of industrialisation being implemented in southern Africa ' },
+    { text: 'with global prospects.', highlighted: true }
+  ]}
+/>
+    <!-- <ImageTextSection
+    imageSrc="/machine-digging.jpg"
+    imageAlt="Mining equipment"
+    imagePosition="left"
+    background="grey"
+    label="Unique Selling Point"
+    heading="Responsible mining focused on long-term value."
+    >
+    <p>
+        At Beth Hakkerem (BH) we have successfully mapped a strategy outlay that will build a “Modern Competitive
+        Economy”, starting from a shallow level of industrialisation being implemented in southern Africa with 
+        global prospects.
+    </p>
+    </ImageTextSection> -->
+
+  <!-- Vision & Mission -->
+  <section class="section-spacing bg-neutral-50">
+    <div class="container-custom">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-4xl mx-auto mb-16 slide-up">
+        <p class="text-accent-500 font-semibold text-lg mb-3 uppercase">
+          Our Vision & Mission
+        </p>
+        <h2 class="text-primary-500 mb-6">
+          Committed to an eco-friendly world
+        </h2>
+      </div>
+
+      <!-- Vision & Mission Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        
+        <!-- Vision -->
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg slide-up">
+          <div class="w-16 h-16 bg-accent-500/10 rounded-xl flex items-center justify-center mb-6">
+            <Eye class="w-8 h-8 text-accent-500" />
+          </div>
+          <h3 class="text-accent-500 text-2xl md:text-3xl font-bold mb-4 uppercase">
+            Vision
+          </h3>
+          <p class="text-neutral-600 text-lg leading-relaxed">
+            Our Vision is founded in Pan African ethics that guide us to focus on 
+            community empowerment from grass roots level growing into the market 
+            space while fulfilling our individual purposes.
+          </p>
+        </div>
+
+        <!-- Mission -->
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg slide-up slide-up-delay-1">
+          <div class="w-16 h-16 bg-accent-500/10 rounded-xl flex items-center justify-center mb-6">
+            <Target class="w-8 h-8 text-accent-500" />
+          </div>
+          <h3 class="text-accent-500 text-2xl md:text-3xl font-bold mb-4 uppercase">
+            Mission
+          </h3>
+          <p class="text-neutral-600 text-lg leading-relaxed">
+            Our Mission is to serve and economically empower the people of GOD to 
+            HIS will and glory. We stand in purpose to balance the scales of trade 
+            and justice by implementing divine strategy to the complete eradication 
+            of poverty within the Promised Land.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    <!-- Our Objectives -->
+    <ObjectivesSection
+        label="Our Objectives"
+        heading="Driving brands forward with strategy & results"
+        objectives={[
+            {
+            icon: 'unlock',
+            title: 'Unlocking Land Through Rehabilitation',
+            description: 'To rehabilitate viable mineral dumps in all African regions availing locked up land for communal and commercial use, reducing the environmental risk ever present in these waste sites.',
+            image: '/mining.jpg'  // Different image for each card
+            },
+            {
+            icon: 'handshake',
+            title: 'Strategic Mining Partnerships',
+            description: 'To partner in the development of both green and brown field mining prospects and projects, protecting the communities/custodians interests through sustainable joint venture agreements. We provide turnkey solutions and complete value chain support across all mineral resource portfolios.',
+            image: '/man-spraying-machine.jpg'  // Different image
+            },
+            {
+            icon: 'leaf',
+            title: 'Sustainable Environmental Stewardship',
+            description: 'Conserve the environment by the effective rehabilitation (clean-up) of all redundant, derelict slimes and tailings dumps. Management of ongoing mining projects, through audits and compliance initiatives by our qualified family (Development partners).',
+            image: '/machine-digging.jpg'  // Different image
+            },
+            {
+            icon: 'shield',
+            title: 'Protecting Custodians & Investors',
+            description: 'BH protects the interests of the resource owner (custodians) and investing partners by actively participating in the commodities space through active engagement and at advisory level.',
+            image: '/mining.jpg'  // Different image
+            }
+        ]}
+    />
+
+  <!-- Our Team / History / More Sections can go here -->
+
+<!-- Founder Section -->
+<FounderSection
+  name="Nyaradzo Nyabunze"
+  title="Founder and Chief of Staff"
+  email="nyabunzen@gmail.com"
+  phone="+263 789 566 412"
+  whatsapp="263789566412"
+  linkedin="https://www.linkedin.com/in/nyaradzo-nyabunze-41b3277a/"
+  image="/nyaradzo-nyabunze-founder.JPG"
+  awardBadge="/award-nyaradzo.JPG"
+  cvLink="/cv-nyaradzo-nyabunze.pdf"
+  background="grey"
+  bio={[
+    "Nyaradzo Nyabunze has over 15 years of experience in the mineral processing and extractive metallurgy industry as a metallurgist. She has a keen interest in mineral resource development and metal/commodity strategy. Her role encompasses mine development, community engagement at both advisory and partnership level, environmental management, and QA/QC management. She has an extensive database with an exclusive support network system within the industry.",
+    "She is purpose driven, believing in the fulfillment of purpose before profit. She is a follower of Jesus Christ and is driven by her faith."
+  ]}
+/>
+
+<!-- Our Journey  -->
+    <ImageTextSection
+    imageSrc="/machine-digging.jpg"
+    imageAlt="Mining equipment"
+    imagePosition="right"
+    background="dark"
+    label="How We Became"
+    heading="Our Journey to Mining Excellence"
+    >
+    <p>
+        At Beth Hakkerem (BH) we have successfully mapped a strategy outlay that will build a “Modern Competitive
+        Economy”, starting from a shallow level of industrialisation being implemented in southern Africa with 
+        global prospects.
+    </p>
+    </ImageTextSection>
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Ready to Partner With Us?"
+    description="Join us in building a sustainable future through responsible mining practices."
+    primaryButtonText="Get in Touch"
+    primaryButtonHref="/contact"
+    secondaryButtonText="View Projects"
+    secondaryButtonHref="/operations"
+    backgroundImage="/mining.jpg"
+  />
+
 </BaseLayout>

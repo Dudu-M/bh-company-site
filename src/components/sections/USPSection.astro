@@ -1,0 +1,53 @@
+---
+interface HighlightedText {
+  text: string;
+  highlighted?: boolean;
+}
+
+interface Props {
+  label?: string;
+  content: HighlightedText[];
+  background?: 'white' | 'grey' | 'light'| 'blue';
+  class?: string;
+}
+
+const { 
+  label = 'Unique selling point',
+  content,
+  background = 'light',
+  class: className = ''
+} = Astro.props;
+
+const bgClasses = {
+  white: 'bg-white',
+  grey: 'bg-neutral-100',
+  light: 'bg-neutral-50',
+  blue: 'bg-primary-500'
+};
+---
+
+<section class={`section-spacing ${bgClasses[background]} ${className}`}>
+  <div class="container-custom">
+    
+    <!-- Label -->
+    <div class="text-center mb-8 slide-up">
+      <p class="text-accent-500 font-semibold text-lg uppercase tracking-wide">
+        {label}
+      </p>
+    </div>
+
+    <!-- Main Quote -->
+    <div class="max-w-5xl mx-auto text-center slide-up slide-up-delay-1">
+      <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight !text-white">
+        {content.map((segment, index) => (
+          segment.highlighted ? (
+            <span class="text-accent-500" key={index}>{segment.text}</span>
+          ) : (
+            <span key={index}>{segment.text}</span>
+          )
+        ))}
+      </h3>
+    </div>
+
+  </div>
+</section>

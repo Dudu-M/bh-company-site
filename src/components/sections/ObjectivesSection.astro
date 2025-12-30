@@ -1,0 +1,139 @@
+---
+import { Unlock, Handshake, Leaf, Shield } from 'lucide-astro';
+
+interface Objective {
+  icon: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+interface Props {
+  label?: string;
+  heading: string;
+  objectives: Objective[];
+  background?: 'white' | 'grey';
+  class?: string;
+}
+
+const { 
+  label = 'Our Objectives',
+  heading,
+  objectives,
+  background = 'white',
+  class: className = ''
+} = Astro.props;
+
+const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
+
+const iconMap = {
+  'unlock': Unlock,
+  'handshake': Handshake,
+  'leaf': Leaf,
+  'shield': Shield,
+};
+---
+
+<section class={`section-spacing ${bgClass} ${className}`}>
+  <div class="container-custom">
+    
+    <!-- Section Header -->
+    <div class="max-w-3xl mb-16 slide-up">
+      <p class="text-accent-500 font-semibold text-lg mb-3 uppercase">
+        {label}
+      </p>
+      <h2 class="text-primary-500">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Sticky Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      
+      <!-- Left: Scrolling Cards -->
+      <div class="space-y-8" id="objectives-container">
+        {objectives.map((objective, index) => {
+          const Icon = iconMap[objective.icon as keyof typeof iconMap];
+          return (
+            <div 
+              class="objective-card bg-neutral-50 p-8 md:p-10 rounded-2xl slide-up"
+              style={`animation-delay: ${index * 0.15}s`}
+              data-image={objective.image}
+              data-index={index}
+            >
+              <!-- Icon -->
+              <div class="w-12 h-12 bg-white rounded-4xl flex items-center justify-center">
+                <Icon class="w-6 h-6 text-accent-500" />
+              </div>
+
+              <!-- Title -->
+              <h4 class="text-primary-500 text-2xl font-semibold mb-4">
+                {objective.title}
+              </h4>
+
+              <!-- Description -->
+              <p class="text-neutral-600 text-lg leading-relaxed">
+                {objective.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Right: Sticky Image Container -->
+      <div class="relative lg:sticky lg:top-32 h-fit hidden lg:block">
+        <div class="relative h-[600px] w-full overflow-hidden rounded-2xl shadow-2xl">
+          {objectives.map((objective, index) => (
+            <img 
+              src={objective.image} 
+              alt={objective.title}
+              class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+              data-objective-image={index}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Intersection Observer to detect which card is in view
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  };
+
+  const cards = document.querySelectorAll('.objective-card');
+  const images = document.querySelectorAll('[data-objective-image]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target as HTMLElement;
+        const index = card.getAttribute('data-index');
+        
+        if (index !== null) {
+          // Hide all images
+          images.forEach(img => {
+            (img as HTMLElement).classList.remove('opacity-100');
+            (img as HTMLElement).classList.add('opacity-0');
+          });
+          
+          // Show the corresponding image
+          const activeImage = document.querySelector(`[data-objective-image="${index}"]`);
+          if (activeImage) {
+            (activeImage as HTMLElement).classList.remove('opacity-0');
+            (activeImage as HTMLElement).classList.add('opacity-100');
+          }
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe all cards
+  cards.forEach(card => observer.observe(card));
+</script>
