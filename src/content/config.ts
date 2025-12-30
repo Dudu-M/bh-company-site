@@ -8,6 +8,7 @@ const newsCollection = defineCollection({
     excerpt: z.string(),
     image: z.string(),
     category: z.string().optional(),
+    spotlight: z.boolean().default(false),
   }),
 });
 

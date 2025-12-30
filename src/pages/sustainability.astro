@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import ImageTextSection from '../components/sections/ImageTextSection.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
+import { Eye, Target } from 'lucide-astro';
+---
+
+<BaseLayout title="About Us - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
+  
+  <!-- Page Hero -->
+  <PageHero 
+    title="Sustainability"
+    subtitle="Our Commitment to Responsible Mining"
+    backgroundImage="/planting-flower.jpg"
+  />
+
+  <!-- Environment -->
+  <ImageTextSection
+    imageSrc="/mining.jpg"
+    imageAlt="Our operations"
+    imagePosition="right"
+    background="white"
+    label="Our Commitment"
+    heading="Sustainability at the Core of Our Operations"
+  >
+    <p>
+        At Beth Hakkerem (BH), sustainability is not just a buzzword; it's a fundamental 
+        principle that guides every aspect of our mining operations. We are dedicated to 
+        minimizing our environmental impact, fostering community development, and ensuring 
+        the well-being of our employees and stakeholders.
+    </p>
+    <p>
+        Our approach to sustainability encompasses responsible resource management, 
+        innovative technologies, and transparent reporting. We believe that by integrating 
+        sustainable practices into our business model, we can create long-term value for 
+        our company, our communities, and the planet.
+    </p>
+  </ImageTextSection>
+
+    <!-- Environment  -->
+    <ImageTextSection
+    imageSrc="/wind-farm.jpg"
+    imageAlt="Wind farm"
+    imagePosition="left"
+    background="grey"
+    label="Environmental Stewardship"
+    heading="Protecting Our Planet for Future Generations"
+    >
+    <p>
+        We are committed to minimizing our environmental impact through responsible mining practices,
+        innovative technologies, and continuous improvement. Our goal is to ensure that our operations
+        contribute positively to the ecosystems and communities we interact with.
+    </p>
+    </ImageTextSection>
+
+    <!-- Community  -->
+    <ImageTextSection
+    imageSrc="/community-garden.jpg"
+    imageAlt="Community garden"
+    imagePosition="right"
+    background="white"
+    label="Community Engagement"
+    heading="Empowering local communities for shared success."
+    >
+    <p>
+        At Beth Hakkerem (BH), we believe in fostering strong relationships with the communities
+        surrounding our mining operations. We are dedicated to creating opportunities for local
+        development, education, and health, ensuring that our growth translates into shared prosperity.
+    </p>
+    </ImageTextSection>
+
+<!-- Sustainability Policy -->
+<ImageTextSection
+    imageSrc="/planting-flower.jpg"
+    imageAlt="Sustainability policy document"
+    imagePosition="right"
+    background="dark"
+    label="Our Policies"
+    heading="Comprehensive Sustainability Policy"
+    buttonText = "View Policy";
+    buttonHref = "/policy";
+    buttonVariant = "primary";
+></ImageTextSection>
+
+<!-- Sustainability Projects  -->
+<NewsSection 
+  limit={9}
+  category="Sustainability"
+  layout="carousel"
+  label="News & Updates"
+  heading="Sustainability Initiatives"
+  buttonText="View All"
+  buttonHref="/news?category=sustainability"
+/>
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Ready to Partner With Us?"
+    description="Join us in building a sustainable future through responsible mining practices."
+    primaryButtonText="Get in Touch"
+    primaryButtonHref="/contact"
+    secondaryButtonText="View Projects"
+    secondaryButtonHref="/operations"
+    backgroundImage="/mining.jpg"
+  />
+
+</BaseLayout>

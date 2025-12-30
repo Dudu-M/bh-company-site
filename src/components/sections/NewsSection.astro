@@ -1,19 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
 import Button from '../ui/Button.astro';
-import { Calendar } from 'lucide-astro';
+import { Calendar, ChevronLeft, ChevronRight } from 'lucide-astro';
 
 interface Props {
   limit?: number;
   showButton?: boolean;
+  category?: string;
+  layout?: 'grid' | 'carousel';
+  label?: string;
+  heading?: string;
+  buttonText?: string;
+  buttonHref?: string;
   class?: string;
 }
 
-const { limit = 3, showButton = true, class: className = '' } = Astro.props;
+const { 
+  limit = 3, 
+  showButton = true,
+  category,
+  layout = 'grid',
+  label = 'Updates News',
+  heading = 'Latest News & Updates',
+  buttonText = 'View All News',
+  buttonHref = '/news',
+  class: className = ''
+} = Astro.props;
 
 // Get all news, sorted by date
 const allNews = await getCollection('news');
-const sortedNews = allNews
+let filteredNews = allNews;
+
+// Filter by category if provided
+if (category) {
+  filteredNews = allNews.filter(article => article.data.category === category);
+}
+
+const sortedNews = filteredNews
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, limit);
 
@@ -25,6 +48,9 @@ const formatDate = (date: Date) => {
     year: 'numeric'
   }).format(date);
 };
+
+// Generate unique ID for this instance
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <section class={`section-spacing bg-white ${className}`}>
@@ -34,71 +60,224 @@ const formatDate = (date: Date) => {
     <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
       <div class="slide-up">
         <p class="text-accent-500 font-semibold text-lg mb-3 uppercase tracking-wide">
-          Updates News
+          {label}
         </p>
         <h2 class="text-primary-500">
-          Latest News & Updates
+          {heading}
         </h2>
       </div>
       
       {showButton && (
         <div class="slide-up slide-up-delay-1">
           <Button 
-            href="/news" 
+            href={buttonHref}
             variant="primary"
             size="md"
             class="!rounded-full"
           >
-            View All News
+            {buttonText}
           </Button>
         </div>
       )}
     </div>
 
-    <!-- News Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {sortedNews.map((article, index) => (
-        <a 
-          href={`/news/${article.slug}`}
-          class="group slide-up"
-          style={`animation-delay: ${index * 0.1}s`}
-        >
-          <article class="bg-neutral-50 rounded-2xl overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-            
-            <!-- Image -->
-            <div class="relative h-64 overflow-hidden">
-              <img 
-                src={article.data.image} 
-                alt={article.data.title}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-
-            <!-- Content -->
-            <div class="p-6">
-              <!-- Date -->
-              <div class="flex items-center gap-2 text-neutral-500 text-sm mb-3">
-                <Calendar class="w-4 h-4" />
-                <time datetime={article.data.date.toISOString()}>
-                  {formatDate(article.data.date)}
-                </time>
+    {layout === 'grid' ? (
+      <!-- Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {sortedNews.map((article, index) => (
+          <a 
+            href={`/news/${article.slug}`}
+            class="group slide-up"
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <article class="bg-neutral-50 rounded-2xl overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+              
+              <!-- Image -->
+              <div class="relative h-64 overflow-hidden">
+                <img 
+                  src={article.data.image} 
+                  alt={article.data.title}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
 
-              <!-- Title -->
-              <h4 class="text-xl font-semibold text-primary-500 mb-3 group-hover:text-accent-500 transition-colors line-clamp-2">
-                {article.data.title}
-              </h4>
+              <!-- Content -->
+              <div class="p-6">
+                <!-- Date -->
+                <div class="flex items-center gap-2 text-neutral-500 text-sm mb-3">
+                  <Calendar class="w-4 h-4" />
+                  <time datetime={article.data.date.toISOString()}>
+                    {formatDate(article.data.date)}
+                  </time>
+                </div>
 
-              <!-- Excerpt -->
-              <p class="text-neutral-600 line-clamp-3">
-                {article.data.excerpt}
-              </p>
-            </div>
+                <!-- Title -->
+                <h4 class="text-xl font-semibold text-primary-500 mb-3 group-hover:text-accent-500 transition-colors line-clamp-2">
+                  {article.data.title}
+                </h4>
 
-          </article>
-        </a>
-      ))}
+                <!-- Excerpt -->
+                <p class="text-neutral-600 line-clamp-3">
+                  {article.data.excerpt}
+                </p>
+              </div>
+
+            </article>
+          </a>
+        ))}
+      </div>
+    ) : (
+  <!-- Carousel Layout -->
+  <div class="relative">
+    
+    <!-- Carousel Container -->
+    <div class="overflow-hidden" id={carouselId}>
+      <div class="carousel-track flex transition-transform duration-500 ease-out gap-8">
+        {sortedNews.map((article) => (
+          <a 
+            href={`/news/${article.slug}`}
+            class="carousel-item group flex-shrink-0 w-full md:w-[calc(33.333%-1.5rem)]"
+          >
+            <article class="bg-neutral-50 rounded-2xl overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+              
+              <!-- Image -->
+              <div class="relative h-64 overflow-hidden">
+                <img 
+                  src={article.data.image} 
+                  alt={article.data.title}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="p-6">
+                <!-- Date -->
+                <div class="flex items-center gap-2 text-neutral-500 text-sm mb-3">
+                  <Calendar class="w-4 h-4" />
+                  <time datetime={article.data.date.toISOString()}>
+                    {formatDate(article.data.date)}
+                  </time>
+                </div>
+
+                <!-- Title -->
+                <h4 class="text-xl font-semibold text-primary-500 mb-3 group-hover:text-accent-500 transition-colors line-clamp-2">
+                  {article.data.title}
+                </h4>
+
+                <!-- Excerpt -->
+                <p class="text-neutral-600 line-clamp-3">
+                  {article.data.excerpt}
+                </p>
+              </div>
+
+            </article>
+          </a>
+        ))}
+      </div>
     </div>
+
+    <!-- Navigation Arrows - Hidden initially if 3 or fewer items -->
+    {sortedNews.length > 3 ? (
+      <>
+        <button 
+          class="carousel-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-primary-500 hover:bg-accent-500 hover:text-white transition-all z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Previous"
+        >
+          <ChevronLeft class="w-6 h-6" />
+        </button>
+        
+        <button 
+          class="carousel-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-primary-500 hover:bg-accent-500 hover:text-white transition-all z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Next"
+        >
+          <ChevronRight class="w-6 h-6" />
+        </button>
+
+        <!-- Dots Indicator -->
+        <div class="carousel-dots flex justify-center gap-2 mt-8"></div>
+      </>
+    ) : null}
+
+  </div>
+)}
 
   </div>
 </section>
+
+{layout === 'carousel' && sortedNews.length > 3 && (
+  <script define:vars={{ carouselId }}>
+    const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+    
+    const track = carousel.querySelector('.carousel-track');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+    const items = track.querySelectorAll('.carousel-item');
+    
+    if (!prevBtn || !nextBtn || !dotsContainer) return;
+    
+    let currentIndex = 0;
+    const itemsPerView = window.innerWidth >= 768 ? 3 : 1;
+    const totalPages = Math.ceil(items.length / itemsPerView);
+
+    // Create dots
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'w-2 h-2 rounded-full transition-all ' + (i === 0 ? 'bg-accent-500 w-8' : 'bg-neutral-300');
+      dot.addEventListener('click', () => goToPage(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = dotsContainer.querySelectorAll('button');
+
+    function updateCarousel() {
+      const itemWidth = items[0].offsetWidth;
+      const gap = 32; // 2rem = 32px
+      const offset = currentIndex * (itemWidth + gap) * itemsPerView;
+      track.style.transform = `translateX(-${offset}px)`;
+
+      // Update dots
+      dots.forEach((dot, index) => {
+        if (index === currentIndex) {
+          dot.classList.add('bg-accent-500', 'w-8');
+          dot.classList.remove('bg-neutral-300', 'w-2');
+        } else {
+          dot.classList.add('bg-neutral-300', 'w-2');
+          dot.classList.remove('bg-accent-500', 'w-8');
+        }
+      });
+
+      // Update button states
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= totalPages - 1;
+    }
+
+    function goToPage(index) {
+      currentIndex = Math.max(0, Math.min(index, totalPages - 1));
+      updateCarousel();
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < totalPages - 1) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    // Update on resize
+    window.addEventListener('resize', () => {
+      updateCarousel();
+    });
+
+    // Initial state
+    updateCarousel();
+  </script>
+)}
