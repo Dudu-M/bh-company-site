@@ -164,15 +164,15 @@ const ARTICLES_PER_PAGE = 9; // Show 9 articles initially
 </BaseLayout>
 
 <script define:vars={{ ARTICLES_PER_PAGE, categoryParam }}>
-  const searchInput = document.getElementById('news-search') as HTMLInputElement;
-  const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement;
-  const sortFilter = document.getElementById('sort-filter') as HTMLSelectElement;
-  const newsGrid = document.getElementById('news-grid') as HTMLElement;
-  const noResults = document.getElementById('no-results') as HTMLElement;
-  const loadMoreBtn = document.getElementById('load-more-btn') as HTMLButtonElement;
-  const loadMoreContainer = document.getElementById('load-more-container') as HTMLElement;
-  const showingCount = document.getElementById('showing-count') as HTMLElement;
-  const newsCards = Array.from(document.querySelectorAll('.news-card')) as HTMLElement[];
+  const searchInput = document.getElementById('news-search');
+  const categoryFilter = document.getElementById('category-filter');
+  const sortFilter = document.getElementById('sort-filter');
+  const newsGrid = document.getElementById('news-grid');
+  const noResults = document.getElementById('no-results');
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const loadMoreContainer = document.getElementById('load-more-container');
+  const showingCount = document.getElementById('showing-count');
+  const newsCards = Array.from(document.querySelectorAll('.news-card'));
 
   let currentlyShowing = ARTICLES_PER_PAGE;
 
