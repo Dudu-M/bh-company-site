@@ -1,7 +1,6 @@
-@import "tailwindcss";
-
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+@import "tailwindcss";
 
 /* Tailwind v4 theme customization via CSS */
 @theme {
@@ -148,6 +147,35 @@ p {
 
 .slide-up-delay-3 {
   animation-delay: 0.3s;
+}
+
+@layer utilities {
+  /* Initial state - hidden and moved down */
+  .slide-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: none;
+  }
+  
+  /* Animated state - visible and in position */
+  .slide-up.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  /* Delays for staggered animations */
+  .slide-up-delay-1.animate-in {
+    transition-delay: 0.1s;
+  }
+  
+  .slide-up-delay-2.animate-in {
+    transition-delay: 0.2s;
+  }
+  
+  .slide-up-delay-3.animate-in {
+    transition-delay: 0.3s;
+  }
 }
 
 @keyframes slideUp {

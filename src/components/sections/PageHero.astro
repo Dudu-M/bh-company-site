@@ -14,7 +14,10 @@ const {
 } = Astro.props;
 ---
 
-<section class={`relative min-h-[400px] md:min-h-[500px] flex items-center overflow-hidden ${className}`}>
+<section 
+  data-hero 
+  class={`relative min-h-[400px] md:min-h-[500px] flex items-center overflow-hidden ${className}`}
+>
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
     <img 

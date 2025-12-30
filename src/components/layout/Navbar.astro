@@ -1,49 +1,68 @@
 ---
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
+  { name: 'About Us', href: '/about' },
   { name: 'Operations', href: '/operations' },
   { name: 'Sustainability', href: '/sustainability' },
-  { name: 'News', href: '/news' },
-  { name: 'Documents', href: '/documents' }
+  { name: 'News & Updates', href: '/news' },
+  { name: 'Documents', href: '/documents' },
 ];
+
+// Get current path for active state
+const currentPath = Astro.url.pathname;
+
+// Function to check if link is active
+const isActive = (href: string) => {
+  if (href === '/' && currentPath === '/') return true;
+  if (href !== '/' && currentPath.startsWith(href)) return true;
+  return false;
+};
 ---
 
-<nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+<nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
   <div class="container-custom">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 group">
-        <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-          <span class="text-white font-bold text-xl">M</span>
-        </div>
-        <span class="font-display font-bold text-xl text-neutral-900">MiningCo</span>
+      <a href="/" class="flex items-center space-x-3 group relative z-50">
+        <div class="w-12 h-12 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
+            <img 
+              src="/logo-square.jpg" 
+              alt="Beth Hakkerem" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        <span class="font-sans font-semibold text-xl text-white transition-colors">Beth Hakkerem</span>
       </a>
 
       <!-- Desktop Nav -->
-      <ul class="hidden md:flex items-center space-x-8">
+      <ul class="hidden lg:flex items-center space-x-8">
         {navItems.map((item) => (
           <li>
             <a 
               href={item.href}
-              class="text-neutral-700 hover:text-primary-600 font-medium transition-colors relative group"
+              class={`nav-link font-medium transition-colors relative group text-white ${
+                isActive(item.href) 
+                  ? '!text-accent-500' 
+                  : 'hover:text-accent-500'
+              }`}
             >
               {item.name}
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300"></span>
             </a>
           </li>
         ))}
       </ul>
 
       <!-- CTA Button -->
-      <div class="hidden md:block">
-        <a href="/contact" class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-all hover:scale-105">
-          Get Quote
+      <div class="hidden lg:block">
+        <a 
+          href="mailto:nyabunzen@gmail.com" 
+          class="inline-flex items-center px-6 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all hover:scale-105"
+        >
+          Contact Us
         </a>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-button" class="md:hidden p-2">
+      <button id="mobile-menu-button" class="lg:hidden p-2 text-white relative z-50">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -52,31 +71,103 @@ const navItems = [
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+  <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-neutral-200">
     <ul class="container-custom py-4 space-y-4">
       {navItems.map((item) => (
         <li>
-          <a href={item.href} class="block py-2 text-neutral-700 hover:text-primary-600 font-medium">
+          <a 
+            href={item.href} 
+            class={`mobile-link block py-2 font-medium transition-colors text-neutral-700 ${
+              isActive(item.href)
+                ? '!text-accent-500'
+                : 'hover:text-accent-500'
+            }`}
+          >
             {item.name}
           </a>
         </li>
       ))}
+      <li class="pt-4">
+        <a 
+          href="mailto:nyabunzen@gmail.com" 
+          class="block text-center py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all"
+        >
+          Contact Us
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
 
 <script>
-  const menuButton = document.getElementById('mobile-menu-button');
+  const navbar = document.getElementById('navbar');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  
-  menuButton?.addEventListener('click', () => {
+
+  // Check if page has hero section
+  const hasHero = document.querySelector('[data-hero]') !== null;
+
+  let isScrolled = false;
+
+  function updateNavbar() {
+    const scrolled = window.scrollY > 50;
+    
+    if (scrolled === isScrolled) return;
+    isScrolled = scrolled;
+    
+    if (!hasHero) {
+      // No hero - always dark
+      navbar?.classList.add('bg-primary-600', 'shadow-lg');
+      navbar?.classList.remove('bg-transparent');
+      return;
+    }
+
+    // Has hero - toggle based on scroll
+    if (scrolled) {
+      navbar?.classList.add('bg-primary-600', 'shadow-lg');
+      navbar?.classList.remove('bg-transparent');
+    } else {
+      navbar?.classList.remove('bg-primary-600', 'shadow-lg');
+      navbar?.classList.add('bg-transparent');
+    }
+  }
+
+  // Mobile menu toggle
+  mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
+
+  // Initial setup - run immediately
+  if (!hasHero) {
+    navbar?.classList.add('bg-primary-600', 'shadow-lg');
+    navbar?.classList.remove('bg-transparent');
+  }
+
+  // Listen to scroll
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  
+  // Run once on load
+  updateNavbar();
 </script>
 
 <style>
-  /* Add padding to body to account for fixed navbar */
+  /* Ensure no extra spacing */
   :global(body) {
-    padding-top: 5rem;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Backdrop blur when dark */
+  #navbar.bg-primary-600 {
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Ensure nav items keep correct color */
+  .nav-link:not(.text-accent-500) {
+    color: white;
+  }
+  
+  #navbar.bg-primary-600 .nav-link:not(.text-accent-500) {
+    color: white;
   }
 </style>

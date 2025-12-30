@@ -1,0 +1,90 @@
+---
+import { Check } from 'lucide-astro';
+
+interface Material {
+  name: string;
+  description: string;
+  images: string[];
+  trustedBy?: string[];
+}
+
+interface Props {
+  label?: string;
+  heading: string;
+  materials: Material[];
+  background?: 'white' | 'grey';
+  class?: string;
+}
+
+const { 
+  label = 'What We Produce',
+  heading,
+  materials,
+  background = 'white',
+  class: className = ''
+} = Astro.props;
+
+const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
+---
+
+<section class={`section-spacing ${bgClass} ${className}`}>
+  <div class="container-custom">
+    
+    <!-- Section Header -->
+    <div class="mb-16 slide-up">
+      <p class="text-accent-500 font-semibold text-lg mb-3 uppercase tracking-wide">
+        {label}
+      </p>
+      <h2 class="text-primary-500">
+        {heading}
+      </h2>
+    </div>
+
+    <!-- Materials -->
+    <div class="space-y-24">
+      {materials.map((material, index) => (
+        <div class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-dense'}`}>
+          
+          <!-- Images Grid -->
+          <div class={`${index % 2 === 0 ? '' : 'lg:col-start-2'} slide-up`}>
+            <div class="grid grid-cols-2 gap-4">
+              {material.images.map((image, imgIndex) => (
+                <div class={`relative overflow-hidden rounded-2xl ${imgIndex === 0 ? 'row-span-2' : ''}`}>
+                  <img 
+                    src={image} 
+                    alt={material.name}
+                    class={`w-full object-cover ${imgIndex === 0 ? 'h-full' : 'h-48'}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class={`${index % 2 === 0 ? '' : 'lg:col-start-1 lg:row-start-1'} slide-up slide-up-delay-1`}>
+            <h3 class="text-accent-500 text-3xl md:text-4xl font-bold mb-6">
+              {material.name}
+            </h3>
+            
+            <p class="text-neutral-600 text-lg leading-relaxed mb-8">
+              {material.description}
+            </p>
+
+            {material.trustedBy && material.trustedBy.length > 0 && (
+              <div class="flex flex-wrap gap-4">
+                {material.trustedBy.map(company => (
+                  <div class="flex items-center gap-2 px-4 py-3 bg-neutral-100 rounded-lg">
+                    <Check class="w-5 h-5 text-accent-500" />
+                    <span class="text-neutral-700 font-medium">Trusted by {company}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

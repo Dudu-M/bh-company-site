@@ -20,7 +20,7 @@ const { title, description = 'Leading mining solutions provider' } = Astro.props
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<ViewTransitions />
+    <ViewTransitions />
   </head>
   <body>
     <Navbar />
@@ -30,3 +30,33 @@ const { title, description = 'Leading mining solutions provider' } = Astro.props
     <Footer />
   </body>
 </html>
+
+<script is:inline>
+  function setupScrollAnimations() {
+    const options = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, options);
+
+    // Get all slide-up elements
+    const slideUpElements = document.querySelectorAll('.slide-up');
+    
+    slideUpElements.forEach(element => {
+      observer.observe(element);
+    });
+  }
+
+  // Run immediately
+  setupScrollAnimations();
+
+  // Re-run after page transitions
+  document.addEventListener('astro:page-load', setupScrollAnimations);
+</script>

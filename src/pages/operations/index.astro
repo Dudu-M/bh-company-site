@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import MaterialsSection from '../../components/sections/MaterialsSection.astro';
+import ProjectsGrid from '../../components/sections/ProjectsGrid.astro';
+import CTASection from '../../components/ui/CTASection.astro';
+---
+
+<BaseLayout title="Operations - Beth Hakkerem" description="Explore our mining operations, projects, and the high-quality materials we produce.">
+  
+  <!-- Hero -->
+  <PageHero 
+    title="Our Operations"
+    subtitle="Sustainable mining operations delivering high-quality materials across the region."
+    backgroundImage="/blue-wallpaper.jpg"
+  />
+
+  <!-- What We Produce -->
+  <MaterialsSection
+    heading="High Quality Materials"
+    materials={[
+      {
+        name: 'Copper',
+        description: "Our Mission is to serve and economically empower the people of GOD to HIS will and glory. We stand in purpose to balance the scales of trade and justice by implementing divine strategy to the complete eradication of poverty within the Promised Land. Our Mission is to serve and economically empower the people of GOD to HIS will and glory. We stand in purpose to balance the scales of trade and justice by implementing divine strategy to the complete eradication of poverty within the Promised Land.",
+        images: [
+          '/materials/copper-1.jpg',
+          '/materials/copper-2.jpg',
+          '/materials/copper-3.jpg',
+        ],
+        trustedBy: ['Company A', 'Company B']
+      },
+      {
+        name: 'Gold',
+        description: "High-purity gold extracted through sustainable practices, meeting international standards for quality and environmental responsibility.",
+        images: [
+          '/materials/gold-1.jpg',
+          '/materials/gold-5.jpg',
+          '/materials/gold-3.jpg',
+        ],
+        trustedBy: ['Company C', 'Company D']
+      }
+    ]}
+  />
+
+  <!-- All Projects -->
+  <ProjectsGrid />
+
+  <!-- CTA -->
+  <CTASection 
+    title="Interested in Partnership?"
+    description="Connect with us to explore collaboration opportunities in our mining operations."
+    primaryButtonText="Contact Us"
+    primaryButtonHref="mailto:nyabunzen@gmail.com"
+  />
+
+</BaseLayout>

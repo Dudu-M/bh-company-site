@@ -1,0 +1,310 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { Calendar, MapPin, ArrowLeft, CheckCircle } from 'lucide-astro';
+import CTASection from '../../components/ui/CTASection.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+// Get other projects for "Related Projects" section
+const allProjects = await getCollection('projects');
+const relatedProjects = allProjects
+  .filter(p => p.slug !== project.slug)
+  .slice(0, 3);
+---
+
+<BaseLayout title={`${project.data.title} - Beth Hakkerem`} description={project.data.description}>
+  
+  <!-- Hero -->
+  <section class="relative h-[400px] md:h-[600px] overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src={project.data.image} 
+        alt={project.data.title}
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-primary-900/95 via-primary-900/70 to-transparent"></div>
+    
+    <div class="container-custom relative h-full flex items-end pb-12">
+      <div class="max-w-4xl">
+        {project.data.status && (
+          <span class={`inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4 ${
+            project.data.status === 'ongoing' ? 'bg-green-500 text-white' :
+            project.data.status === 'completed' ? 'bg-blue-500 text-white' :
+            'bg-yellow-500 text-white'
+          }`}>
+            {project.data.status.charAt(0).toUpperCase() + project.data.status.slice(1)}
+          </span>
+        )}
+        <h1 class="text-white mb-4 !text-white">{project.data.title}</h1>
+        {project.data.subtitle && (
+          <p class="text-accent-400 text-2xl font-semibold mb-4">
+            {project.data.subtitle}
+          </p>
+        )}
+        <div class="flex flex-wrap gap-6 text-neutral-100">
+          {project.data.location && (
+            <div class="flex items-center gap-2">
+              <MapPin class="w-5 h-5" />
+              <span>{project.data.location}</span>
+            </div>
+          )}
+          {project.data.year && (
+            <div class="flex items-center gap-2">
+              <Calendar class="w-5 h-5" />
+              <span>{project.data.year}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back Button & Overview -->
+  <section class="section-spacing bg-white">
+    <div class="container-custom">
+      
+      <a href="/operations" class="inline-flex items-center gap-2 text-accent-500 hover:text-accent-600 font-semibold mb-12 group">
+        <ArrowLeft class="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+        Back to Operations
+      </a>
+
+      <div class="max-w-4xl">
+        <!-- Overview -->
+        <div class="mb-12">
+          <h2 class="text-primary-500 mb-6">Project Overview</h2>
+          <p class="text-neutral-600 text-lg leading-relaxed">
+            {project.data.description}
+          </p>
+        </div>
+
+        <!-- Project Content (from markdown) -->
+        <div class="prose-custom max-w-none mb-16">
+        <Content />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Related Projects -->
+  {relatedProjects.length > 0 && (
+    <section class="section-spacing bg-neutral-50">
+      <div class="container-custom">
+        
+        <div class="mb-12">
+          <h2 class="text-primary-500">Related Projects</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {relatedProjects.map((relatedProject, index) => (
+            <a 
+              href={`/operations/${relatedProject.slug}`}
+              class="group slide-up"
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <article class="bg-white rounded-2xl overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                
+                <!-- Image -->
+                <div class="relative h-64 overflow-hidden">
+                  <img 
+                    src={relatedProject.data.image} 
+                    alt={relatedProject.data.title}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {relatedProject.data.status && (
+                    <div class="absolute top-4 left-4">
+                      <span class={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                        relatedProject.data.status === 'ongoing' ? 'bg-green-500 text-white' :
+                        relatedProject.data.status === 'completed' ? 'bg-blue-500 text-white' :
+                        'bg-yellow-500 text-white'
+                      }`}>
+                        {relatedProject.data.status.charAt(0).toUpperCase() + relatedProject.data.status.slice(1)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <!-- Content -->
+                <div class="p-6">
+                  <h3 class="text-xl font-semibold text-primary-500 mb-3 group-hover:text-accent-500 transition-colors line-clamp-2">
+                    {relatedProject.data.title}
+                  </h3>
+
+                  {relatedProject.data.subtitle && (
+                    <p class="text-accent-500 text-sm font-semibold mb-3">
+                      {relatedProject.data.subtitle}
+                    </p>
+                  )}
+
+                  <p class="text-neutral-600 line-clamp-3 mb-4">
+                    {relatedProject.data.description}
+                  </p>
+
+                  {(relatedProject.data.location || relatedProject.data.year) && (
+                    <div class="flex flex-wrap gap-3 text-xs text-neutral-500">
+                      {relatedProject.data.location && (
+                        <span>📍 {relatedProject.data.location}</span>
+                      )}
+                      {relatedProject.data.year && (
+                        <span>📅 {relatedProject.data.year}</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+              </article>
+            </a>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Interested in This Project?"
+    description="Contact us to learn more about our operations and explore partnership opportunities."
+    primaryButtonText="Get in Touch"
+    primaryButtonHref="mailto:nyabunzen@gmail.com"
+    secondaryButtonText="View All Projects"
+    secondaryButtonHref="/operations"
+  />
+
+  <style is:global>
+  .prose-custom {
+    color: #525252;
+    line-height: 1.8;
+  }
+
+  /* Headings */
+  .prose-custom h2 {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 700;
+    color: #102333;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .prose-custom h3 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: #102333;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .prose-custom h4 {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    color: #102333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Paragraphs */
+  .prose-custom p {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #525252;
+  }
+
+  /* Lists */
+  .prose-custom ul,
+  .prose-custom ol {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-custom li {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+    color: #525252;
+  }
+
+  .prose-custom ul li {
+    list-style-type: disc;
+  }
+
+  .prose-custom ol li {
+    list-style-type: decimal;
+  }
+
+  /* Nested lists */
+  .prose-custom ul ul,
+  .prose-custom ol ol {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Bold text */
+  .prose-custom strong {
+    font-weight: 600;
+    color: #102333;
+  }
+
+  /* Italic text */
+  .prose-custom em {
+    font-style: italic;
+    color: #D6500D;
+  }
+
+  /* Blockquotes */
+  .prose-custom blockquote {
+    border-left: 4px solid #D6500D;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #525252;
+  }
+
+  /* Images */
+  .prose-custom img {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Links */
+  .prose-custom a {
+    color: #D6500D;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+
+  .prose-custom a:hover {
+    color: #B34309;
+  }
+
+  /* Horizontal rules */
+  .prose-custom hr {
+    margin: 3rem 0;
+    border-color: #E5E5E5;
+  }
+
+  /* First paragraph after heading - reduce margin */
+  .prose-custom h2 + p,
+  .prose-custom h3 + p,
+  .prose-custom h4 + p {
+    margin-top: 0;
+  }
+</style>
+
+</BaseLayout>

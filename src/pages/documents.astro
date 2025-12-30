@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { FileText, Download, ChevronRight } from 'lucide-astro';
+
+// Get all documents
+const allDocuments = await getCollection('documents');
+
+// Sort by date (newest first)
+const sortedDocuments = allDocuments.sort((a, b) => 
+  b.data.date.getTime() - a.data.date.getTime()
+);
+
+// Get unique categories
+const categories = ['All', ...new Set(sortedDocuments.map(doc => doc.data.category))];
+
+// Format date
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(date);
+};
+
+// File type icons/colors
+const fileTypeConfig = {
+  pdf: { color: 'text-red-500', bg: 'bg-red-50' },
+  doc: { color: 'text-blue-500', bg: 'bg-blue-50' },
+  xls: { color: 'text-green-500', bg: 'bg-green-50' },
+  ppt: { color: 'text-orange-500', bg: 'bg-orange-50' }
+};
+---
+
+<BaseLayout title="Document Library - Beth Hakkerem" description="Access our comprehensive library of reports, policies, and corporate documents.">
+  
+  <!-- Narrower Hero -->
+  <section 
+  data-hero 
+  class="relative h-[400px] overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-700">
+      <img 
+      src='/blue-wallpaper.jpg'
+      alt="Dark Blue Wallpaper"
+      class="w-full h-full object-cover"
+    />
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 z-10 bg-gradient-to-r from-primary-900/80 via-primary-900/50 to-primary-900/50"></div>
+    
+    <div class="container-custom relative h-full flex items-center z-20">
+      <div class="max-w-3xl slide-up">
+        <h1 class="text-white mb-4 !text-white">Document Library</h1>
+        <p class="text-xl text-neutral-100">
+          Access our reports, policies, and corporate documents
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documents Section -->
+  <section class="section-spacing bg-neutral-50">
+    <div class="container-custom">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        
+        <!-- Left Sidebar - Categories -->
+        <aside class="lg:col-span-1">
+          <div class="bg-white rounded-2xl p-6 shadow-lg lg:sticky lg:top-32">
+            <h3 class="text-primary-500 text-xl font-bold mb-6">Categories</h3>
+            
+            <nav>
+              <ul class="space-y-2">
+                {categories.map((category, index) => (
+                  <li>
+                    <button
+                      class={`category-btn w-full text-left px-4 py-3 rounded-lg transition-all ${
+                        index === 0 
+                          ? 'bg-accent-500 text-white' 
+                          : 'text-neutral-700 hover:bg-neutral-100'
+                      }`}
+                      data-category={category.toLowerCase()}
+                    >
+                      {category}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Right Content - Documents List -->
+        <div class="lg:col-span-3">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            
+            <!-- Header -->
+            <div class="border-b border-neutral-200 px-6 py-4">
+              <div class="flex items-center justify-between">
+                <p id="document-count" class="text-neutral-600 font-medium">
+                  Showing {sortedDocuments.length} documents
+                </p>
+              </div>
+            </div>
+
+            <!-- Documents List -->
+            <div class="divide-y divide-neutral-200">
+              {sortedDocuments.map((doc) => {
+                const config = fileTypeConfig[doc.data.fileType];
+                return (
+                  <div 
+                    class="document-item px-6 py-5 hover:bg-neutral-50 transition-colors cursor-pointer"
+                    data-category={doc.data.category.toLowerCase()}
+                  >
+                    <a 
+                      href={doc.data.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-start gap-4 group"
+                    >
+                      
+                      <!-- File Icon -->
+                      <div class={`flex-shrink-0 w-12 h-12 ${config.bg} rounded-lg flex items-center justify-center`}>
+                        <FileText class={`w-6 h-6 ${config.color}`} />
+                      </div>
+
+                      <!-- Document Info -->
+                      <div class="flex-1 min-w-0">
+                        <h4 class="text-lg font-semibold text-primary-500 mb-1 group-hover:text-accent-500 transition-colors">
+                          {doc.data.title}
+                        </h4>
+                        {doc.data.description && (
+                          <p class="text-neutral-600 text-sm mb-2 line-clamp-2">
+                            {doc.data.description}
+                          </p>
+                        )}
+                        <div class="flex flex-wrap gap-3 text-xs text-neutral-500">
+                          <span class="flex items-center gap-1">
+                            <span class="font-semibold uppercase">{doc.data.fileType}</span>
+                          </span>
+                          {doc.data.fileSize && (
+                            <span>• {doc.data.fileSize}</span>
+                          )}
+                          <span>• {formatDate(doc.data.date)}</span>
+                        </div>
+                      </div>
+
+                      <!-- Arrow -->
+                      <div class="flex-shrink-0 text-neutral-400 group-hover:text-accent-500 transition-colors">
+                        <ChevronRight class="w-6 h-6" />
+                      </div>
+
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden px-6 py-16 text-center">
+              <FileText class="w-16 h-16 text-neutral-300 mx-auto mb-4" />
+              <p class="text-neutral-500 text-lg">No documents found in this category</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  const categoryButtons = document.querySelectorAll('.category-btn');
+  const documentItems = document.querySelectorAll('.document-item');
+  const documentCount = document.getElementById('document-count');
+  const emptyState = document.getElementById('empty-state');
+
+  function filterDocuments(selectedCategory: string) {
+    let visibleCount = 0;
+
+    documentItems.forEach((item) => {
+      const itemCategory = (item as HTMLElement).dataset.category || '';
+      
+      if (selectedCategory === 'all' || itemCategory === selectedCategory) {
+        (item as HTMLElement).style.display = 'block';
+        visibleCount++;
+      } else {
+        (item as HTMLElement).style.display = 'none';
+      }
+    });
+
+    // Update count
+    if (documentCount) {
+      documentCount.textContent = `Showing ${visibleCount} document${visibleCount !== 1 ? 's' : ''}`;
+    }
+
+    // Show/hide empty state
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+  }
+
+  // Add click handlers to category buttons
+  categoryButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = (button as HTMLElement).dataset.category || 'all';
+      
+      // Update button styles
+      categoryButtons.forEach((btn) => {
+        btn.classList.remove('bg-accent-500', 'text-white');
+        btn.classList.add('text-neutral-700', 'hover:bg-neutral-100');
+      });
+      
+      button.classList.add('bg-accent-500', 'text-white');
+      button.classList.remove('text-neutral-700', 'hover:bg-neutral-100');
+      
+      // Filter documents
+      filterDocuments(category);
+    });
+  });
+</script>
