@@ -29,7 +29,7 @@ const isActive = (href: string) => {
       <a href={base} class="flex items-center space-x-3 group relative z-50">
         <div class="w-12 h-12 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
             <img 
-              src={`${base}logo-square.png`}
+              src='/bh-company-site/logo-square.jpg'
               alt="Beth Hakkerem" 
               class="w-full h-full object-cover"
             />
@@ -104,54 +104,68 @@ const isActive = (href: string) => {
 </nav>
 
 <script>
-  const navbar = document.getElementById('navbar');
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  function setupNavbar() {
+    const navbar = document.getElementById('navbar');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  // Check if page has hero section
-  const hasHero = document.querySelector('[data-hero]') !== null;
+    if (!navbar) return;
 
-  let isScrolled = false;
+    // Check if page has hero section
+    const hasHero = document.querySelector('[data-hero]') !== null;
 
-  function updateNavbar() {
-    const scrolled = window.scrollY > 50;
-    
-    if (scrolled === isScrolled) return;
-    isScrolled = scrolled;
-    
+    let isScrolled = false;
+
+    function updateNavbar() {
+      const scrolled = window.scrollY > 50;
+      
+      if (scrolled === isScrolled) return;
+      isScrolled = scrolled;
+      
+      if (!hasHero) {
+        // No hero - always dark
+        navbar.classList.add('bg-primary-600', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+        return;
+      }
+
+      // Has hero - toggle based on scroll
+      if (scrolled) {
+        navbar.classList.add('bg-primary-600', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-primary-600', 'shadow-lg');
+        navbar.classList.add('bg-transparent');
+      }
+    }
+
+    // Mobile menu toggle
+    mobileMenuButton?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+
+    // Initial setup - run immediately
     if (!hasHero) {
-      // No hero - always dark
-      navbar?.classList.add('bg-primary-600', 'shadow-lg');
-      navbar?.classList.remove('bg-transparent');
-      return;
-    }
-
-    // Has hero - toggle based on scroll
-    if (scrolled) {
-      navbar?.classList.add('bg-primary-600', 'shadow-lg');
-      navbar?.classList.remove('bg-transparent');
+      navbar.classList.add('bg-primary-600', 'shadow-lg');
+      navbar.classList.remove('bg-transparent');
     } else {
-      navbar?.classList.remove('bg-primary-600', 'shadow-lg');
-      navbar?.classList.add('bg-transparent');
+      // Reset to transparent if has hero
+      navbar.classList.remove('bg-primary-600', 'shadow-lg');
+      navbar.classList.add('bg-transparent');
     }
+
+    // Listen to scroll
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    
+    // Run once on load
+    updateNavbar();
   }
 
-  // Mobile menu toggle
-  mobileMenuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-  });
+  // Run on initial page load
+  setupNavbar();
 
-  // Initial setup - run immediately
-  if (!hasHero) {
-    navbar?.classList.add('bg-primary-600', 'shadow-lg');
-    navbar?.classList.remove('bg-transparent');
-  }
-
-  // Listen to scroll
-  window.addEventListener('scroll', updateNavbar, { passive: true });
-  
-  // Run once on load
-  updateNavbar();
+  // Re-run after ViewTransitions (important!)
+  document.addEventListener('astro:page-load', setupNavbar);
 </script>
 
 <style>
