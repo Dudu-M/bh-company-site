@@ -31,6 +31,164 @@ const fileTypeConfig = {
   ppt: { color: 'text-orange-500', bg: 'bg-orange-50' }
 };
 ---
+<!-- Password Modal -->
+<div id="password-modal" class="hidden fixed inset-0 z-[100] overflow-y-auto">
+  
+  <!-- Background overlay -->
+  <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" onclick="closePasswordModal()"></div>
+
+  <!-- Modal Container -->
+  <div class="flex min-h-full items-center justify-center p-4">
+    
+    <!-- Modal panel -->
+    <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 z-[101]">
+      
+      <!-- Icon at top - centered -->
+      <div class="flex justify-center mb-6">
+        <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
+          <svg class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Content - centered -->
+      <div class="text-center">
+        <h3 class="text-2xl font-bold text-primary-500 mb-3">
+          Protected Document
+        </h3>
+        <p class="text-neutral-600 mb-6" id="modal-doc-name">
+          This document is password protected.
+        </p>
+        
+        <div class="space-y-4">
+          <!-- Password Input with Eye Toggle -->
+          <div class="relative">
+            <input 
+              type="password" 
+              id="password-input"
+              placeholder="Enter password"
+              class="w-full px-4 py-3 pr-12 border-2 border-neutral-300 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-accent-500 outline-none text-base"
+              onkeypress="if(event.key === 'Enter') verifyPassword()"
+            />
+            <button
+              type="button"
+              onclick="togglePasswordVisibility()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 transition-colors"
+              aria-label="Toggle password visibility"
+            >
+              <!-- Eye Icon (show password) -->
+              <svg id="eye-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <!-- Eye Slash Icon (hide password) -->
+              <svg id="eye-slash-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+              </svg>
+            </button>
+          </div>
+          
+          <p id="error-message" class="hidden text-sm text-red-600 font-medium">
+            ❌ Incorrect password. Please try again.
+          </p>
+
+          <!-- Buttons -->
+          <div class="flex flex-col gap-3 mt-6">
+            <button 
+              type="button"
+              onclick="verifyPassword()"
+              class="w-full px-6 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all hover:scale-105"
+            >
+              Unlock Document
+            </button>
+            <button 
+              type="button"
+              onclick="closePasswordModal()"
+              class="w-full px-6 py-3 border-2 border-neutral-300 text-neutral-700 font-semibold rounded-lg hover:bg-neutral-50 transition-all"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  let currentDocUrl = '';
+  let currentDocPassword = '';
+
+  function openPasswordModal(button) {
+    const modal = document.getElementById('password-modal');
+    const docTitle = button.dataset.docTitle;
+    const docUrl = button.dataset.docUrl;
+    const docPassword = button.dataset.docPassword;
+    
+    currentDocUrl = docUrl;
+    currentDocPassword = docPassword;
+    
+    document.getElementById('modal-doc-name').textContent = `Enter password to access "${docTitle}"`;
+    document.getElementById('password-input').value = '';
+    document.getElementById('password-input').type = 'password';
+    document.getElementById('error-message').classList.add('hidden');
+    document.getElementById('eye-icon').classList.remove('hidden');
+    document.getElementById('eye-slash-icon').classList.add('hidden');
+    
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      document.getElementById('password-input').focus();
+    }, 100);
+  }
+
+  function closePasswordModal() {
+    const modal = document.getElementById('password-modal');
+    modal.classList.add('hidden');
+    currentDocUrl = '';
+    currentDocPassword = '';
+  }
+
+  function togglePasswordVisibility() {
+    const input = document.getElementById('password-input');
+    const eyeIcon = document.getElementById('eye-icon');
+    const eyeSlashIcon = document.getElementById('eye-slash-icon');
+    
+    if (input.type === 'password') {
+      input.type = 'text';
+      eyeIcon.classList.add('hidden');
+      eyeSlashIcon.classList.remove('hidden');
+    } else {
+      input.type = 'password';
+      eyeIcon.classList.remove('hidden');
+      eyeSlashIcon.classList.add('hidden');
+    }
+  }
+
+  function verifyPassword() {
+    const input = document.getElementById('password-input');
+    const errorMsg = document.getElementById('error-message');
+    
+    if (input.value === currentDocPassword) {
+      // Correct password - open document
+      window.open(currentDocUrl, '_blank');
+      closePasswordModal();
+    } else {
+      // Wrong password - show error
+      errorMsg.classList.remove('hidden');
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closePasswordModal();
+    }
+  });
+</script>
 
 <BaseLayout title="Document Library - Beth Hakkerem" description="Access our comprehensive library of reports, policies, and corporate documents.">
   
@@ -108,50 +266,106 @@ const fileTypeConfig = {
             <div class="divide-y divide-neutral-200">
               {sortedDocuments.map((doc) => {
                 const config = fileTypeConfig[doc.data.fileType];
+                const isLocked = !!doc.data.password;
+                
                 return (
                   <div 
                     class="document-item px-6 py-5 hover:bg-neutral-50 transition-colors cursor-pointer"
                     data-category={doc.data.category.toLowerCase()}
                   >
-                    <a 
-                      href={doc.data.fileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-start gap-4 group"
-                    >
-                      
-                      <!-- File Icon -->
-                      <div class={`flex-shrink-0 w-12 h-12 ${config.bg} rounded-lg flex items-center justify-center`}>
-                        <FileText class={`w-6 h-6 ${config.color}`} />
-                      </div>
-
-                      <!-- Document Info -->
-                      <div class="flex-1 min-w-0">
-                        <h4 class="text-lg font-semibold text-primary-500 mb-1 group-hover:text-accent-500 transition-colors">
-                          {doc.data.title}
-                        </h4>
-                        {doc.data.description && (
-                          <p class="text-neutral-600 text-sm mb-2 line-clamp-2">
-                            {doc.data.description}
-                          </p>
-                        )}
-                        <div class="flex flex-wrap gap-3 text-xs text-neutral-500">
-                          <span class="flex items-center gap-1">
-                            <span class="font-semibold uppercase">{doc.data.fileType}</span>
-                          </span>
-                          {doc.data.fileSize && (
-                            <span>• {doc.data.fileSize}</span>
-                          )}
-                          <span>• {formatDate(doc.data.date)}</span>
+                    {isLocked ? (
+                      <button 
+                        class="flex items-start gap-4 group w-full text-left"
+                        data-doc-id={doc.id}
+                        data-doc-password={doc.data.password}
+                        data-doc-url={doc.data.fileUrl}
+                        data-doc-title={doc.data.title}
+                        onclick="openPasswordModal(this)"
+                      >
+                        
+                        <!-- File Icon -->
+                        <div class={`flex-shrink-0 w-12 h-12 ${config.bg} rounded-lg flex items-center justify-center relative`}>
+                          <FileText class={`w-6 h-6 ${config.color}`} />
+                          <div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center">
+                            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
 
-                      <!-- Arrow -->
-                      <div class="flex-shrink-0 text-neutral-400 group-hover:text-accent-500 transition-colors">
-                        <ChevronRight class="w-6 h-6" />
-                      </div>
+                        <!-- Document Info -->
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center gap-2 mb-1">
+                            <h4 class="text-lg font-semibold text-primary-500 group-hover:text-accent-500 transition-colors">
+                              {doc.data.title}
+                            </h4>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                              Protected
+                            </span>
+                          </div>
+                          {doc.data.description && (
+                            <p class="text-neutral-600 text-sm mb-2 line-clamp-2">
+                              {doc.data.description}
+                            </p>
+                          )}
+                          <div class="flex flex-wrap gap-3 text-xs text-neutral-500">
+                            <span class="flex items-center gap-1">
+                              <span class="font-semibold uppercase">{doc.data.fileType}</span>
+                            </span>
+                            {doc.data.fileSize && (
+                              <span>• {doc.data.fileSize}</span>
+                            )}
+                            <span>• {formatDate(doc.data.date)}</span>
+                          </div>
+                        </div>
 
-                    </a>
+                        <!-- Arrow -->
+                        <div class="flex-shrink-0 text-neutral-400 group-hover:text-accent-500 transition-colors">
+                          <ChevronRight class="w-6 h-6" />
+                        </div>
+
+                      </button>
+                    ) : (
+                      <a 
+                        href={doc.data.fileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex items-start gap-4 group"
+                      >
+                        
+                        <!-- File Icon -->
+                        <div class={`flex-shrink-0 w-12 h-12 ${config.bg} rounded-lg flex items-center justify-center`}>
+                          <FileText class={`w-6 h-6 ${config.color}`} />
+                        </div>
+
+                        <!-- Document Info -->
+                        <div class="flex-1 min-w-0">
+                          <h4 class="text-lg font-semibold text-primary-500 mb-1 group-hover:text-accent-500 transition-colors">
+                            {doc.data.title}
+                          </h4>
+                          {doc.data.description && (
+                            <p class="text-neutral-600 text-sm mb-2 line-clamp-2">
+                              {doc.data.description}
+                            </p>
+                          )}
+                          <div class="flex flex-wrap gap-3 text-xs text-neutral-500">
+                            <span class="flex items-center gap-1">
+                              <span class="font-semibold uppercase">{doc.data.fileType}</span>
+                            </span>
+                            {doc.data.fileSize && (
+                              <span>• {doc.data.fileSize}</span>
+                            )}
+                            <span>• {formatDate(doc.data.date)}</span>
+                          </div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="flex-shrink-0 text-neutral-400 group-hover:text-accent-500 transition-colors">
+                          <ChevronRight class="w-6 h-6" />
+                        </div>
+
+                      </a>
+                    )}
                   </div>
                 );
               })}
