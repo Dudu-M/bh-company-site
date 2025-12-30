@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://Dudu-M.github.io',
-  base: '/bh-company-site',
+  base: '/bh-company-site/',
   build: {
     inlineStylesheets: 'auto',
   },
