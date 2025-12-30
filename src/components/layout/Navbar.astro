@@ -139,11 +139,6 @@ const isActive = (href: string) => {
       }
     }
 
-    // Mobile menu toggle
-    mobileMenuButton?.addEventListener('click', () => {
-      mobileMenu?.classList.toggle('hidden');
-    });
-
     // Initial setup - run immediately
     if (!hasHero) {
       navbar.classList.add('bg-primary-600', 'shadow-lg');
@@ -161,11 +156,35 @@ const isActive = (href: string) => {
     updateNavbar();
   }
 
+  // Mobile menu toggle - separate from setupNavbar to avoid duplicates
+  function setupMobileMenu() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (!mobileMenuButton || !mobileMenu) return;
+    
+    // Remove any existing click handler by cloning the button
+    const newButton = mobileMenuButton.cloneNode(true);
+    mobileMenuButton.parentNode?.replaceChild(newButton, mobileMenuButton);
+    
+    // Add fresh event listener
+    const button = document.getElementById('mobile-menu-button');
+    button?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const menu = document.getElementById('mobile-menu');
+      menu?.classList.toggle('hidden');
+    });
+  }
+
   // Run on initial page load
   setupNavbar();
+  setupMobileMenu();
 
-  // Re-run after ViewTransitions (important!)
-  document.addEventListener('astro:page-load', setupNavbar);
+  // Re-run after page navigation
+  document.addEventListener('astro:page-load', () => {
+    setupNavbar();
+    setupMobileMenu();
+  });
 </script>
 
 <style>
