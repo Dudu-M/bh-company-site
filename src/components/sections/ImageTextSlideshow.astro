@@ -97,25 +97,14 @@ const slideshowId = `slideshow-${Math.random().toString(36).substr(2, 9)}`;
                   class="w-full h-full object-cover"
                 />
               ) : (
-                <div class="relative w-full h-full">
-                  <video 
-                    src={item.src}
-                    class="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsinline
-                  ></video>
-                  <button 
-                    class="video-play-btn absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
-                    data-video-index={index}
-                  >
-                    <div class="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center">
-                      <svg class="w-10 h-10 text-accent-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
+                <video 
+                  src={item.src}
+                  class="w-full h-full object-cover"
+                  loop
+                  muted
+                  playsinline
+                  autoplay={index === 0}
+                ></video>
               )}
             </div>
           ))}
@@ -196,9 +185,8 @@ const slideshowId = `slideshow-${Math.random().toString(36).substr(2, 9)}`;
       const prevBtn = slideshow.querySelector('.slideshow-prev');
       const nextBtn = slideshow.querySelector('.slideshow-next');
       const dots = slideshow.querySelectorAll('.slideshow-dot');
-      const playBtns = slideshow.querySelectorAll('.video-play-btn');
       
-      if (items.length <= 1) return; // Skip if only one item
+      if (items.length <= 1) return;
       
       let currentIndex = 0;
       let autoplayInterval: number | null = null;
@@ -206,11 +194,25 @@ const slideshowId = `slideshow-${Math.random().toString(36).substr(2, 9)}`;
       const intervalDuration = parseInt(slideshow.getAttribute('data-interval') || '5000');
 
       function showSlide(index: number) {
+        // Pause all videos first
+        slideshow.querySelectorAll('video').forEach((video: HTMLVideoElement) => {
+          video.pause();
+          video.currentTime = 0;
+        });
+
         // Hide all items
         items.forEach((item, i) => {
           if (i === index) {
             item.classList.remove('opacity-0', 'z-0');
             item.classList.add('opacity-100', 'z-10');
+            
+            // Autoplay video if this slide has one
+            const video = item.querySelector('video') as HTMLVideoElement;
+            if (video) {
+              video.play().catch(err => {
+                console.log('Video autoplay failed:', err);
+              });
+            }
           } else {
             item.classList.remove('opacity-100', 'z-10');
             item.classList.add('opacity-0', 'z-0');
@@ -226,11 +228,6 @@ const slideshowId = `slideshow-${Math.random().toString(36).substr(2, 9)}`;
             dot.classList.add('bg-white/50', 'w-2');
             dot.classList.remove('bg-white', 'w-8');
           }
-        });
-
-        // Pause all videos
-        slideshow.querySelectorAll('video').forEach((video: HTMLVideoElement) => {
-          video.pause();
         });
 
         currentIndex = index;
@@ -278,32 +275,20 @@ const slideshowId = `slideshow-${Math.random().toString(36).substr(2, 9)}`;
         });
       });
 
-      // Video play buttons
-      playBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const videoIndex = parseInt(btn.getAttribute('data-video-index') || '0');
-          const videoItem = items[videoIndex] as HTMLElement;
-          const video = videoItem.querySelector('video') as HTMLVideoElement;
-          
-          if (video) {
-            if (video.paused) {
-              video.play();
-              btn.classList.add('hidden');
-            } else {
-              video.pause();
-              btn.classList.remove('hidden');
-            }
-          }
-        });
-      });
-
       // Pause autoplay on hover
       slideshow.addEventListener('mouseenter', stopAutoplay);
       slideshow.addEventListener('mouseleave', startAutoplay);
 
       // Start autoplay
       startAutoplay();
+      
+      // Autoplay first video if present
+      const firstVideo = items[0].querySelector('video') as HTMLVideoElement;
+      if (firstVideo) {
+        firstVideo.play().catch(err => {
+          console.log('First video autoplay failed:', err);
+        });
+      }
     });
   }
 
