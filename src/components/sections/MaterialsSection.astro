@@ -1,11 +1,15 @@
 ---
 import { Check } from 'lucide-astro';
+import Button from '../ui/Button.astro';
 
 interface Material {
   name: string;
   description: string;
   images: string[];
   trustedBy?: string[];
+  buttonText?: string;
+  buttonHref?: string;
+  buttonVariant?: 'primary' | 'secondary' | 'outline';
 }
 
 interface Props {
@@ -70,6 +74,17 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
               {material.description}
             </p>
 
+            {material.buttonText && material.buttonHref && (
+            <div class="mt-8"> {/* flex justify-end  - to align button right*/}
+              <Button 
+                href={material.buttonHref} 
+                variant={material.buttonVariant}
+                size="lg"
+              >
+                {material.buttonText}
+              </Button>
+            </div>
+          )}
             {material.trustedBy && material.trustedBy.length > 0 && (
               <div class="flex flex-wrap gap-4">
                 {material.trustedBy.map(company => (

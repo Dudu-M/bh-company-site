@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import ImageTextSection from '../../components/sections/ImageTextSection.astro';
+import CTASection from '../../components/ui/CTASection.astro';
+import NewsSection from '../../components/sections/NewsSection.astro';
+import { Eye, CheckSquare, Shovel } from 'lucide-astro';
+import CopperOresSection from '../../components/sections/CopperOresSection.astro';
+import CopperGallerySection from '../../components/sections/CopperGallerySection.astro';
+import ImageTextSlideShow from '../../components/sections/ImageTextSlideshow.astro';
+---
+
+<BaseLayout title="Copper Profile - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
+  
+  <!-- Page Hero -->
+  <PageHero 
+    title="Copper Profile"
+    subtitle="Our portfolio focuses on copper resources and materials that support modern infrastructure, clean energy, and advanced technologies. We specialise in copper oxide deposits and are developing advanced copper–erbium materials to support future-facing applications."
+    backgroundImage="/materials/copper-1.jpg"
+  />
+
+  <!-- Core Asset -->
+  <ImageTextSlideShow
+    media={[
+    { type: 'image', src: '/bh-company-site/materials/copper/copper-stone-pile.jpg', alt: 'Processing facility' },
+    { type: 'video', src: '/bh-company-site/materials/copper/mine.MP4', alt: 'Processing video' },
+    { type: 'image', src: '/bh-company-site/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
+    { type: 'image', src: '/bh-company-site/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' }
+    ]}
+    imagePosition="right"
+    background="white"
+    label="OUR CORE ASSET"
+    heading="Copper Oxide"
+    autoplay={true}
+    interval={5000}
+  >
+    <p>
+        Copper oxide ores are typically found near the Earth’s surface and can be processed using leaching and electrolysis. 
+        This enables efficient copper recovery while reducing the need for energy-intensive smelting.
+    </p>
+    <p>
+        Our focus on copper oxide assets supports scalable development and aligns with long-term global copper 
+        demand driven by electrification and renewable energy.
+    </p>
+    <ul>
+        <li class="flex items-center gap-2 mb-2">
+            <CheckSquare class="w-5 h-5 text-accent-500" />
+            <span>Near-surface geological profile.</span>
+        </li>
+        <li class="flex items-center gap-2 mb-2">
+            <CheckSquare class="w-5 h-5 text-accent-500" />
+            <span>Efficient extraction methods</span>
+        </li>
+        <li class="flex items-center gap-2 mb-2">
+            <CheckSquare class="w-5 h-5 text-accent-500" />
+            <span>Strong alignment with energy transition demand</span>
+        </li>
+    </ul>
+  </ImageTextSlideShow>
+
+  <CopperOresSection
+  heading="Understanding Copper Ores"
+  intro={[
+    "Copper Ore is a naturally occurring rock that contains copper in concentrations high enough to be economically extracted and used.",
+    "There are three main types of copper ore: sulfide, oxide, and carbonate."
+  ]}
+  ores={[
+    {
+      title: "Sulfide Copper Ores",
+      image: "/materials/copper/sulfide-ore.jpg",
+      composition: "Copper combined with sulfur.",
+      examples: "Chalcopyrite, Bornite, Chalcocite.",
+      formation: "Usually found deep underground, formed by hydrothermal processes.",
+      processing: "Extracted mainly by smelting and flotation.",
+    },
+    {
+      title: "Oxide Copper Ores",
+      image: "/materials/copper/oxide-ore.jpg",
+      composition: "Copper combined with oxygen.",
+      examples: "Cuprite, Tenorite.",
+      formation: "Typically found near the Earth's surface, formed by weathering of sulfide ores.",
+      processing: "Extracted using leaching and electrolysis.",
+      isFocus: true  // This makes it the featured card!
+    },
+    {
+      title: "Carbonate Copper Ores",
+      image: "/materials/copper/carbonate-ore.jpg",
+      composition: "Copper combined with carbonate ions.",
+      examples: "Malachite, Azurite.",
+      formation: "Found in the oxidation zones of copper deposits.",
+      processing: "Often processed by leaching, sometimes directly smelted.",
+    }
+  ]}
+  background="grey"
+/>
+
+<!-- Copper Erbium  -->
+<ImageTextSection
+    imageSrc="/materials/copper/copper-erbium-formula.jpg"
+    imageAlt="Sustainability policy document"
+    imagePosition="right"
+    background="dark"
+    label="Advanced Materials"
+    heading="Copper Erbium"
+>
+    <p>
+        As part of our growth strategy, we are advancing into copper–erbium materials.
+    </p>
+    <p>
+        Copper erbium alloys combine the excellent electrical and thermal conductivity of copper with the unique magnetic and optical properties of erbium. 
+        This makes them ideal for advanced applications in telecommunications, medical devices, and clean energy technologies.
+    </p>
+    <p>
+        By developing copper erbium materials, we aim to support cutting-edge industries while promoting sustainable resource use and innovation.
+        This expansion reflects our commitment to increasing portfolio value beyond traditional copper production.
+    </p>
+
+</ImageTextSection>
+
+<CopperGallerySection
+  heading="Copper Mining Gallery"
+  description="Explore our copper mining operations, from raw ore extraction to refined copper products."
+  items={[
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-authentic.JPG',
+      alt: 'Authentic copper sample',
+      caption: 'Authentic Copper Sample'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-authentic-1.JPG',
+      alt: 'Authentic copper sample',
+      caption: 'Copper Specimen'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-cluster.JPG',
+      alt: 'Copper mineral cluster',
+      caption: 'Copper Mineral Cluster'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-in-hand.jpg',
+      alt: 'Copper ore in hand',
+      caption: 'Copper Ore Sample'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-stone-in-hand.jpg',
+      alt: 'Copper stone sample',
+      caption: 'Copper Stone in Hand'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-stone-pile.jpg',
+      alt: 'Pile of copper stones',
+      caption: 'Copper Stone Pile'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-product.JPG',
+      alt: 'Copper product',
+      caption: 'Refined Copper Product'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-product-tubes.jpg',
+      alt: 'Copper product tubes',
+      caption: 'Copper Tubes'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-product-tubes-side.jpg',
+      alt: 'Copper product tubes side view',
+      caption: 'Copper Tubes - Side View'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-product-tubes-in hand.JPG',
+      alt: 'Copper product tubes in hand',
+      caption: 'Copper Tubes in Hand'
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-tubes.jpg',
+      alt: 'Copper tubes collection',
+      caption: 'Copper Tubes Collection'
+    },
+    {
+      type: 'video',
+      src: '/bh-company-site/materials/copper/mine.MP4',
+      alt: 'Mining operations video',
+      caption: 'Mining Operations',
+      thumbnail: '/materials/copper/copper-stone-pile.jpg',
+    },
+    {
+      type: 'video',
+      src: '/bh-company-site/materials/copper/mine2.MP4',
+      alt: 'Mining operations video',
+      caption: 'Mining Operations - Extended',
+      thumbnail: '/materials/copper/copper-in-hand.jpg',
+    },
+    {
+      type: 'image',
+      src: '/bh-company-site/materials/copper/copper-authentic-2.JPG',
+      alt: 'Authentic copper sample',
+      caption: 'Copper Sample'
+    },
+  ]}
+  background="grey"
+/>
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Ready to Partner With Us?"
+    description="Join us in building a sustainable future through responsible mining practices."
+    primaryButtonText="Get in Touch"
+    primaryButtonHref="mailto:nyabunzen@gmail.com"
+    secondaryButtonText="View Projects"
+    secondaryButtonHref="/operations"
+    backgroundImage="/mining.jpg"
+  />
+
+</BaseLayout>
