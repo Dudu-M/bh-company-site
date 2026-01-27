@@ -1,7 +1,32 @@
 ---
 const navItems = [
   { name: 'About Us', href: '/about' },
-  { name: 'Operations', href: '/operations' },
+  { 
+    name: 'Operations', 
+    href: '/operations',
+    dropdown: [
+      {
+        label: 'Materials Produced',
+        isHeading: true
+      },
+      {
+        name: 'Copper',
+        href: '/materials/copper-profile'
+      },
+      // {
+      //   name: 'Gold',
+      //   href: '/materials/gold'
+      // },
+      {
+        label: 'Activities',
+        isHeading: true
+      },
+      {
+        name: 'All Projects',
+        href: '/operations#projects'
+      }
+    ]
+  },
   { name: 'Sustainability', href: '/sustainability' },
   { name: 'News & Updates', href: '/news' },
   { name: 'Documents', href: '/documents' },
@@ -15,7 +40,7 @@ const currentPath = Astro.url.pathname;
 
 // Function to check if link is active
 const isActive = (href: string) => {
-  const fullPath = base + href.slice(1); // Remove leading slash and add base
+  const fullPath = base + href.slice(1);
   if (href === '/' && currentPath === base) return true;
   if (href !== '/' && currentPath.startsWith(fullPath)) return true;
   return false;
@@ -28,29 +53,56 @@ const isActive = (href: string) => {
       <!-- Logo -->
       <a href={base} class="flex items-center space-x-3 group relative z-50">
         <div class="w-12 h-12 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
-            <img 
-              src='/bh-company-site/logo-square.jpg'
-              alt="Beth Hakkerem" 
-              class="w-full h-full object-cover"
-            />
-          </div>
+          <img 
+            src='/bh-company-site/logo-square.jpg'
+            alt="Beth Hakkerem" 
+            class="w-full h-full object-cover"
+          />
+        </div>
         <span class="font-sans font-semibold text-xl text-white transition-colors">Beth Hakkerem</span>
       </a>
 
       <!-- Desktop Nav -->
       <ul class="hidden lg:flex items-center space-x-8">
         {navItems.map((item) => (
-          <li>
+          <li class="relative group/nav">
             <a 
               href={`${base}${item.href.slice(1)}`}
-              class={`nav-link font-medium transition-colors relative group text-white ${
+              class={`nav-link font-medium transition-colors relative flex items-center gap-1 text-white ${
                 isActive(item.href) 
                   ? '!text-accent-500' 
                   : 'hover:text-accent-500'
               }`}
             >
               {item.name}
+              {item.dropdown && (
+                <svg class="w-4 h-4 transition-transform group-hover/nav:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
             </a>
+
+            {/* Dropdown Menu */}
+            {item.dropdown && (
+              <div class="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-200 overflow-hidden">
+                <div class="py-2">
+                  {item.dropdown.map((subItem) => (
+                    subItem.isHeading ? (
+                      <div class="px-4 py-2 text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                        {subItem.label}
+                      </div>
+                    ) : (
+                      <a 
+                        href={`${base}${subItem.href.slice(1)}`}
+                        class="block px-4 py-2 text-neutral-700 hover:bg-accent-50 hover:text-accent-500 transition-colors font-medium"
+                      >
+                        {subItem.name}
+                      </a>
+                    )
+                  ))}
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -89,6 +141,28 @@ const isActive = (href: string) => {
           >
             {item.name}
           </a>
+          
+          {/* Mobile Submenu */}
+          {item.dropdown && (
+            <ul class="ml-4 mt-2 space-y-2">
+              {item.dropdown.map((subItem) => (
+                subItem.isHeading ? (
+                  <li class="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                    {subItem.label}
+                  </li>
+                ) : (
+                  <li>
+                    <a 
+                      href={`${base}${subItem.href.slice(1)}`}
+                      class="block py-1 text-sm text-neutral-600 hover:text-accent-500 transition-colors"
+                    >
+                      {subItem.name}
+                    </a>
+                  </li>
+                )
+              ))}
+            </ul>
+          )}
         </li>
       ))}
       <li class="pt-4">
@@ -156,7 +230,7 @@ const isActive = (href: string) => {
     updateNavbar();
   }
 
-  // Mobile menu toggle - separate from setupNavbar to avoid duplicates
+  // Mobile menu toggle
   function setupMobileMenu() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -211,5 +285,14 @@ const isActive = (href: string) => {
   /* Hover state - accent color */
   .nav-link:hover {
     color: #D6500D !important;
+  }
+
+  /* Dropdown styling */
+  .dropdown-menu {
+    transform: translateY(-10px);
+  }
+
+  .group\/nav:hover .dropdown-menu {
+    transform: translateY(0);
   }
 </style>

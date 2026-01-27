@@ -4,7 +4,7 @@ import PageHero from '../../components/sections/PageHero.astro';
 import MaterialsSection from '../../components/sections/MaterialsSection.astro';
 import ProjectsGrid from '../../components/sections/ProjectsGrid.astro';
 import CTASection from '../../components/ui/CTASection.astro';
-import ObjectivesSection from '../../components/sections/ObjectivesSection.astro';
+import ImageStrip from '../../components/sections/ImageStrip.astro';
 ---
 
 <BaseLayout title="Operations - Beth Hakkerem" description="Explore our mining operations, projects, and the high-quality materials we produce.">
@@ -21,15 +21,15 @@ import ObjectivesSection from '../../components/sections/ObjectivesSection.astro
     heading="High Quality Materials"
     materials={[
       {
-        name: 'Copper Ore',
-        description: "Copper Ore is a naturally occurring rock that contains copper in concentrations high enough to be economically extracted and used. Copper plays a vital role in modern life, especially in electrical wiring, construction, renewable energy systems, and electronics. /n There are three main types of copper ore: sulfide, oxide, and carbonate.",
+        name: 'Copper',
+        description: "Our copper portfolio is centered on oxide copper resources, selected for their geological accessibility, processing efficiency, and alignment with long-term copper demand. We are also advancing into higher-value copper-based materials.",
         images: [
           '/materials/copper/copper-stone-in-hand.jpg',
           '/materials/copper/copper-stone-pile.jpg',
           '/materials/copper/copper-product-tubes.jpg',
         ],
-        trustedBy: ['Company A', 'Company B'],
-        buttonText: 'Our Copper Profile',
+        //trustedBy: ['Company A', 'Company B'],
+        buttonText: 'Explore Our Copper Profile »',
         buttonHref: '/materials/copper-profile',
         buttonVariant: 'primary'
       },
@@ -46,9 +46,49 @@ import ObjectivesSection from '../../components/sections/ObjectivesSection.astro
     ]}
   />
 
+    <ImageStrip
+  images={[
+    { 
+      src: '/materials/copper/copper-authentic.JPG', 
+      alt: 'Authentic copper ore',
+      caption: 'Authentic Copper Ore'
+    },
+    { 
+      src: '/materials/copper/copper-cluster.JPG', 
+      alt: 'Copper cluster formation',
+      caption: 'Copper Cluster Formation'
+    },
+    { 
+      src: '/materials/copper/copper-in-hand.jpg', 
+      alt: 'Copper sample in hand',
+      caption: 'Copper Sample'
+    },
+    { 
+      src: '/materials/copper/copper-product-tubes.jpg', 
+      alt: 'Copper product tubes',
+      caption: 'Copper Product Tubes'
+    },
+    { 
+      src: '/materials/copper/copper-stone-pile.jpg', 
+      alt: 'Copper stone pile',
+      caption: 'Copper Stone Pile'
+    },
+    { 
+      src: '/materials/copper/carbonate-ore.jpg', 
+      alt: 'Carbonate ore sample',
+      caption: 'Carbonate Ore'
+    },
+  ]}
+  background="grey"
+  imageHeight="h-64"
+  autoplay={true}
+  interval={6000}
+/>
 
   <!-- All Projects -->
-  <ProjectsGrid />
+  <div id="projects">
+    <ProjectsGrid />
+  </div>
 
   <!-- CTA -->
   <CTASection 
