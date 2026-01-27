@@ -1,0 +1,300 @@
+---
+interface MediaItem {
+  type: 'image' | 'video';
+  src: string;
+  alt: string;
+  thumbnail?: string; // For video thumbnails
+}
+
+interface Props {
+  media: MediaItem[];
+  imagePosition?: 'left' | 'right';
+  background?: 'white' | 'grey' | 'dark';
+  label?: string;
+  heading: string;
+  buttonText?: string;
+  buttonHref?: string;
+  buttonVariant?: 'primary' | 'secondary' | 'outline';
+  autoplay?: boolean;
+  interval?: number; // milliseconds
+  class?: string;
+}
+
+const { 
+  media,
+  imagePosition = 'left',
+  background = 'white',
+  label,
+  heading,
+  buttonText,
+  buttonHref,
+  buttonVariant = 'primary',
+  autoplay = false,
+  interval = 5000,
+  class: className = ''
+} = Astro.props;
+
+import Button from '../ui/Button.astro';
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+
+// Background classes
+const backgrounds = {
+  white: 'bg-white',
+  grey: 'bg-neutral-100',
+  dark: 'bg-primary-500'
+};
+
+// Text colors based on background
+const textColors = {
+  white: 'text-primary-500',
+  grey: 'text-primary-500',
+  dark: 'text-white'
+};
+
+const bodyTextColors = {
+  white: 'text-neutral-600',
+  grey: 'text-neutral-600',
+  dark: 'text-neutral-100'
+};
+
+const labelColors = {
+  white: 'text-accent-500',
+  grey: 'text-accent-500',
+  dark: 'text-accent-400'
+};
+
+// Layout order
+const imageOrder = imagePosition === 'left' ? 'order-1' : 'order-2';
+const textOrder = imagePosition === 'left' ? 'order-2' : 'order-1';
+
+// Generate unique ID for this slideshow
+const slideshowId = `slideshow-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<section class={`section-spacing ${backgrounds[background]} ${className}`}>
+  <div class="container-custom">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      <!-- Slideshow -->
+      <div class={`${imageOrder} slide-up`}>
+        <div 
+          id={slideshowId}
+          class="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden rounded-2xl shadow-lg group"
+          data-autoplay={autoplay}
+          data-interval={interval}
+        >
+          
+          <!-- Media Items -->
+          {media.map((item, index) => (
+            <div 
+              class={`slideshow-item absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+              data-index={index}
+            >
+              {item.type === 'image' ? (
+                <img 
+                  src={item.src} 
+                  alt={item.alt}
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <video 
+                  src={item.src}
+                  class="w-full h-full object-cover"
+                  loop
+                  muted
+                  playsinline
+                  autoplay={index === 0}
+                ></video>
+              )}
+            </div>
+          ))}
+
+          <!-- Navigation Arrows (only show if more than 1 item) -->
+          {media.length > 1 && (
+            <>
+              <button 
+                class="slideshow-prev absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-primary-500 transition-all opacity-0 group-hover:opacity-100 z-20"
+                aria-label="Previous"
+              >
+                <ChevronLeft class="w-6 h-6" />
+              </button>
+              
+              <button 
+                class="slideshow-next absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-primary-500 transition-all opacity-0 group-hover:opacity-100 z-20"
+                aria-label="Next"
+              >
+                <ChevronRight class="w-6 h-6" />
+              </button>
+
+              <!-- Dots Indicator -->
+              <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                {media.map((_, index) => (
+                  <button 
+                    class={`slideshow-dot w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-white w-8' : 'bg-white/50'}`}
+                    data-dot-index={index}
+                    aria-label={`Go to slide ${index + 1}`}
+                  ></button>
+                ))}
+              </div>
+            </>
+          )}
+
+        </div>
+      </div>
+
+      <!-- Text Content -->
+      <div class={`${textOrder} slide-up slide-up-delay-1`}>
+        {label && (
+          <p class={`${labelColors[background]} font-semibold text-lg mb-4`}>
+            {label}
+          </p>
+        )}
+        
+        <h2 class={`${textColors[background]} mb-6 !${textColors[background]}`}>
+          {heading}
+        </h2>
+        
+        <div class={`${bodyTextColors[background]} text-lg leading-relaxed space-y-4`}>
+          <slot />
+        </div>
+
+        {buttonText && buttonHref && (
+          <div class="mt-8">
+            <Button 
+              href={buttonHref} 
+              variant={buttonVariant}
+              size="lg"
+              class={background === 'dark' ? '!text-white !border-white hover:!bg-white hover:!text-primary-900' : ''}
+            >
+              {buttonText}
+            </Button>
+          </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupSlideshows() {
+    const slideshows = document.querySelectorAll('[id^="slideshow-"]');
+    
+    slideshows.forEach(slideshow => {
+      const items = slideshow.querySelectorAll('.slideshow-item');
+      const prevBtn = slideshow.querySelector('.slideshow-prev');
+      const nextBtn = slideshow.querySelector('.slideshow-next');
+      const dots = slideshow.querySelectorAll('.slideshow-dot');
+      
+      if (items.length <= 1) return;
+      
+      let currentIndex = 0;
+      let autoplayInterval: number | null = null;
+      const shouldAutoplay = slideshow.getAttribute('data-autoplay') === 'true';
+      const intervalDuration = parseInt(slideshow.getAttribute('data-interval') || '5000');
+
+      function showSlide(index: number) {
+        // Pause all videos first
+        slideshow.querySelectorAll('video').forEach((video: HTMLVideoElement) => {
+          video.pause();
+          video.currentTime = 0;
+        });
+
+        // Hide all items
+        items.forEach((item, i) => {
+          if (i === index) {
+            item.classList.remove('opacity-0', 'z-0');
+            item.classList.add('opacity-100', 'z-10');
+            
+            // Autoplay video if this slide has one
+            const video = item.querySelector('video') as HTMLVideoElement;
+            if (video) {
+              video.play().catch(err => {
+                console.log('Video autoplay failed:', err);
+              });
+            }
+          } else {
+            item.classList.remove('opacity-100', 'z-10');
+            item.classList.add('opacity-0', 'z-0');
+          }
+        });
+
+        // Update dots
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('bg-white', 'w-8');
+            dot.classList.remove('bg-white/50', 'w-2');
+          } else {
+            dot.classList.add('bg-white/50', 'w-2');
+            dot.classList.remove('bg-white', 'w-8');
+          }
+        });
+
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        const newIndex = (currentIndex + 1) % items.length;
+        showSlide(newIndex);
+      }
+
+      function prevSlide() {
+        const newIndex = (currentIndex - 1 + items.length) % items.length;
+        showSlide(newIndex);
+      }
+
+      function startAutoplay() {
+        if (shouldAutoplay && !autoplayInterval) {
+          autoplayInterval = window.setInterval(nextSlide, intervalDuration);
+        }
+      }
+
+      function stopAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+        }
+      }
+
+      // Navigation buttons
+      prevBtn?.addEventListener('click', () => {
+        prevSlide();
+        stopAutoplay();
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        nextSlide();
+        stopAutoplay();
+      });
+
+      // Dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          showSlide(index);
+          stopAutoplay();
+        });
+      });
+
+      // Pause autoplay on hover
+      slideshow.addEventListener('mouseenter', stopAutoplay);
+      slideshow.addEventListener('mouseleave', startAutoplay);
+
+      // Start autoplay
+      startAutoplay();
+      
+      // Autoplay first video if present
+      const firstVideo = items[0].querySelector('video') as HTMLVideoElement;
+      if (firstVideo) {
+        firstVideo.play().catch(err => {
+          console.log('First video autoplay failed:', err);
+        });
+      }
+    });
+  }
+
+  // Run on initial load
+  setupSlideshows();
+
+  // Re-run after navigation
+  document.addEventListener('astro:page-load', setupSlideshows);
+</script>

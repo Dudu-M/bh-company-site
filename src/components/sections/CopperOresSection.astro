@@ -1,0 +1,128 @@
+---
+interface OreType {
+  title: string;
+  image: string;
+  composition: string;
+  examples: string;
+  formation: string;
+  processing: string;
+  isFocus?: boolean;
+}
+
+interface Props {
+  heading: string;
+  intro: string[];
+  ores: OreType[];
+  background?: 'white' | 'grey';
+  class?: string;
+}
+
+const { 
+  heading,
+  intro,
+  ores,
+  background = 'white',
+  class: className = ''
+} = Astro.props;
+
+const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
+---
+
+<section class={`section-spacing ${bgClass} ${className}`}>
+  <div class="container-custom">
+    
+    <!-- Heading and Intro -->
+    <div class="max-w-4xl mx-auto text-center mb-16 slide-up">
+      <h2 class="text-primary-500 mb-4">
+        {heading}
+      </h2>
+      <!-- Tighter intro spacing -->
+      <div class="space-y-2">
+        {intro.map(paragraph => (
+          <p class="text-lg text-neutral-600 leading-relaxed">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </div>
+
+    <!-- Ore Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {ores.map((ore, index) => (
+        <div 
+          class={`group relative slide-up ${
+            ore.isFocus 
+              ? 'md:-translate-y-4 md:scale-105' 
+              : ''
+          }`}
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <article 
+            class={`bg-white rounded-2xl overflow-hidden h-full transition-all duration-300 ${
+              ore.isFocus
+                ? 'shadow-2xl ring-1 ring-grey-500 ring-opacity-20'
+                : 'shadow-lg hover:shadow-xl hover:-translate-y-2'
+            }`}
+          >
+            
+            <!-- Image -->
+            <div class="relative h-64 overflow-hidden">
+              <img 
+                src={ore.image} 
+                alt={ore.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              {ore.isFocus && (
+                <div class="absolute top-4 right-4">
+                  <span class="inline-flex items-center px-4 py-2 bg-primary-800 text-white rounded-full text-sm font-bold shadow-lg">
+                    Our Focus
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+              
+              <!-- Title -->
+              <h4 class={`text-2xl font-bold mb-4 ${
+                ore.isFocus ? 'text-accent-500' : 'text-primary-500'
+              }`}>
+                {ore.title}
+              </h4>
+
+              <!-- Composition (no heading) -->
+              <p class="text-neutral-600 mb-4">
+                {ore.composition}
+              </p>
+
+              <!-- Formation + Processing (combined, no headings) -->
+              <p class="text-neutral-600 mb-4">
+                {ore.formation} {ore.processing}
+              </p>
+
+              <!-- Examples (with heading) -->
+              <div>
+                <p class="text-sm font-semibold text-primary-500 mb-1">
+                  Examples:
+                </p>
+                <p class="text-neutral-600">
+                  {ore.examples}
+                </p>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- Focus Card Glow Effect -->
+          {ore.isFocus && (
+            <div class="absolute inset-0 -z-10 bg-gradient-to-r from-accent-500/20 via-accent-400/20 to-accent-500/20 blur-2xl rounded-2xl"></div>
+          )}
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

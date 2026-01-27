@@ -1,0 +1,242 @@
+---
+interface GalleryItem {
+  type: 'image' | 'video';
+  src: string;
+  thumbnail?: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  heading?: string;
+  description?: string;
+  items: GalleryItem[];
+  background?: 'white' | 'grey';
+  class?: string;
+}
+
+const { 
+  heading = "Copper in Focus",
+  description,
+  items,
+  background = 'grey',
+  class: className = ''
+} = Astro.props;
+
+const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
+---
+
+<section class={`section-spacing ${bgClass} ${className}`}>
+  <div class="container-custom">
+    
+    <!-- Header -->
+    <div class="text-center mb-12 slide-up">
+      <h2 class="text-primary-500 mb-4">{heading}</h2>
+      {description && (
+        <p class="text-lg text-neutral-600 max-w-3xl mx-auto">
+          {description}
+        </p>
+      )}
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {items.map((item, index) => (
+        <button
+          class="gallery-item group relative aspect-square overflow-hidden rounded-xl bg-neutral-200 hover:scale-105 transition-transform duration-300 slide-up"
+          data-index={index.toString()}
+          data-src={item.src}
+          data-type={item.type}
+          data-caption={item.caption || ''}
+          data-alt={item.alt}
+          style={`animation-delay: ${index * 0.05}s`}
+        >
+          {item.type === 'image' ? (
+            <img 
+              src={item.src} 
+              alt={item.alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          ) : (
+            <>
+              <img 
+                src={item.thumbnail || item.src} 
+                alt={item.alt}
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-accent-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </>
+          )}
+          
+          {item.caption && (
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+              <p class="text-white text-sm font-medium">{item.caption}</p>
+            </div>
+          )}
+        </button>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95">
+  <button 
+    id="close-lightbox"
+    class="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10"
+    aria-label="Close lightbox"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div class="h-full flex items-center justify-center p-4">
+    <div class="max-w-6xl w-full">
+      <!-- Image -->
+      <img 
+        id="lightbox-image" 
+        class="hidden max-h-[85vh] w-auto mx-auto rounded-lg object-contain" 
+        alt=""
+      />
+      
+      <!-- Video -->
+      <video 
+        id="lightbox-video" 
+        class="hidden max-h-[85vh] w-auto mx-auto rounded-lg" 
+        muted
+        controls
+        preload="metadata"
+      ></video>
+      
+      <!-- Caption -->
+      <p id="lightbox-caption" class="text-white text-center mt-4 text-lg"></p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <button 
+    id="prev-lightbox"
+    class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+    aria-label="Previous image"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  
+  <button 
+    id="next-lightbox"
+    class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+    aria-label="Next image"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+
+<script>
+  function setupGallery() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+    const lightboxVideo = document.getElementById('lightbox-video') as HTMLVideoElement;
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('close-lightbox');
+    const prevBtn = document.getElementById('prev-lightbox');
+    const nextBtn = document.getElementById('next-lightbox');
+    
+    let currentIndex = 0;
+    const items = Array.from(galleryItems);
+
+    function openLightbox(index: number) {
+      currentIndex = index;
+      showCurrentItem();
+      if (lightbox) {
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox() {
+      if (lightbox) {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+      if (lightboxVideo) {
+        lightboxVideo.pause();
+        lightboxVideo.src = '';
+      }
+    }
+
+    function showCurrentItem() {
+      const item = items[currentIndex] as HTMLElement;
+      const type = item.getAttribute('data-type');
+      const src = item.getAttribute('data-src');
+      const caption = item.getAttribute('data-caption');
+      const alt = item.getAttribute('data-alt');
+
+      console.log('Showing item:', { type, src, caption, alt }); // Debug
+
+      if (!lightboxImage || !lightboxVideo || !lightboxCaption) return;
+
+      if (type === 'image') {
+        lightboxImage.src = src || '';
+        lightboxImage.alt = alt || '';
+        lightboxImage.classList.remove('hidden');
+        lightboxVideo.classList.add('hidden');
+        lightboxVideo.pause();
+        lightboxVideo.src = '';
+      } else {
+        lightboxVideo.src = src || '';
+        lightboxVideo.classList.remove('hidden');
+        lightboxImage.classList.add('hidden');
+      }
+
+      lightboxCaption.textContent = caption || '';
+    }
+
+    function navigate(direction: number) {
+      currentIndex = (currentIndex + direction + items.length) % items.length;
+      showCurrentItem();
+    }
+
+    // Add click listeners to gallery items
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    // Add button listeners
+    closeBtn?.addEventListener('click', closeLightbox);
+    prevBtn?.addEventListener('click', () => navigate(-1));
+    nextBtn?.addEventListener('click', () => navigate(1));
+    
+    // Click backdrop to close
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox?.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+      }
+    });
+  }
+
+  // Run on initial load
+  setupGallery();
+
+  // Re-run after navigation
+  document.addEventListener('astro:page-load', setupGallery);
+</script>

@@ -1,0 +1,256 @@
+---
+interface ImageItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  heading?: string;
+  description?: string;
+  images: ImageItem[];
+  background?: 'white' | 'grey' | 'dark';
+  imageHeight?: string;
+  autoplay?: boolean;
+  interval?: number; // milliseconds between scrolls
+  class?: string;
+}
+
+const { 
+  heading,
+  description,
+  images,
+  background = 'white',
+  imageHeight = 'h-64',
+  autoplay = false,
+  interval = 3000,
+  class: className = ''
+} = Astro.props;
+
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+
+const bgClass = background === 'white' ? 'bg-white' : background === 'grey' ? 'bg-neutral-50' : 'bg-primary-500';
+const textClass = background === 'dark' ? 'text-white' : 'text-primary-500';
+const descClass = background === 'dark' ? 'text-neutral-100' : 'text-neutral-600';
+
+const stripId = `image-strip-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<section class={`pt-16 pb-16 ${bgClass} ${className}`}>
+  <div class="container-custom">
+    
+    <!-- Header -->
+    {(heading || description) && (
+      <div class="text-center mb-12 slide-up">
+        {heading && (
+          <h2 class={textClass}>{heading}</h2>
+        )}
+        {description && (
+          <p class={`text-lg ${descClass} mt-4 max-w-3xl mx-auto`}>
+            {description}
+          </p>
+        )}
+      </div>
+    )}
+
+    <!-- Image Strip Container -->
+    <div class="relative group/strip slide-up">
+      
+      <!-- Previous Button -->
+      <button 
+        class="strip-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center text-primary-500 shadow-lg transition-all opacity-0 group-hover/strip:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed"
+        aria-label="Previous images"
+        data-strip-id={stripId}
+      >
+        <ChevronLeft class="w-6 h-6" />
+      </button>
+
+      <!-- Scrollable Container -->
+      <div 
+        id={stripId}
+        class="image-strip overflow-x-auto scrollbar-hide scroll-smooth"
+        data-autoplay={autoplay}
+        data-interval={interval}
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
+        <div class="flex gap-4">
+          {images.map((image, index) => (
+            <div 
+              class="flex-shrink-0 w-80 group/image"
+              style={`animation-delay: ${index * 0.05}s`}
+            >
+              <div class={`relative ${imageHeight} overflow-hidden rounded-xl shadow-lg group-hover/image:shadow-2xl transition-shadow duration-300`}>
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-110"
+                />
+                {image.caption && (
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover/image:opacity-100 transition-opacity">
+                    <p class="text-white text-sm font-medium">{image.caption}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Next Button -->
+      <button 
+        class="strip-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center text-primary-500 shadow-lg transition-all opacity-0 group-hover/strip:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed"
+        aria-label="Next images"
+        data-strip-id={stripId}
+      >
+        <ChevronRight class="w-6 h-6" />
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .image-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .image-strip {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  function setupImageStrips() {
+    const strips = document.querySelectorAll('[id^="image-strip-"]');
+    
+    strips.forEach(strip => {
+      const stripId = strip.id;
+      const prevBtn = document.querySelector(`.strip-prev[data-strip-id="${stripId}"]`) as HTMLButtonElement;
+      const nextBtn = document.querySelector(`.strip-next[data-strip-id="${stripId}"]`) as HTMLButtonElement;
+      
+      if (!prevBtn || !nextBtn) return;
+
+      const scrollAmount = 336; // 320px (image width) + 16px (gap)
+      const shouldAutoplay = strip.getAttribute('data-autoplay') === 'true';
+      const intervalDuration = parseInt(strip.getAttribute('data-interval') || '3000');
+      
+      let autoplayInterval: number | null = null;
+      let userInteracted = false;
+
+      function updateButtons() {
+        const scrollLeft = strip.scrollLeft;
+        const maxScroll = strip.scrollWidth - strip.clientWidth;
+        
+        prevBtn.disabled = scrollLeft <= 0;
+        nextBtn.disabled = scrollLeft >= maxScroll - 1;
+      }
+
+      function scrollPrev() {
+        strip.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+        stopAutoplay();
+        userInteracted = true;
+      }
+
+      function scrollNext() {
+        const maxScroll = strip.scrollWidth - strip.clientWidth;
+        const currentScroll = strip.scrollLeft;
+        
+        // If at the end, loop back to start
+        if (currentScroll >= maxScroll - 1) {
+          strip.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          strip.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      function startAutoplay() {
+        if (shouldAutoplay && !autoplayInterval && !userInteracted) {
+          autoplayInterval = window.setInterval(scrollNext, intervalDuration);
+        }
+      }
+
+      function stopAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+        }
+      }
+
+      // Button events
+      prevBtn.addEventListener('click', scrollPrev);
+      nextBtn.addEventListener('click', () => {
+        scrollNext();
+        stopAutoplay();
+        userInteracted = true;
+      });
+      
+      strip.addEventListener('scroll', updateButtons);
+
+      // Pause on hover
+      strip.addEventListener('mouseenter', stopAutoplay);
+      strip.addEventListener('mouseleave', () => {
+        if (!userInteracted) startAutoplay();
+      });
+
+      // Initial state
+      updateButtons();
+
+      // Touch/drag scrolling
+      let isDown = false;
+      let startX: number;
+      let scrollLeftStart: number;
+
+      strip.addEventListener('mousedown', (e) => {
+        isDown = true;
+        strip.style.cursor = 'grabbing';
+        startX = e.pageX - strip.offsetLeft;
+        scrollLeftStart = strip.scrollLeft;
+        stopAutoplay();
+      });
+
+      strip.addEventListener('mouseleave', () => {
+        isDown = false;
+        strip.style.cursor = 'grab';
+      });
+
+      strip.addEventListener('mouseup', () => {
+        isDown = false;
+        strip.style.cursor = 'grab';
+        userInteracted = true;
+      });
+
+      strip.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - strip.offsetLeft;
+        const walk = (x - startX) * 2;
+        strip.scrollLeft = scrollLeftStart - walk;
+      });
+
+      // Touch events - stop autoplay on touch
+      strip.addEventListener('touchstart', () => {
+        stopAutoplay();
+        userInteracted = true;
+      });
+
+      strip.style.cursor = 'grab';
+
+      // Start autoplay
+      startAutoplay();
+    });
+  }
+
+  setupImageStrips();
+  document.addEventListener('astro:page-load', setupImageStrips);
+</script>

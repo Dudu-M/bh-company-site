@@ -8,6 +8,7 @@ import ObjectivesSection from '../components/sections/ObjectivesSection.astro';
 import FounderSection from '../components/sections/FounderSection.astro';
 import USPSection from '../components/sections/USPSection.astro';
 import { Eye, Target } from 'lucide-astro';
+import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro';
 ---
 
 <BaseLayout title="About Us - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
@@ -21,7 +22,7 @@ import { Eye, Target } from 'lucide-astro';
 
   <!-- Who We Are -->
   <ImageTextSection
-    imageSrc="/mining.jpg"
+    imageSrc="/mining-team.JPG"
     imageAlt="Our operations"
     imagePosition="right"
     background="white"
@@ -29,17 +30,11 @@ import { Eye, Target } from 'lucide-astro';
     heading="Dedicated to Building a Sustainable Future"
   >
     <p>
-      Our marketing team is expert in creating smart strategies that help you 
-      grow and connect with audiences. Our marketing team is expert in creating 
-      smart strategies that help you grow and connect with audiences.
-      Our marketing team is expert in creating smart strategies that help you 
-      grow and connect with audiences. Our marketing team is expert in creating 
-      smart strategies that help you grow and connect with audiences.
-    </p>
-    <p>
-      Our marketing team is expert in creating smart strategies that help you 
-      grow and connect with audiences. Our marketing team is expert in creating 
-      smart strategies that help you grow and connect with audiences.
+      Beth Hakkerem (BH) initiates the implementation of economic growth through strategic initiatives 
+      designed to assimilate all stakeholders and their individual needs. Through sustainable rehabilitation
+      of derelict mines and mine development from green fields, BH serves to provide value/wealth all 
+      encompassing of the mining and agricultural initiatives. We aim to achieve community development 
+      and empowerment by encompassing the informal (ASM sector).
     </p>
     <!-- <ul class="space-y-3 mt-4">
       <li class="flex items-start gap-3">
@@ -195,13 +190,19 @@ import { Eye, Target } from 'lucide-astro';
 />
 
 <!-- Our Journey  -->
-    <ImageTextSection
-    imageSrc="/machine-digging.jpg"
-    imageAlt="Mining equipment"
+    <ImageTextSlideshow
+    media={[
+    { type: 'video', src: '/bh-company-site/materials/copper/mine.MP4', alt: 'Processing video' },
+    { type: 'image', src: '/bh-company-site/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
+    { type: 'image', src: '/bh-company-site/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' },
+    { type: 'image', src: '/bh-company-site/materials/copper/copper-authentic-1.JPG', alt: 'Copper mining operation' },
+    ]}
     imagePosition="right"
     background="dark"
     label="How We Became"
     heading="Our Journey to Mining Excellence"
+    autoplay={true}
+    interval={6000}
     >
     <p>
         At Beth Hakkerem (BH) we have successfully mapped a strategy outlay that will build a “Modern Competitive
