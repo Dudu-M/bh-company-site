@@ -99,6 +99,7 @@ const isActive = (href: string) => {
                       <a 
                         href={`${base}${subItem.href.slice(1)}`}
                         class="block px-4 py-2 text-neutral-700 hover:bg-accent-50 hover:text-accent-500 transition-colors font-medium"
+                        data-astro-reload={subItem.href.includes('#') ? true : undefined}
                       >
                         {subItem.name}
                       </a>
@@ -159,6 +160,7 @@ const isActive = (href: string) => {
                     <a 
                       href={`${base}${subItem.href.slice(1)}`}
                       class="block py-1 text-sm text-neutral-600 hover:text-accent-500 transition-colors"
+                      data-astro-reload={subItem.href.includes('#') ? true : undefined}
                     >
                       {subItem.name}
                     </a>
