@@ -1,0 +1,507 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/sections/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import PropertyList from '../../../components/copper/PropertyList.astro';
+import TechSpecsTable from '../../../components/copper/TechSpecsTable.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import { Atom, Mountain, Leaf, TrendingUp } from 'lucide-astro';
+---
+
+<BaseLayout 
+  title="Copper Oxide Ores - Beth Hakkerem" 
+  description="Our specialty in high-grade copper oxide ore extraction and processing. Premium copper cathodes for electrical, construction, and renewable energy applications."
+>
+  
+  <!-- Hero -->
+  <PageHero 
+    title="Copper Oxide Ores: Our Specialty in High-Grade Copper Extraction"
+    subtitle="As our flagship product, copper oxide ores represent decades of extraction expertise and processing excellence. Understanding the full spectrum of copper ores—and why we've specialized in oxide varieties—reveals the unique advantages we bring to electrical infrastructure, construction, renewable energy, and electronics industries worldwide."
+    backgroundImage="/materials/copper/copper-stone-pile.jpg"
+  />
+
+  <!-- Main Content -->
+  <div class="bg-white">
+    <div class="container mx-auto px-4 max-w-7xl py-16">
+      
+      <!-- Breadcrumb -->
+      <Breadcrumb 
+        items={[
+          { label: 'Mining Operations', href: '/mining-operations' },
+          { label: 'Copper', href: '/mining-operations/copper' },
+          { label: 'Copper Oxide Ores' }
+        ]}
+      />
+
+      <!-- Introduction -->
+      <section class="max-w-4xl mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          What is Copper Ore?
+        </h2>
+        <div class="prose prose-lg max-w-none">
+          <p class="text-lg text-neutral-700 leading-relaxed mb-4">
+            Copper ore is a naturally occurring rock that contains copper in concentrations high enough to be economically extracted and used. 
+            Copper plays a vital role in modern life, especially in electrical wiring, construction, renewable energy systems, and electronics.
+          </p>
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            The copper extracted from these ores is one of humanity's most important industrial metals, prized for its exceptional electrical 
+            and thermal conductivity, corrosion resistance, and malleability. From ancient civilizations to modern technology, copper has been 
+            indispensable to human progress.
+          </p>
+        </div>
+      </section>
+
+      <!-- Types of Copper Ore - Comparison Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Types of Copper Ore
+        </h2>
+        <p class="text-lg text-neutral-700 mb-8">
+          There are three main types of copper ore: <strong>sulfide</strong>, <strong>oxide</strong>, and <strong>carbonate</strong>. 
+          Each formed under different geological conditions and requires different extraction methods.
+        </p>
+
+        <!-- Comparison Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+          
+          <!-- Sulfide -->
+          <div class="bg-neutral-50 rounded-lg p-6 border border-neutral-200">
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Sulfide Copper Ores</h3>
+            <img 
+              src="/materials/copper/sulfide-ore.jpg" 
+              alt="Sulfide copper ore"
+              class="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <dl class="space-y-3 text-sm">
+              <div>
+                <dt class="font-semibold text-neutral-900">Composition:</dt>
+                <dd class="text-neutral-700">Copper combined with sulfur</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Examples:</dt>
+                <dd class="text-neutral-700">Chalcopyrite, Bornite, Chalcocite</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Formation:</dt>
+                <dd class="text-neutral-700">Deep underground, formed by hydrothermal processes</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Processing:</dt>
+                <dd class="text-neutral-700">Smelting and flotation (pyrometallurgical)</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Oxide - FEATURED -->
+          <div class="bg-white rounded-lg p-6 border-2 border-accent-500 shadow-lg relative">
+            <div class="absolute -top-3 left-6 bg-accent-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+              OUR SPECIALTY
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Oxide Copper Ores</h3>
+            <img 
+              src="/materials/copper/oxide-ore.jpg" 
+              alt="Oxide copper ore"
+              class="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <dl class="space-y-3 text-sm">
+              <div>
+                <dt class="font-semibold text-neutral-900">Composition:</dt>
+                <dd class="text-neutral-700">Copper combined with oxygen</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Examples:</dt>
+                <dd class="text-neutral-700">Cuprite, Tenorite</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Formation:</dt>
+                <dd class="text-neutral-700">Near Earth's surface, formed by weathering of sulfide ores</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Processing:</dt>
+                <dd class="text-neutral-700">Leaching and electrolysis (hydrometallurgical)</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Carbonate -->
+          <div class="bg-neutral-50 rounded-lg p-6 border border-neutral-200">
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Carbonate Copper Ores</h3>
+            <img 
+              src="/materials/copper/carbonate-ore.jpg" 
+              alt="Carbonate copper ore"
+              class="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <dl class="space-y-3 text-sm">
+              <div>
+                <dt class="font-semibold text-neutral-900">Composition:</dt>
+                <dd class="text-neutral-700">Copper combined with carbonate ions</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Examples:</dt>
+                <dd class="text-neutral-700">Malachite, Azurite</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Formation:</dt>
+                <dd class="text-neutral-700">Found in oxidation zones of copper deposits</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-neutral-900">Processing:</dt>
+                <dd class="text-neutral-700">Leaching or direct smelting</dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Why We Specialize in Oxide -->
+      <section class="mb-16 bg-accent-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Our Specialty: Copper Oxide Ores
+        </h2>
+        <p class="text-lg text-neutral-700 mb-8 leading-relaxed">
+          While all copper ores have industrial value, we've specialized in copper oxide ores for compelling reasons:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4 flex items-center gap-2">
+              <Leaf class="w-6 h-6 text-accent-600" />
+              Sustainable Processing
+            </h3>
+            <p class="text-neutral-700 leading-relaxed">
+              Oxide ores respond exceptionally well to hydrometallurgical methods (leaching and electrolysis), which consume 
+              significantly less energy than traditional smelting and produce minimal emissions compared to sulfide ore processing.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4 flex items-center gap-2">
+              <Mountain class="w-6 h-6 text-accent-600" />
+              Accessibility & Efficiency
+            </h3>
+            <p class="text-neutral-700 leading-relaxed">
+              Located near the Earth's surface, oxide ores enable efficient extraction with reduced environmental disturbance 
+              and lower operational costs compared to deep underground mining.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4 flex items-center gap-2">
+              <Atom class="w-6 h-6 text-accent-600" />
+              High-Purity Output
+            </h3>
+            <p class="text-neutral-700 leading-relaxed">
+              Our leaching and electrowinning process delivers 99.99% pure copper cathodes, meeting the most demanding industry 
+              specifications without the sulfur dioxide emissions associated with smelting.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4 flex items-center gap-2">
+              <TrendingUp class="w-6 h-6 text-accent-600" />
+              Decades of Expertise
+            </h3>
+            <p class="text-neutral-700 leading-relaxed">
+              Our geological understanding of oxide ore formation, combined with optimized processing technology, positions us 
+              as leaders in oxide copper extraction and refinement.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formation & Geology -->
+      <section class="mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Formation & Geology of Oxide Ores
+        </h2>
+        <div class="prose prose-lg max-w-none">
+          <p class="text-lg text-neutral-700 leading-relaxed mb-4">
+            Copper oxide ores are created through natural geological processes occurring over millions of years:
+          </p>
+
+          <h3 class="text-xl font-bold text-neutral-900 mt-8 mb-4">Weathering & Oxidation</h3>
+          <p class="text-neutral-700 leading-relaxed mb-6">
+            When primary copper sulfide deposits are exposed to oxygen and water near the Earth's surface, chemical weathering 
+            gradually transforms sulfide minerals into oxide minerals. This oxidation process creates a distinct "oxidation zone" 
+            or "gossan" above deeper sulfide deposits.
+          </p>
+
+          <h3 class="text-xl font-bold text-neutral-900 mb-4">Surface Enrichment</h3>
+          <p class="text-neutral-700 leading-relaxed mb-6">
+            As copper-bearing solutions percolate downward through fractures and porous rock, copper concentrates in specific horizons. 
+            This creates economically viable oxide ore bodies with higher concentrations than the original sulfide deposit.
+          </p>
+
+          <h3 class="text-xl font-bold text-neutral-900 mb-4">Geological Timeframes</h3>
+          <p class="text-neutral-700 leading-relaxed">
+            This transformation occurs over extended geological periods—often millions of years—with climate, rainfall patterns, 
+            groundwater chemistry, and host rock composition all influencing the extent and quality of oxide ore formation.
+          </p>
+        </div>
+      </section>
+
+      <!-- Types of Oxide Ores -->
+      <section class="mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Types of Copper Oxide Ores
+        </h2>
+        <p class="text-lg text-neutral-700 mb-8">
+          Primary oxide minerals in our deposits:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white border border-neutral-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">Cuprite (Cu₂O) - Ruby Copper</h3>
+            <p class="text-neutral-700 leading-relaxed mb-4">
+              A distinctive ruby-red to dark red mineral representing one of the richest copper oxide ores. Cuprite forms in 
+              the upper oxidation zones where complete oxidation has occurred.
+            </p>
+            <p class="text-sm text-neutral-600">
+              <strong>Copper content:</strong> Up to 88.8% copper by weight
+            </p>
+          </div>
+
+          <div class="bg-white border border-neutral-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">Tenorite (CuO) - Black Copper Oxide</h3>
+            <p class="text-neutral-700 leading-relaxed mb-4">
+              A black to grey-black mineral commonly found in weathered copper deposits. Tenorite is widely distributed throughout 
+              oxide zones and responds excellently to our leaching processes.
+            </p>
+            <p class="text-sm text-neutral-600">
+              <strong>Copper content:</strong> 79.9% copper by weight
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Extraction & Processing -->
+      <section class="mb-16 bg-neutral-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Extraction & Processing
+        </h2>
+        <p class="text-lg text-neutral-700 mb-8">
+          From ore to high-purity copper: Our proven hydrometallurgical process optimized for maximum copper recovery and purity.
+        </p>
+
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="flex gap-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+              1
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-neutral-900 mb-2">Extraction & Preparation</h3>
+              <p class="text-neutral-700 leading-relaxed">
+                Ore is carefully extracted from near-surface deposits using modern mining techniques. The ore is then crushed 
+                and sized to optimal particle dimensions, maximizing surface area for efficient chemical processing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex gap-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+              2
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-neutral-900 mb-2">Heap Leaching</h3>
+              <p class="text-neutral-700 leading-relaxed">
+                Crushed ore is placed in engineered heap structures on impermeable liners. The heaps are irrigated with dilute 
+                sulfuric acid solutions that percolate through the ore, dissolving copper and creating a copper-rich solution 
+                (pregnant leach solution or PLS).
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex gap-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+              3
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-neutral-900 mb-2">Solvent Extraction (SX)</h3>
+              <p class="text-neutral-700 leading-relaxed">
+                The PLS undergoes solvent extraction to concentrate copper and remove impurities. Organic solvents selectively 
+                bind copper, transferring it to a concentrated electrolyte solution while rejecting unwanted elements.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex gap-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+              4
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-neutral-900 mb-2">Electrowinning (EW)</h3>
+              <p class="text-neutral-700 leading-relaxed">
+                The concentrated copper solution flows through specialized electrowinning cells where electrical current plates 
+                pure copper onto cathode starter sheets. This electrolysis process yields 99.99% pure copper cathodes—ready for 
+                industrial use without further refining.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Properties -->
+      <section class="mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Key Properties
+        </h2>
+        <p class="text-lg text-neutral-700 mb-8">
+          What makes our copper oxide ores superior:
+        </p>
+        <PropertyList 
+          properties={[
+            'High copper grades ensuring economically viable extraction and processing',
+            'Near-surface accessibility enabling efficient extraction with minimal environmental disturbance',
+            'Optimal processing response achieving 80-90% copper recovery rates',
+            'Consistent quality through comprehensive geological characterization',
+            'Sustainable extraction with lower carbon footprint than sulfide ore processing',
+            'Low impurity levels producing cleaner final copper products'
+          ]}
+          columns={2}
+        />
+      </section>
+
+      <!-- Applications -->
+      <section class="mb-16 bg-neutral-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Applications
+        </h2>
+        <p class="text-lg text-neutral-700 mb-8">
+          The high-purity copper derived from our oxide ores serves as the foundation for countless essential applications:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">Electrical & Power</h3>
+            <ul class="space-y-2 text-neutral-700">
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Building wiring for residential, commercial, and industrial systems</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Power grid infrastructure and high-voltage transmission</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Electric motors and generators</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">Construction & Infrastructure</h3>
+            <ul class="space-y-2 text-neutral-700">
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Plumbing systems with antimicrobial properties</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Architectural roofing and cladding</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>HVAC systems and heat exchangers</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">Renewable Energy</h3>
+            <ul class="space-y-2 text-neutral-700">
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Solar photovoltaic systems and thermal installations</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Wind turbine generators and transformers</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Energy storage and smart grid infrastructure</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">Electronics & Transportation</h3>
+            <ul class="space-y-2 text-neutral-700">
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Printed circuit boards and semiconductors</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Automotive wiring and electric vehicle systems</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-accent-500 mt-1">•</span>
+                <span>Railways and electrified transit systems</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Specifications -->
+      <section class="mb-16">
+        <TechSpecsTable 
+          specs={[
+            { parameter: 'Ore Type', specification: 'Copper Oxide (Cuprite, Tenorite, mixed oxides)' },
+            { parameter: 'Typical Copper Grade', specification: '0.5% - 2.5% Cu (deposit and zone dependent)' },
+            { parameter: 'Processing Method', specification: 'Heap leaching + Solvent extraction + Electrowinning' },
+            { parameter: 'Final Product', specification: 'Copper cathodes (LME Grade A)' },
+            { parameter: 'Purity', specification: '99.99% Cu minimum (Cu-CATH-1)' },
+            { parameter: 'Physical Form', specification: 'Full cathode plates, cut cathodes, or custom forms' },
+            { parameter: 'Cathode Weight', specification: '80-120 kg per plate (standard)' },
+            { parameter: 'Impurities', specification: '<0.01% total (meets international standards)' },
+            { parameter: 'Certifications', specification: 'ISO 9001, LME registered brand' },
+            { parameter: 'Sustainability', specification: 'Lower carbon footprint than pyrometallurgical processing' }
+          ]}
+        />
+        <p class="text-sm text-neutral-600 mt-4">
+          * Detailed ore characterization reports, product certificates of analysis, and material safety data sheets available upon request.
+        </p>
+      </section>
+
+      <!-- Why Choose Section -->
+      <section class="mb-16 bg-accent-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8">
+          Why Choose Our Copper Oxide Ores
+        </h2>
+        <PropertyList 
+          properties={[
+            'Deep geological knowledge - Extensive experience in oxide ore identification, assessment, and extraction',
+            'Quality consistency - Rigorous geological modeling and grade control ensure reliable ore characteristics',
+            'Processing excellence - State-of-the-art leaching and electrowinning facilities optimized for oxide ores',
+            'Environmental leadership - Sustainable extraction with comprehensive monitoring and water recycling',
+            'Reliable supply chain - Established reserves and production capacity ensure long-term availability',
+            'Industry standards compliance - Products consistently meet or exceed LME, ASTM, and ISO specifications',
+            'Technical partnership - Comprehensive customer support from specification consultation to logistics'
+          ]}
+          columns={2}
+        />
+      </section>
+
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Partner with Oxide Ore Specialists"
+    description="With decades of experience in copper oxide ore extraction and processing, we deliver the high-purity copper that powers modern infrastructure. Our technical team is ready to discuss your specific copper requirements and delivery needs."
+    primaryButtonText="Request Ore Specifications"
+    primaryButtonHref="mailto:nyabunzen@gmail.com"
+    secondaryButtonText="Get Product Pricing"
+    secondaryButtonHref="mailto:nyabunzen@gmail.com?subject=Copper Oxide Pricing Inquiry"
+    backgroundImage="/materials/copper/copper-stone-pile.jpg"
+  />
+
+</BaseLayout>

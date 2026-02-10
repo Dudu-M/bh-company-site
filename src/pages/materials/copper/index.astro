@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/sections/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import ProductCard from '../../../components/copper/ProductCard.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import { Award, Shield, Zap, Users } from 'lucide-astro';
+---
+
+<BaseLayout 
+  title="Copper - Beth Hakkerem Mining Operations" 
+  description="Premium copper products from extraction to advanced processing. Specializing in copper oxide ores, high-purity isotopes, and copper-erbium alloys."
+>
+  
+  <!-- Hero -->
+  <PageHero 
+    title="Premium Copper: From Extraction to Advanced Processing"
+    subtitle="We specialize in copper oxide ore extraction and advanced copper processing, delivering high-purity copper products for industrial, medical, and high-tech applications worldwide."
+    backgroundImage="/materials/copper-1.jpg"
+  />
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-7xl">
+      
+      <!-- Breadcrumb -->
+      <Breadcrumb 
+        items={[
+          { label: 'Mining Operations', href: '/materials' },
+          { label: 'Copper' }
+        ]}
+      />
+
+      <!-- Introduction -->
+      <div class="max-w-3xl mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+          Our Copper Products
+        </h2>
+        <p class="text-lg text-neutral-700 leading-relaxed">
+          From naturally occurring oxide ores to specialized isotopes and advanced alloys, our comprehensive copper 
+          portfolio serves diverse industrial needs with uncompromising quality. Each product line represents decades 
+          of geological expertise and processing innovation.
+        </p>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        
+        <!-- Copper Oxide Ores -->
+        <ProductCard
+          title="Copper Oxide Ores"
+          description="High-grade copper oxide ores extracted from near-surface deposits and processed through advanced leaching and electrolysis methods. Our oxide ores deliver superior purity for electrical, construction, and renewable energy applications."
+          applications={[
+            'Electrical wiring and power transmission',
+            'Construction materials and infrastructure',
+            'Renewable energy systems (solar, wind)',
+            'Electronics manufacturing'
+          ]}
+          href="/materials/copper/copper-oxide-ores"
+          isSpecialty={true}
+        />
+
+        <!-- Copper Isotopes -->
+        <ProductCard
+          title="Copper Isotopes"
+          description="High-purity copper isotopes (⁶³Cu and ⁶⁵Cu) derived through specialized separation processes. These isotopes serve critical roles in medical diagnostics, nuclear technology, and advanced scientific research."
+          applications={[
+            'Medical imaging (PET scans) and radiotherapy',
+            'Nuclear reactor technology',
+            'Aerospace and space exploration',
+            'Quantum computing and superconductors'
+          ]}
+          href="/materials/copper/copper-isotopes"
+        />
+
+        <!-- Copper Erbium Alloys -->
+        <ProductCard
+          title="Copper Erbium Alloys"
+          description="Advanced copper-erbium compounds produced through precision alloying processes. These specialized alloys offer enhanced mechanical and thermal properties for demanding industrial environments."
+          applications={[
+            'High-performance electrical contacts',
+            'Aerospace components',
+            'Resistance welding electrodes',
+            'Advanced manufacturing processes'
+          ]}
+          href="/materials/copper/copper-erbium-alloys"
+        />
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Why Our Copper Section -->
+  <section class="py-16 bg-neutral-50">
+    <div class="container mx-auto px-4 max-w-7xl">
+      
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+          Why Choose Our Copper Products
+        </h2>
+        <p class="text-lg text-neutral-700 max-w-3xl mx-auto">
+          Decades of expertise in copper extraction and processing, combined with cutting-edge technology 
+          and unwavering commitment to quality.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Quality Assurance -->
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-neutral-200">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+            <Award class="w-6 h-6 text-accent-600" />
+          </div>
+          <h3 class="text-xl font-bold text-neutral-900 mb-3">Quality Assurance</h3>
+          <p class="text-neutral-700 leading-relaxed">
+            Rigorous testing and quality control at every processing stage ensures consistent purity and 
+            composition that meets or exceeds industry standards.
+          </p>
+        </div>
+
+        <!-- Advanced Processing -->
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-neutral-200">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+            <Zap class="w-6 h-6 text-accent-600" />
+          </div>
+          <h3 class="text-xl font-bold text-neutral-900 mb-3">Advanced Processing</h3>
+          <p class="text-neutral-700 leading-relaxed">
+            State-of-the-art facilities enable us to deliver everything from raw oxide ores to highly 
+            specialized isotopes and custom alloys.
+          </p>
+        </div>
+
+        <!-- Sustainable Operations -->
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-neutral-200">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+            <Shield class="w-6 h-6 text-accent-600" />
+          </div>
+          <h3 class="text-xl font-bold text-neutral-900 mb-3">Sustainable Operations</h3>
+          <p class="text-neutral-700 leading-relaxed">
+            Environmentally responsible extraction and processing methods minimize environmental impact 
+            while maximizing resource efficiency.
+          </p>
+        </div>
+
+        <!-- Technical Expertise -->
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-neutral-200">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+            <Users class="w-6 h-6 text-accent-600" />
+          </div>
+          <h3 class="text-xl font-bold text-neutral-900 mb-3">Technical Expertise</h3>
+          <p class="text-neutral-700 leading-relaxed">
+            Our metallurgical team provides comprehensive technical support, helping clients select the 
+            optimal copper product for their specific applications.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Visual Divider / Image Section (Optional - using existing assets) -->
+  <section class="relative h-96 bg-neutral-900">
+    <div class="absolute inset-0">
+      <img 
+        src="/materials/copper/copper-stone-pile.jpg" 
+        alt="Copper mining operations"
+        class="w-full h-full object-cover opacity-40"
+      />
+    </div>
+    <div class="relative h-full flex items-center justify-center">
+      <div class="text-center text-white px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          From Ore to Innovation
+        </h2>
+        <p class="text-xl md:text-2xl text-neutral-200">
+          Powering the future of clean energy and advanced technology
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Ready to Source Premium Copper?"
+    description="Whether you need bulk oxide ores, specialized isotopes, or custom alloy formulations, our team is ready to discuss your requirements."
+    primaryButtonText="Request a Quote"
+    primaryButtonHref="mailto:nyabunzen@gmail.com"
+    secondaryButtonText="Download Technical Specifications"
+    secondaryButtonHref="/downloads/copper-specs.pdf"
+    backgroundImage="/mining.jpg"
+  />
+
+</BaseLayout>
