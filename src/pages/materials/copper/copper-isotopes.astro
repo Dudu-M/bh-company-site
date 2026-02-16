@@ -5,290 +5,327 @@ import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import PropertyList from '../../../components/copper/PropertyList.astro';
 import TechSpecsTable from '../../../components/copper/TechSpecsTable.astro';
 import CTASection from '../../../components/ui/CTASection.astro';
-import { Atom, Zap, Shield, Activity } from 'lucide-astro';
+import ScrollToTop from '../../../components/ui/ScrollToTop.astro';
+import { Atom, Shield, Zap, Activity, FlaskConical, BarChart2, Microscope } from 'lucide-astro';
 ---
 
 <BaseLayout 
   title="Copper Isotopes - Beth Hakkerem" 
   description="High-purity copper isotopes for medical imaging, nuclear technology, aerospace, and quantum computing applications."
 >
-  
-  <!-- Hero -->
+
   <PageHero 
-    title="Copper Isotopes: High-Purity Materials for Advanced Applications"
+    title="Copper Isotopes"
     subtitle="Copper isotopes are specialized variants of copper that play critical roles in medical diagnostics, nuclear technology, and cutting-edge scientific research. Through advanced separation processes, we deliver high-purity isotopes that meet the exacting standards of pharmaceutical, aerospace, and high-tech industries."
-    backgroundImage="/materials/copper/copper-product.JPG"
+    backgroundImage="/materials/copper/copper-ingot-2.webp"
   />
 
-  <!-- Main Content -->
-  <div class="bg-white">
-    <div class="container mx-auto px-4 max-w-7xl py-16">
-      
-      <!-- Breadcrumb -->
+  <!-- Breadcrumb -->
+  <div class="bg-white py-8">
+    <div class="container mx-auto px-8 max-w-5xl">
       <Breadcrumb 
         items={[
-          { label: 'Mining Operations', href: '/mining-operations' },
-          { label: 'Copper', href: '/mining-operations/copper' },
+          { label: 'Mining Operations', href: '/materials' },
+          { label: 'Copper', href: '/materials/copper' },
           { label: 'Copper Isotopes' }
         ]}
       />
-
-      <!-- Introduction -->
-      <section class="max-w-4xl mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          What Are Copper Isotopes?
-        </h2>
-        <div class="prose prose-lg max-w-none">
-          <p class="text-lg text-neutral-700 leading-relaxed mb-4">
-            Copper isotopes are variants of the element copper that differ in the number of neutrons they contain while maintaining 
-            the same number of protons. Naturally occurring copper consists of two stable isotopes:
-          </p>
-          <ul class="text-lg text-neutral-700 space-y-2 mb-6">
-            <li><strong>⁶³Cu</strong> – 69.17% natural abundance</li>
-            <li><strong>⁶⁵Cu</strong> – 30.83% natural abundance</li>
-          </ul>
-          <p class="text-lg text-neutral-700 leading-relaxed">
-            These isotopes exhibit slightly different physical and chemical properties, which can be leveraged for specialized 
-            applications where precise material composition is critical. Unlike radioactive isotopes, both ⁶³Cu and ⁶⁵Cu are stable 
-            and non-radioactive, making them safe for diverse industrial and medical applications.
-          </p>
-        </div>
-      </section>
-
-      <!-- Production & Derivation -->
-      <section class="mb-16 bg-neutral-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          How Copper Isotopes Are Derived
-        </h2>
-        <p class="text-lg text-neutral-700 leading-relaxed mb-6">
-          Our copper isotopes are derived from high-purity copper through specialized separation processes that leverage the 
-          natural isotopic composition of copper. Beginning with our premium copper oxide ores, we employ advanced techniques 
-          to isolate and concentrate specific isotopes to the precise ratios required by our clients.
-        </p>
-        <p class="text-lg text-neutral-700 leading-relaxed">
-          This separation process ensures isotopic specificity and exceptional purity levels, meeting the stringent requirements 
-          of pharmaceutical manufacturers, research institutions, and high-tech industries. The resulting isotopes maintain copper's 
-          superior electrical and thermal conductivity while providing the atomic precision demanded by advanced applications.
-        </p>
-      </section>
-
-      <!-- Key Properties -->
-      <section class="mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Key Properties
-        </h2>
-        <p class="text-lg text-neutral-700 mb-8">
-          What makes our copper isotopes superior:
-        </p>
-
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Atom class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">High Purity Levels</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Manufactured to exceptional purity standards, ensuring precise isotopic compositions for industrial and scientific 
-              applications where even trace impurities can affect performance.
-            </p>
-          </div>
-
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Shield class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Stable & Non-Radioactive</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Both ⁶³Cu and ⁶⁵Cu are stable isotopes that do not undergo radioactive decay, providing safety and reliability for 
-              long-term applications in medical, aerospace, and research environments.
-            </p>
-          </div>
-
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Zap class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Superior Conductivity</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Our copper isotopes retain copper's excellent electrical and thermal conductivity properties, making them ideal for 
-              electronic components and power applications requiring both isotopic precision and performance.
-            </p>
-          </div>
-
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Activity class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Chemical Stability</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Exhibits high chemical stability under extreme conditions, enabling use in harsh environments such as nuclear reactors, 
-              space applications, and corrosive industrial settings.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Applications -->
-      <section class="mb-16 bg-accent-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Applications
-        </h2>
-        <p class="text-lg text-neutral-700 mb-8">
-          Our copper isotopes serve critical functions across multiple high-value sectors:
-        </p>
-
-        <div class="space-y-8">
-          <!-- Medical & Pharmaceutical -->
-          <div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Medical & Pharmaceutical Applications</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Radiopharmaceuticals</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Copper isotopes, particularly ⁶⁴Cu, are essential in PET imaging and cancer diagnostics. When bound with biomolecules, 
-                  they can target tumors for early detection and treatment planning.
-                </p>
-              </div>
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Targeted Radiotherapy</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Used in radiotherapy protocols for treating neuroendocrine tumors, liver cancer, and other malignancies, offering 
-                  precise targeting with minimal side effects.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Nuclear Energy -->
-          <div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Nuclear Energy & Reactor Technology</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Reactor Control Systems</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Incorporated into neutron-absorbing materials that regulate nuclear reactions, ensuring safe and efficient reactor operation.
-                </p>
-              </div>
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Nuclear Waste Management</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Studied for potential applications in safely handling and storing nuclear waste materials.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Aerospace -->
-          <div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Aerospace & Space Exploration</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Spectroscopic Analysis</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Used in studying celestial bodies and stellar compositions, providing insights into cosmic events and the evolution 
-                  of the universe.
-                </p>
-              </div>
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Satellite Components</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Applied in space-grade electronic components and radiation shielding for satellites and spacecraft, where reliability 
-                  in extreme conditions is paramount.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Electronics -->
-          <div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Electronics & Semiconductor Industry</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">High-Precision Electronics</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Incorporated into microprocessors and high-frequency circuit boards to enhance performance stability and signal integrity.
-                </p>
-              </div>
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Superconductors</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Contributing to the development of high-temperature superconducting materials for quantum computing, MRI technologies, 
-                  and advanced energy transmission systems.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Research -->
-          <div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Industrial & Scientific Research</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Material Science</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Isotopically enriched copper enables precise studies of corrosion resistance, oxidation rates, and material durability 
-                  under various conditions.
-                </p>
-              </div>
-              <div class="bg-white rounded-lg p-6">
-                <h4 class="font-bold text-neutral-900 mb-2">Nanotechnology</h4>
-                <p class="text-neutral-700 text-sm leading-relaxed">
-                  Used in fabricating nanostructured materials with enhanced mechanical and electrical properties for next-generation technologies.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Technical Specifications -->
-      <section class="mb-16">
-        <TechSpecsTable 
-          specs={[
-            { parameter: 'Isotopes Available', specification: '⁶³Cu, ⁶⁵Cu, custom ratios' },
-            { parameter: 'Purity Levels', specification: '99.9% - 99.999% (application-dependent)' },
-            { parameter: 'Chemical Stability', specification: 'High stability across pH and temperature ranges' },
-            { parameter: 'Conductivity', specification: 'Maintains copper\'s superior electrical/thermal properties' },
-            { parameter: 'Physical Forms', specification: 'Powder, foil, wire, custom forms available' },
-            { parameter: 'Radioactivity', specification: 'Non-radioactive (stable isotopes)' },
-            { parameter: 'Certifications', specification: 'Compliant with international quality standards' },
-            { parameter: 'Custom Processing', specification: 'Tailored isotopic ratios available upon request' }
-          ]}
-        />
-        <p class="text-sm text-neutral-600 mt-4">
-          * Detailed specifications and certificates of analysis available upon request.
-        </p>
-      </section>
-
-      <!-- Why Choose -->
-      <section class="mb-16 bg-neutral-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8">
-          Why Choose Our Copper Isotopes
-        </h2>
-        <PropertyList 
-          properties={[
-            'Consistent Quality - Rigorous quality control ensures batch-to-batch consistency',
-            'Technical Support - Our metallurgical team provides application guidance',
-            'Custom Solutions - Flexible isotopic ratios and forms to meet specific needs',
-            'Reliable Supply - Established production capabilities for consistent delivery',
-            'Industry Compliance - Meeting pharmaceutical, aerospace, and research standards'
-          ]}
-          columns={2}
-        />
-      </section>
-
     </div>
   </div>
+
+  <!-- SECTION 1: Introduction — white bg -->
+  <section class="bg-white pb-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">What Are Copper Isotopes?</h2>
+
+      <p class="text-lg text-neutral-700 leading-relaxed mb-4">
+        Copper isotopes are variants of the element copper that differ in the number of neutrons they contain while maintaining 
+        the same number of protons. Naturally occurring copper consists of two stable isotopes:
+      </p>
+      <ul class="text-lg text-neutral-700 space-y-2 mb-6">
+        <li><strong>⁶³Cu</strong> – 69.17% natural abundance</li>
+        <li><strong>⁶⁵Cu</strong> – 30.83% natural abundance</li>
+      </ul>
+      <p class="text-lg text-neutral-700 leading-relaxed mb-8">
+        These isotopes exhibit slightly different physical and chemical properties, which can be leveraged for specialized 
+        applications where precise material composition is critical. Unlike radioactive isotopes, both ⁶³Cu and ⁶⁵Cu are stable 
+        and non-radioactive, making them safe for diverse industrial and medical applications.
+      </p>
+
+      <!-- Two images side by side -->
+      <div class="grid grid-cols-2 gap-4">
+        <img 
+          src="/materials/copper/copper-ingot-3.jpg" 
+          alt="High-purity copper isotopes"
+          class="w-full h-96 object-cover rounded-lg"
+        />
+        <img 
+          src="/materials/copper/copper_ingots_cube.jpg" 
+          alt="Copper isotope products"
+          class="w-full h-96 object-cover rounded-lg"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Key Properties — neutral-50 bg -->
+  <section class="bg-neutral-50 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Key Properties</h2>
+      <ul class="space-y-5">
+        <li class="flex items-start gap-3">
+          <Atom class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>High Purity Levels: </strong>Manufactured to exceptional purity standards — 99.9% to 99.999% depending 
+            on application — ensuring precise isotopic compositions where even trace impurities can affect performance in 
+            pharmaceutical, nuclear, and research environments.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <Shield class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Stable & Non-Radioactive: </strong>Both ⁶³Cu and ⁶⁵Cu are stable isotopes that do not undergo 
+            radioactive decay, providing long-term safety and reliability in medical, aerospace, and research environments 
+            without the handling complexities of radioactive materials.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <Zap class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Superior Conductivity: </strong>Our copper isotopes retain copper's excellent electrical and thermal 
+            conductivity properties, making them ideal for electronic components and power applications that require both 
+            isotopic precision and high performance.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <Activity class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Chemical Stability: </strong>Exhibits high chemical stability under extreme conditions — enabling 
+            reliable use in harsh environments such as nuclear reactors, space applications, and corrosive industrial 
+            settings where material integrity cannot be compromised.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTION 3: How Isotopes Are Derived — dark bg -->
+  <section class="bg-primary-500 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <p class="text-accent-400 font-semibold text-lg mb-4">PROCESS</p>
+      <h2 class="text-3xl font-bold !text-white mb-4">How Copper Isotopes Are Derived</h2>
+      <p class="text-neutral-400 text-lg mb-12">
+        Our isotopes begin as high-purity copper from our own oxide ore operations, then undergo advanced separation 
+        to achieve the precise isotopic compositions required by our clients.
+      </p>
+
+      <div class="space-y-0">
+
+        <!-- Step 1 -->
+        <div class="flex items-start gap-6">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+              1
+            </div>
+            <div class="w-px h-full min-h-[80px] bg-neutral-700 mt-1"></div>
+          </div>
+          <div class="pb-10">
+            <h4 class="font-bold !text-white mb-2">High-Purity Copper Feedstock</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              The process begins with our 99.99% pure copper cathodes derived from oxide ore processing — providing 
+              a clean, consistent feedstock free of impurities that could interfere with isotopic separation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex items-start gap-6">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+              2
+            </div>
+            <div class="w-px h-full min-h-[80px] bg-neutral-700 mt-1"></div>
+          </div>
+          <div class="pb-10">
+            <h4 class="font-bold !text-white mb-2">Isotopic Separation</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Advanced separation processes leverage the natural isotopic composition of copper — exploiting the 
+              slight mass difference between ⁶³Cu and ⁶⁵Cu to isolate and concentrate specific isotopes to the 
+              precise ratios required by each application.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex items-start gap-6">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+              3
+            </div>
+            <div class="w-px h-full min-h-[80px] bg-neutral-700 mt-1"></div>
+          </div>
+          <div class="pb-10">
+            <h4 class="font-bold !text-white mb-2">Purification & Verification</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Separated isotopes undergo rigorous purification to remove any remaining impurities, followed by 
+              mass spectrometry verification to confirm isotopic composition and purity levels meet the stringent 
+              specifications of pharmaceutical, nuclear, and research clients.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex items-start gap-6">
+          <div class="flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+              4
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold !text-white mb-2">Form Conversion & Delivery</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Verified isotopes are converted into the required physical forms — powder, foil, wire, or custom 
+              configurations — and prepared for delivery with full certificates of analysis and compliance 
+              documentation for regulated industries.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Isotopic Composition — white bg (image + text) -->
+  <section class="bg-white py-20">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <div class="flex gap-12 items-start">
+
+        <!-- Image -->
+        <div class="w-80 flex-shrink-0">
+          <img 
+            src="/materials/copper/copper-isotope-ingot.webp" 
+            alt="Copper isotope sample"
+            class="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+
+        <!-- Text -->
+        <div class="flex-1">
+          <h2 class="text-3xl font-bold text-neutral-900 mb-6">Isotopic Composition</h2>
+          <PropertyList 
+            properties={[
+              '⁶³Cu — 69.17% natural abundance, the primary stable isotope of copper',
+              '⁶⁵Cu — 30.83% natural abundance, the secondary stable isotope',
+              'Custom ratios available — enriched or depleted compositions to client specification',
+              'Non-radioactive — both isotopes are stable with no decay risk'
+            ]}
+            columns={1}
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Applications — neutral-50 bg -->
+  <section class="bg-neutral-50 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Applications</h2>
+      <p class="text-lg text-neutral-700 mb-8">
+        Our copper isotopes serve critical functions across multiple high-value sectors:
+      </p>
+
+      <div class="space-y-5">
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Medical & Pharmaceutical</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Copper isotopes — particularly ⁶⁴Cu — are essential in PET (Positron Emission Tomography) imaging and cancer 
+            diagnostics. When bound with biomolecules, they target tumors for early detection and treatment planning. 
+            They are also employed in radiotherapy for neuroendocrine tumors and liver cancer, offering precise targeting 
+            with minimal side effects, and are critical for tracing metabolic pathways in biomedical research.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Nuclear Energy & Reactor Technology</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Incorporated into neutron-absorbing materials that regulate nuclear reactions, ensuring safe and efficient 
+            reactor operation. Copper isotopes are also studied for their potential in safely handling and containing 
+            nuclear waste materials, where isotopic purity and chemical stability are paramount.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Aerospace & Space Exploration</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Used in spectroscopic analysis to study celestial bodies and stellar compositions, providing insights into 
+            cosmic events and the evolution of the universe. Applied in space-grade electronic components and radiation 
+            shielding for satellites and spacecraft, where reliability under extreme conditions and radiation exposure 
+            is non-negotiable.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Electronics & Quantum Computing</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Incorporated into microprocessors and high-frequency circuit boards to enhance performance stability and 
+            signal integrity. Contributing to the development of high-temperature superconducting materials for quantum 
+            computing, MRI technologies, and advanced energy transmission systems where isotopic consistency directly 
+            impacts device performance.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Scientific Research & Nanotechnology</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Isotopically enriched copper enables precise studies of corrosion resistance, oxidation rates, and material 
+            durability under controlled conditions. Used in the fabrication of nanostructured materials with enhanced 
+            mechanical and electrical properties, advancing next-generation technologies in materials science and 
+            semiconductor development.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Why Choose — neutral-100 bg -->
+  <section class="bg-neutral-100 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8 text-center">Why Choose Our Copper Isotopes</h2>
+      <div class="space-y-4">
+        {[
+          { icon: FlaskConical, title: 'Consistent Quality', body: 'Rigorous quality control and mass spectrometry verification at every production stage ensures batch-to-batch isotopic composition consistency — critical for regulated pharmaceutical and nuclear applications.' },
+          { icon: Atom, title: 'High-Purity Feedstock', body: 'Starting from our own 99.99% pure copper cathodes means our isotope separation begins with an exceptionally clean base, reducing contamination risk and improving final isotopic purity.' },
+          { icon: BarChart2, title: 'Custom Isotopic Ratios', body: 'We offer flexible isotopic compositions — enriched ⁶³Cu, enriched ⁶⁵Cu, or custom ratios — in a range of physical forms including powder, foil, wire, and bespoke configurations to meet your exact specifications.' },
+          { icon: Shield, title: 'Reliable Supply', body: 'Established production capabilities backed by our own copper oxide ore operations provide a consistent, traceable supply chain — reducing dependency on external feedstock and ensuring reliable delivery schedules.' },
+          { icon: Microscope, title: 'Industry Compliance', body: 'Our isotopes are produced and documented to meet the demanding standards of pharmaceutical, aerospace, and research sectors — with full certificates of analysis, material safety data, and compliance documentation included.' },
+        ].map(({ icon: Icon, title, body }) => (
+          <div class="bg-white rounded-lg px-6 py-5 border border-neutral-200 flex items-start gap-4">
+            <div class="flex-shrink-0 w-9 h-9 bg-accent-100 rounded-lg flex items-center justify-center mt-0.5">
+              <Icon class="w-5 h-5 text-accent-600" />
+            </div>
+            <p class="text-sm text-neutral-700 leading-relaxed">
+              <span class="font-bold text-neutral-900">{title} — </span>{body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <CTASection 
     title="Source High-Purity Copper Isotopes"
-    description="Our copper isotopes meet the demanding requirements of medical, aerospace, and high-tech applications. Contact our technical team to discuss your specific isotopic needs."
+    description="Our copper isotopes meet the demanding requirements of medical, aerospace, and high-tech applications. Contact our technical team to discuss your specific isotopic needs and custom compositions."
     primaryButtonText="Request Technical Specifications"
     primaryButtonHref="mailto:nyabunzen@gmail.com"
     secondaryButtonText="Speak with Our Team"
     secondaryButtonHref="mailto:nyabunzen@gmail.com?subject=Copper Isotopes Inquiry"
-    backgroundImage="/materials/copper/copper-product-tubes.jpg"
+    backgroundImage="/materials/copper-1.jpg"
   />
+
+  <ScrollToTop />
 
 </BaseLayout>

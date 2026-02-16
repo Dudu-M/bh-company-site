@@ -1,0 +1,36 @@
+---
+import { ArrowUp } from 'lucide-astro';
+---
+
+<button
+  id="scroll-to-top"
+  class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-accent-500/40 hover:bg-accent-500/60 text-accent-900 flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none hover:scale-110 z-40"
+  aria-label="Scroll to top"
+>
+  <ArrowUp class="w-6 h-6" />
+</button>
+
+<script>
+  const scrollButton = document.getElementById('scroll-to-top');
+  
+  if (scrollButton) {
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollButton.classList.add('opacity-100', 'pointer-events-auto');
+        scrollButton.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        scrollButton.classList.add('opacity-0', 'pointer-events-none');
+        scrollButton.classList.remove('opacity-100', 'pointer-events-auto');
+      }
+    });
+
+    // Smooth scroll to top
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>

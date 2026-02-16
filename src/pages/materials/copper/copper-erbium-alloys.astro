@@ -5,7 +5,8 @@ import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import PropertyList from '../../../components/copper/PropertyList.astro';
 import TechSpecsTable from '../../../components/copper/TechSpecsTable.astro';
 import CTASection from '../../../components/ui/CTASection.astro';
-import { Zap, Flame, Gauge, Boxes } from 'lucide-astro';
+import ScrollToTop from '../../../components/ui/ScrollToTop.astro';
+import { Zap, Flame, Gauge, Boxes, Users } from 'lucide-astro';
 ---
 
 <BaseLayout 
@@ -13,393 +14,286 @@ import { Zap, Flame, Gauge, Boxes } from 'lucide-astro';
   description="Advanced copper-erbium alloys combining conductivity with enhanced mechanical strength for aerospace, electronics, and industrial applications."
 >
   
-  <!-- Hero -->
   <PageHero 
-    title="Copper Erbium Alloys: Advanced Materials for Demanding Applications"
-    subtitle="Copper erbium alloys (Cu-Er) represent the pinnacle of specialty copper materials, combining copper's exceptional conductivity with erbium's strengthening properties. Through precision alloying processes, we produce high-performance materials engineered for aerospace, electronics, and industrial applications where both electrical performance and mechanical strength are non-negotiable."
+    title="Copper Erbium Alloys"
+    subtitle="Copper erbium alloys (Cu-Er) represent the pinnacle of specialty copper materials, combining copper's exceptional conductivity with erbium's strengthening properties."
     backgroundImage="/materials/copper/copper-erbium-formula.jpg"
   />
 
-  <!-- Main Content -->
-  <div class="bg-white">
-    <div class="container mx-auto px-4 max-w-7xl py-16">
-      
-      <!-- Breadcrumb -->
+  <!-- Breadcrumb -->
+  <div class="bg-white py-4">
+    <div class="container mx-auto px-8 max-w-5xl py-4">
       <Breadcrumb 
         items={[
-          { label: 'Mining Operations', href: '/mining-operations' },
-          { label: 'Copper', href: '/mining-operations/copper' },
+          { label: 'Mining Operations', href: '/materials' },
+          { label: 'Copper', href: '/materials/copper' },
           { label: 'Copper Erbium Alloys' }
         ]}
       />
-
-      <!-- Introduction -->
-      <section class="max-w-4xl mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          What Are Copper Erbium Alloys?
-        </h2>
-        <div class="prose prose-lg max-w-none">
-          <p class="text-lg text-neutral-700 leading-relaxed mb-4">
-            Copper erbium alloys are advanced metallic materials created by combining high-purity copper with carefully controlled 
-            amounts of erbium, a rare earth element. This strategic alloying produces materials that retain most of copper's excellent 
-            electrical and thermal conductivity while gaining significantly enhanced mechanical properties—particularly strength, hardness, 
-            and thermal stability.
-          </p>
-          <p class="text-lg text-neutral-700 leading-relaxed">
-            Unlike pure copper, which softens and loses strength at elevated temperatures, Cu-Er alloys maintain their mechanical 
-            integrity across a wide temperature range. This unique combination of properties makes them invaluable in applications 
-            where components must conduct electricity efficiently while withstanding mechanical stress, high temperatures, or repeated 
-            thermal cycling.
-          </p>
-        </div>
-      </section>
-
-      <!-- Why Alloy Copper with Erbium -->
-      <section class="mb-16 bg-accent-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Why Alloy Copper with Erbium?
-        </h2>
-        <p class="text-lg text-neutral-700 mb-8">
-          The engineering advantages of copper-erbium combinations:
-        </p>
-
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Gauge class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Enhanced Mechanical Strength</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Erbium additions significantly increase the tensile strength and hardness of copper without the dramatic conductivity 
-              losses associated with other strengthening elements. This strength improvement persists even at elevated temperatures 
-              where pure copper would soften.
-            </p>
-          </div>
-
-          <div class="bg-white rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Flame class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Thermal Stability</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Cu-Er alloys resist softening and recrystallization at temperatures up to 500-600°C, maintaining structural integrity 
-              in high-temperature applications where pure copper would fail.
-            </p>
-          </div>
-
-          <div class="bg-white rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Zap class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Retained Conductivity</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Unlike many copper alloys that sacrifice conductivity for strength, Cu-Er maintains 85-95% of pure copper's electrical 
-              conductivity—a crucial advantage for power transmission applications.
-            </p>
-          </div>
-
-          <div class="bg-white rounded-lg p-6">
-            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <Boxes class="w-6 h-6 text-accent-600" />
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">Improved Wear Resistance</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Enhanced surface hardness and mechanical properties provide better wear resistance in contact applications such as 
-              electrical switches and welding electrodes.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Production & Manufacturing -->
-      <section class="mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Production & Manufacturing
-        </h2>
-        <p class="text-lg text-neutral-700 leading-relaxed mb-8">
-          Our Cu-Er alloy production leverages our high-purity copper foundation combined with precision metallurgical processes:
-        </p>
-
-        <div class="space-y-6">
-          <div class="bg-neutral-50 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">1. Starting Materials</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              We begin with our high-purity copper cathodes (99.99% Cu) derived from our oxide ore processing operations, ensuring 
-              a clean base material free of detrimental impurities.
-            </p>
-          </div>
-
-          <div class="bg-neutral-50 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">2. Erbium Addition</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              High-purity erbium is carefully added to molten copper in precisely controlled quantities, typically 0.1-0.5% by weight, 
-              depending on the target application requirements. The alloying occurs in controlled-atmosphere furnaces to prevent oxidation.
-            </p>
-          </div>
-
-          <div class="bg-neutral-50 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">3. Homogenization & Forming</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              The molten alloy is held at temperature with controlled stirring to ensure complete dissolution and uniform erbium 
-              distribution. The homogenized alloy is then cast into billets, ingots, or continuous cast forms depending on final 
-              product requirements.
-            </p>
-          </div>
-
-          <div class="bg-neutral-50 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">4. Heat Treatment</h3>
-            <p class="text-neutral-700 leading-relaxed">
-              Controlled heat treatment cycles optimize the precipitation of erbium-rich phases within the copper matrix, maximizing 
-              strength while maintaining conductivity. This solution treatment and aging process is carefully tailored to each application.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Key Properties -->
-      <section class="mb-16 bg-neutral-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Key Properties
-        </h2>
-        <p class="text-lg text-neutral-700 mb-8">
-          What makes our copper erbium alloys superior:
-        </p>
-        <PropertyList 
-          properties={[
-            'High Electrical Conductivity - Maintains 85-95% of pure copper\'s conductivity (50-58 MS/m)',
-            'Exceptional Strength - Tensile strength of 350-450 MPa, nearly double pure copper',
-            'Thermal Conductivity - Retains 85-90% of copper\'s thermal conductivity',
-            'Elevated Temperature Performance - Maintains properties at temperatures up to 500-600°C',
-            'Fatigue Resistance - Superior fatigue life under cyclic loading',
-            'Oxidation Resistance - Improved resistance at elevated temperatures',
-            'Microstructural Stability - Long-term stability preventing grain growth'
-          ]}
-          columns={2}
-        />
-      </section>
-
-      <!-- Applications -->
-      <section class="mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Applications
-        </h2>
-        <p class="text-lg text-neutral-700 mb-8">
-          Our copper erbium alloys excel in demanding applications where pure copper's conductivity must be paired with superior 
-          mechanical performance:
-        </p>
-
-        <div class="space-y-8">
-          <!-- Resistance Welding -->
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Resistance Welding Electrodes</h3>
-            <p class="text-neutral-700 leading-relaxed mb-4">
-              Cu-Er electrodes provide the perfect balance of conductivity (for efficient current delivery) and strength (to withstand 
-              mechanical pressure and high temperatures during welding cycles). They significantly outlast pure copper electrodes in 
-              automotive and manufacturing applications.
-            </p>
-            <ul class="space-y-2 text-neutral-700">
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Spot welding in automotive manufacturing</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Seam welding for continuous operations</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Projection welding requiring dimensional accuracy</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Electrical Contacts -->
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Electrical Contacts & Switches</h3>
-            <p class="text-neutral-700 leading-relaxed mb-4">
-              Used in circuit breakers, contactors, and power switches where both conductivity and mechanical durability are essential. 
-              Cu-Er contacts resist wear and arcing damage better than pure copper.
-            </p>
-            <ul class="space-y-2 text-neutral-700">
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>High-current circuit breakers</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Railway electrification pantograph contacts</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Power distribution equipment in high-vibration environments</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Aerospace -->
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Aerospace Components</h3>
-            <p class="text-neutral-700 leading-relaxed mb-4">
-              Aircraft electrical systems require connectors that maintain conductivity while withstanding vibration, temperature 
-              cycling, and mechanical stress—conditions where Cu-Er excels.
-            </p>
-            <ul class="space-y-2 text-neutral-700">
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Electrical connectors for avionics</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Heat sink applications for spacecraft electronics</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>High-reliability systems for critical operations</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Electronics -->
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Electronics & Semiconductors</h3>
-            <p class="text-neutral-700 leading-relaxed mb-4">
-              Cu-Er provides the conductivity needed for semiconductor packages while offering sufficient strength for automated 
-              assembly processes and thermal cycling during operation.
-            </p>
-            <ul class="space-y-2 text-neutral-700">
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Lead frames for integrated circuits</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Heat spreaders for power electronics and LEDs</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>High-frequency RF and microwave components</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Industrial -->
-          <div class="bg-white border border-neutral-200 rounded-lg p-6">
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">Industrial Manufacturing</h3>
-            <p class="text-neutral-700 leading-relaxed mb-4">
-              Cu-Er electrodes and components provide better wear resistance and dimensional stability in demanding manufacturing processes.
-            </p>
-            <ul class="space-y-2 text-neutral-700">
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Electrical discharge machining (EDM) electrodes</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Plastic injection mold components</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-accent-500 mt-1">•</span>
-                <span>Glass manufacturing equipment electrodes</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Technical Specifications -->
-      <section class="mb-16">
-        <TechSpecsTable 
-          specs={[
-            { parameter: 'Alloy Designation', specification: 'Cu-Er, CuEr (various erbium contents)' },
-            { parameter: 'Erbium Content', specification: '0.1% - 0.5% Er (custom concentrations available)' },
-            { parameter: 'Copper Purity', specification: '99.5%+ Cu (balance erbium and trace elements)' },
-            { parameter: 'Electrical Conductivity', specification: '50-58 MS/m (85-95% IACS)' },
-            { parameter: 'Thermal Conductivity', specification: '330-360 W/m·K (85-90% of pure copper)' },
-            { parameter: 'Tensile Strength', specification: '350-450 MPa (temper dependent)' },
-            { parameter: 'Hardness', specification: '100-140 HV (Vickers hardness)' },
-            { parameter: 'Service Temperature', specification: 'Continuous operation up to 500-600°C' },
-            { parameter: 'Available Forms', specification: 'Rod, bar, plate, sheet, wire, custom profiles' },
-            { parameter: 'Temper Options', specification: 'Annealed, half-hard, hard, solution treated & aged' }
-          ]}
-        />
-        <p class="text-sm text-neutral-600 mt-4">
-          * Detailed material data sheets, test certificates, and application engineering support available upon request.
-        </p>
-      </section>
-
-      <!-- Comparison Table -->
-      <section class="mb-16 bg-accent-50 -mx-4 px-4 md:mx-0 md:px-8 py-12 rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-          Cu-Er vs. Pure Copper: Performance Comparison
-        </h2>
-        <div class="overflow-x-auto">
-          <table class="w-full bg-white rounded-lg shadow-sm">
-            <thead class="bg-neutral-100">
-              <tr>
-                <th class="px-6 py-4 text-left text-sm font-bold text-neutral-900">Property</th>
-                <th class="px-6 py-4 text-left text-sm font-bold text-neutral-900">Pure Copper</th>
-                <th class="px-6 py-4 text-left text-sm font-bold text-neutral-900">Cu-Er Alloy</th>
-                <th class="px-6 py-4 text-left text-sm font-bold text-neutral-900">Advantage</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-neutral-200">
-              <tr>
-                <td class="px-6 py-4 text-sm font-medium text-neutral-900">Tensile Strength</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">220 MPa</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">350-450 MPa</td>
-                <td class="px-6 py-4 text-sm text-accent-600 font-semibold">+60-100%</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-sm font-medium text-neutral-900">Electrical Conductivity</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">100% IACS</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">85-95% IACS</td>
-                <td class="px-6 py-4 text-sm text-neutral-600">Minor reduction</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-sm font-medium text-neutral-900">High-Temp Strength (400°C)</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">Low</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">High</td>
-                <td class="px-6 py-4 text-sm text-accent-600 font-semibold">Maintains integrity</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-sm font-medium text-neutral-900">Creep Resistance</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">Poor</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">Excellent</td>
-                <td class="px-6 py-4 text-sm text-accent-600 font-semibold">Superior stability</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-sm font-medium text-neutral-900">Application Temperature</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">&lt;200°C</td>
-                <td class="px-6 py-4 text-sm text-neutral-700">Up to 600°C</td>
-                <td class="px-6 py-4 text-sm text-accent-600 font-semibold">3x range</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Why Choose -->
-      <section class="mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-8">
-          Why Choose Our Copper Erbium Alloys
-        </h2>
-        <PropertyList 
-          properties={[
-            'High-Purity Foundation - Starting with our premium copper cathodes ensures minimal impurities',
-            'Precise Composition Control - Advanced alloying processes deliver consistent erbium content',
-            'Optimized Heat Treatment - Tailored thermal processing maximizes strength-conductivity balance',
-            'Comprehensive Testing - Every batch undergoes chemical, electrical, and mechanical verification',
-            'Custom Formulations - Erbium content and processing tailored to specific requirements',
-            'Technical Partnership - Metallurgical team provides application engineering support',
-            'Consistent Supply - Established production capabilities ensure reliable delivery',
-            'Quality Certification - Full traceability and certification documentation'
-          ]}
-          columns={2}
-        />
-      </section>
-
     </div>
   </div>
+
+  <!-- SECTION 1: Introduction — white bg -->
+  <section class="bg-white pb-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">
+        What Are Copper Erbium Alloys?
+      </h2>
+      <p class="text-lg text-neutral-700 leading-relaxed mb-4">
+        Copper erbium alloys are advanced metallic materials created by combining high-purity copper with carefully controlled 
+        amounts of erbium, a rare earth element. This strategic alloying produces materials that retain most of copper's excellent 
+        electrical and thermal conductivity while gaining significantly enhanced mechanical properties — particularly strength, hardness, 
+        and thermal stability.
+      </p>
+      <p class="text-lg text-neutral-700 leading-relaxed mb-8">
+        Unlike pure copper, which softens and loses strength at elevated temperatures, Cu-Er alloys maintain their mechanical 
+        integrity across a wide temperature range. This unique combination of properties makes them invaluable in applications 
+        where components must conduct electricity efficiently while withstanding mechanical stress, high temperatures, or repeated 
+        thermal cycling.
+      </p>
+
+      <!-- Two images side by side -->
+      <div class="grid grid-cols-2 gap-4">
+        <img 
+          src="/materials/copper/copper-erbium-formula.jpg" 
+          alt="Copper erbium alloy formula"
+          class="w-full h-96 object-cover rounded-lg"
+        />
+        <img 
+          src="/materials/copper/copper-erbium.png" 
+          alt="Copper erbium alloy products"
+          class="w-full h-96 object-cover rounded-lg"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Advantages — neutral-50 bg -->
+  <section class="bg-neutral-50 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">
+        Advantages of Copper Erbium Alloys
+      </h2>
+      <ul class="space-y-5">
+        <li class="flex items-start gap-3">
+          <Gauge class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Enhanced Strength: </strong>Erbium additions significantly increase tensile strength and hardness — 
+            reaching 350-450 MPa — without the dramatic conductivity losses associated with other strengthening elements. 
+            This improvement persists even at elevated temperatures where pure copper would soften.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <Flame class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Thermal Stability: </strong>Cu-Er alloys resist softening and recrystallization at temperatures up to 
+            500-600°C, maintaining structural integrity in high-temperature applications where pure copper would fail.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <Zap class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Retained Conductivity: </strong>Unlike many copper alloys that sacrifice conductivity for strength, 
+            Cu-Er maintains 85-95% of pure copper's electrical conductivity — a crucial advantage for power transmission 
+            and precision electronics applications.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <Boxes class="w-5 h-5 text-accent-600 flex-shrink-0 mt-0.5" />
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            <strong>Superior Wear Resistance: </strong>Enhanced surface hardness and mechanical properties provide better 
+            wear resistance in contact applications such as electrical switches, welding electrodes, and sliding components 
+            operating under sustained load.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Production & Manufacturing — dark bg -->
+  <section class="bg-primary-500 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <p class="text-accent-400 font-semibold text-lg mb-4">PROCESS</p>
+      <h2 class="text-3xl font-bold !text-white mb-4">Production & Manufacturing</h2>
+      <p class="text-neutral-400 text-lg mb-12">
+        Our Cu-Er alloy production leverages our high-purity copper foundation combined with precision metallurgical processes.
+      </p>
+
+      <div class="space-y-0">
+
+        <div class="flex items-start gap-6">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+              1
+            </div>
+            <div class="w-px h-full min-h-[80px] bg-neutral-700 mt-1"></div>
+          </div>
+          <div class="pb-10">
+            <h4 class="font-bold !text-white mb-2">High-Purity Copper</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Starting with 99.99% pure copper cathodes derived from our own oxide ore processing operations, 
+              ensuring a clean base material free of detrimental impurities.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-6">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+              2
+            </div>
+            <div class="w-px h-full min-h-[80px] bg-neutral-700 mt-1"></div>
+          </div>
+          <div class="pb-10">
+            <h4 class="font-bold !text-white mb-2">Erbium Addition</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              High-purity erbium is carefully added to molten copper in precisely controlled quantities — 
+              typically 0.1-0.5% by weight — in controlled-atmosphere furnaces to prevent oxidation.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-6">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm z-10">
+              3
+            </div>
+            <div class="w-px h-full min-h-[80px] bg-neutral-700 mt-1"></div>
+          </div>
+          <div class="pb-10">
+            <h4 class="font-bold !text-white mb-2">Homogenization</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              The molten alloy is held at temperature with controlled stirring to ensure complete dissolution 
+              and uniform erbium distribution throughout the copper matrix before casting.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-6">
+          <div class="flex-shrink-0">
+            <div class="w-9 h-9 bg-accent-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+              4
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold !text-white mb-2">Heat Treatment</h4>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Controlled heat treatment cycles optimize the precipitation of erbium-rich phases within the copper 
+              matrix — maximizing strength while maintaining conductivity through carefully tailored solution 
+              treatment and aging processes.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Key Properties — white bg -->
+  <section class="bg-white py-20">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <div class="flex gap-12 items-start">
+
+        <!-- Image -->
+        <div class="w-80 flex-shrink-0">
+          <img 
+            src="/materials/copper/copper-erbium.png" 
+            alt="Copper erbium alloy properties"
+            class="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+
+        <!-- Text -->
+        <div class="flex-1">
+          <h2 class="text-3xl font-bold text-neutral-900 mb-6">Key Properties</h2>
+          <PropertyList 
+            properties={[
+              'High Electrical Conductivity — 85-95% of pure copper (50-58 MS/m)',
+              'Exceptional Strength — Tensile strength of 350-450 MPa, nearly double pure copper',
+              'Thermal Stability — Maintains mechanical integrity at temperatures up to 500-600°C',
+              'Superior Wear Resistance — Enhanced surface hardness and durability under sustained load'
+            ]}
+            columns={1}
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Applications — neutral-50 bg -->
+  <section class="bg-neutral-50 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Applications</h2>
+      <p class="text-lg text-neutral-700 mb-8">
+        Our copper erbium alloys excel in demanding applications requiring conductivity and mechanical strength:
+      </p>
+
+      <div class="space-y-5">
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Resistance Welding</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Electrodes that balance conductivity and strength for automotive and manufacturing welding operations, 
+            significantly outlasting pure copper electrodes in spot, seam, and projection welding applications.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Electrical Contacts & Switches</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Circuit breakers, contactors, and power switches where both conductivity and mechanical durability are 
+            essential. Cu-Er contacts resist wear and arcing damage better than pure copper in high-current and 
+            high-vibration environments.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Aerospace Components</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Electrical connectors, heat sinks, and critical avionics systems requiring components that maintain 
+            conductivity while withstanding vibration, extreme temperature cycling, and mechanical stress in 
+            flight and space environments.
+          </p>
+        </div>
+
+        <div class="border-l-4 border-accent-500 bg-white pl-5 py-2">
+          <h4 class="font-bold text-neutral-900 mb-1">Power Electronics & Semiconductors</h4>
+          <p class="text-neutral-700 text-sm leading-relaxed">
+            Lead frames, heat spreaders, and high-frequency RF components for semiconductor packages, power 
+            electronics, and LED applications where efficient heat dissipation and structural integrity under 
+            thermal stress are critical.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Why Choose — neutral-100 bg -->
+  <section class="bg-neutral-100 py-16">
+    <div class="container mx-auto px-8 max-w-5xl">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8 text-center">Why Choose Our Copper Erbium Alloys</h2>
+      <div class="space-y-4">
+        {[
+          { icon: Gauge, title: 'High-Purity Foundation', body: 'Starting with our own 99.99% pure copper cathodes derived from oxide ore processing ensures a clean base material free of detrimental impurities that could compromise alloy performance.' },
+          { icon: Zap, title: 'Precise Composition Control', body: 'Advanced alloying processes deliver consistent erbium content and uniform distribution throughout the copper matrix, ensuring reliable and repeatable mechanical and electrical properties batch to batch.' },
+          { icon: Flame, title: 'Optimized Heat Treatment', body: 'Tailored solution treatment and aging cycles maximize the strength-conductivity balance for each specific application, ensuring erbium precipitates form optimally within the copper matrix.' },
+          { icon: Boxes, title: 'Custom Formulations', body: 'Erbium content, temper, and processing parameters can be tailored to your specific application requirements — from standard rod and bar to custom profiles and specialized heat treatment conditions.' },
+          { icon: Users, title: 'Technical Partnership', body: 'Our metallurgical team provides full application engineering support, helping you select the right formulation, interpret material data, and optimize Cu-Er performance for your specific operating conditions.' },
+        ].map(({ icon: Icon, title, body }) => (
+          <div class="bg-white rounded-lg px-6 py-5 border border-neutral-200 flex items-start gap-4">
+            <div class="flex-shrink-0 w-9 h-9 bg-accent-100 rounded-lg flex items-center justify-center mt-0.5">
+              <Icon class="w-5 h-5 text-accent-600" />
+            </div>
+            <p class="text-sm text-neutral-700 leading-relaxed">
+              <span class="font-bold text-neutral-900">{title} — </span>{body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <CTASection 
@@ -409,7 +303,9 @@ import { Zap, Flame, Gauge, Boxes } from 'lucide-astro';
     primaryButtonHref="mailto:nyabunzen@gmail.com"
     secondaryButtonText="Discuss Custom Formulations"
     secondaryButtonHref="mailto:nyabunzen@gmail.com?subject=Cu-Er Custom Formulation Inquiry"
-    backgroundImage="/materials/copper/copper-product-tubes.jpg"
+    backgroundImage="/materials/copper-1.jpg"
   />
+
+  <ScrollToTop />
 
 </BaseLayout>

@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/sections/PageHero.astro';
 import ImageTextSection from '../../../components/sections/ImageTextSection.astro';
 import CTASection from '../../../components/ui/CTASection.astro';
+import ScrollToTop from '../../../components/ui/ScrollToTop.astro';
 import NewsSection from '../../../components/sections/NewsSection.astro';
 import { Eye, CheckSquare, Shovel } from 'lucide-astro';
 import CopperOresSection from '../../../components/sections/CopperOresSection.astro';
@@ -215,5 +216,7 @@ import ImageTextSlideShow from '../../../components/sections/ImageTextSlideshow.
     secondaryButtonHref="/operations"
     backgroundImage="/mining.jpg"
   />
+
+  <ScrollToTop />
 
 </BaseLayout>

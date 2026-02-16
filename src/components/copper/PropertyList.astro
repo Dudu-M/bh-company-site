@@ -12,7 +12,7 @@ const { properties, columns = 1 } = Astro.props;
 <ul class={`space-y-3 ${columns === 2 ? 'md:grid md:grid-cols-2 md:gap-x-8' : ''}`}>
   {properties.map(property => (
     <li class="flex items-start gap-3">
-      <CheckCircle class="w-5 h-5 text-accent-500 flex-shrink-0 mt-0.5" />
+      <CheckCircle class="w-5 h-5 text-accent-500 flex-shrink-0 mt-1" />
       <span class="text-neutral-700">{property}</span>
     </li>
   ))}
