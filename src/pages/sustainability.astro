@@ -5,6 +5,10 @@ import ImageTextSection from '../components/sections/ImageTextSection.astro';
 import CTASection from '../components/ui/CTASection.astro';
 import NewsSection from '../components/sections/NewsSection.astro';
 import { Eye, Target } from 'lucide-astro';
+import plantingFlower from '../assets/planting-flower.jpg';
+import mining from '../assets/mining.jpg';
+import windFarm from '../assets/wind-farm.jpg';
+import communityGarden from '../assets/community-garden.jpg';
 ---
 
 <BaseLayout title="Sustainability - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
@@ -13,12 +17,12 @@ import { Eye, Target } from 'lucide-astro';
   <PageHero 
     title="Sustainability"
     subtitle="Our Commitment to Responsible Mining"
-    backgroundImage="/planting-flower.jpg"
+    backgroundImage={plantingFlower}
   />
 
   <!-- Environment -->
   <ImageTextSection
-    imageSrc="/mining.jpg"
+    imageSrc={mining}
     imageAlt="Our operations"
     imagePosition="right"
     background="white"
@@ -41,7 +45,7 @@ import { Eye, Target } from 'lucide-astro';
 
     <!-- Environment  -->
     <ImageTextSection
-    imageSrc="/wind-farm.jpg"
+    imageSrc={windFarm}
     imageAlt="Wind farm"
     imagePosition="left"
     background="grey"
@@ -57,7 +61,7 @@ import { Eye, Target } from 'lucide-astro';
 
     <!-- Community  -->
     <ImageTextSection
-    imageSrc="/community-garden.jpg"
+    imageSrc={communityGarden}
     imageAlt="Community garden"
     imagePosition="right"
     background="white"
@@ -73,7 +77,7 @@ import { Eye, Target } from 'lucide-astro';
 
 <!-- Sustainability Policy -->
 <ImageTextSection
-    imageSrc="/planting-flower.jpg"
+    imageSrc={plantingFlower}
     imageAlt="Sustainability policy document"
     imagePosition="right"
     background="dark"

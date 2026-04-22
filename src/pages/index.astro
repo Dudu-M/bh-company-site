@@ -1,6 +1,7 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import Button from '../components/ui/Button.astro';
 import CTASection from '../components/ui/CTASection.astro';
 import ImageTextSection from '../components/sections/ImageTextSection.astro';
@@ -8,6 +9,11 @@ import ValuesGrid from '../components/sections/ValuesGrid.astro';
 import NewsSection from '../components/sections/NewsSection.astro';
 import ImageStrip from '../components/sections/ImageStrip.astro';
 import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro';
+import heroMining from '../assets/mining.jpg';
+import miningTeam from '../assets/mining-team.JPG';
+import machineDigging from '../assets/machine-digging.jpg';
+import copperProductTubes from '../assets/materials/copper/copper-product-tubes.jpg';
+import copperStoneInHand from '../assets/materials/copper/copper-stone-in-hand.jpg';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -21,8 +27,8 @@ import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro'
 >
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
-    <img 
-      src="/mining.jpg" 
+    <Image 
+      src={heroMining}
       alt="Mining operations" 
       class="w-full h-full object-cover"
     />
@@ -52,10 +58,10 @@ import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro'
 <!-- Who We are Section  -->
 <ImageTextSlideshow
   media={[
-    { type: 'image', src: '/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' },
+    { type: 'image', src: copperProductTubes, alt: 'Refined copper' },
     { type: 'video', src: '/materials/copper/mine.MP4', alt: 'Processing video' },
-    { type: 'image', src: '/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
-    { type: 'image', src: '/mining-team.JPG', alt: 'Copper mining operation'},
+    { type: 'image', src: copperStoneInHand, alt: 'Copper mining operation' },
+    { type: 'image', src: miningTeam, alt: 'Copper mining operation'},
   ]}
   imagePosition="right"
   background="white"
@@ -79,7 +85,7 @@ import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro'
 
 <!-- What we do Section  -->
 <ImageTextSection
-  imageSrc="/machine-digging.jpg"
+  imageSrc={machineDigging}
   imageAlt="Mining equipment"
   imagePosition="left"
   background="grey"

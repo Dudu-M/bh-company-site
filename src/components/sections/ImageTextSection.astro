@@ -1,6 +1,6 @@
 ---
 interface Props {
-  imageSrc: string;
+  imageSrc: string | any;
   imageAlt: string;
   imagePosition?: 'left' | 'right';
   background?: 'white' | 'grey' | 'dark';
@@ -11,6 +11,9 @@ interface Props {
   buttonVariant?: 'primary' | 'secondary' | 'outline';
   class?: string;
 }
+
+import { Image } from 'astro:assets';
+import Button from '../ui/Button.astro';
 
 const { 
   imageSrc,
@@ -24,8 +27,6 @@ const {
   buttonVariant = 'primary',
   class: className = ''
 } = Astro.props;
-
-import Button from '../ui/Button.astro';
 
 // Background classes
 const backgrounds = {
@@ -65,11 +66,19 @@ const textOrder = imagePosition === 'left' ? 'order-2' : 'order-1';
       <!-- Image -->
         <div class={`${imageOrder} slide-up`}>
         <div class="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden rounded-2xl shadow-lg">
-            <img 
-            src={imageSrc} 
-            alt={imageAlt}
-            class="absolute inset-0 w-full h-full object-cover"
+          {typeof imageSrc === 'string' ? (
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              class="absolute inset-0 w-full h-full object-cover"
             />
+          ) : (
+            <Image 
+              src={imageSrc}
+              alt={imageAlt}
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
         </div>
         </div>
 

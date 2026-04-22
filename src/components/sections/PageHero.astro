@@ -1,15 +1,18 @@
 ---
+import { Image } from 'astro:assets';
+import defaultBackgroundImage from '../../assets/mining.jpg';
+
 interface Props {
   title: string;
   subtitle?: string;
-  backgroundImage?: string;
+  backgroundImage?: string | any;
   class?: string;
 }
 
 const { 
   title, 
   subtitle,
-  backgroundImage = '/mining.jpg',
+  backgroundImage = defaultBackgroundImage,
   class: className = ''
 } = Astro.props;
 ---
@@ -20,11 +23,19 @@ const {
 >
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
-    <img 
-      src={backgroundImage} 
-      alt={title}
-      class="w-full h-full object-cover"
-    />
+    {typeof backgroundImage === 'string' ? (
+      <img
+        src={backgroundImage}
+        alt={title}
+        class="w-full h-full object-cover"
+      />
+    ) : (
+      <Image 
+        src={backgroundImage}
+        alt={title}
+        class="w-full h-full object-cover"
+      />
+    )}
   </div>
   
   <!-- Gradient Overlay -->

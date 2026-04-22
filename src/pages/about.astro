@@ -9,6 +9,11 @@ import FounderSection from '../components/sections/FounderSection.astro';
 import USPSection from '../components/sections/USPSection.astro';
 import { Eye, Target } from 'lucide-astro';
 import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro';
+import mining4 from '../assets/mining-4.jpg';
+import miningTeam from '../assets/mining-team.JPG';
+import copperStoneInHand from '../assets/materials/copper/copper-stone-in-hand.jpg';
+import copperProductTubes from '../assets/materials/copper/copper-product-tubes.jpg';
+import copperAuthentic1 from '../assets/materials/copper/copper-authentic-1.JPG';
 ---
 
 <BaseLayout title="About Us - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
@@ -17,12 +22,12 @@ import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro'
   <PageHero 
     title="About Beth Hakkerem"
     subtitle="Leading the future of sustainable mining with integrity, innovation, and impact."
-    backgroundImage="/mining-4.jpg"
+    backgroundImage={mining4}
   />
 
   <!-- Who We Are -->
   <ImageTextSection
-    imageSrc="/mining-team.JPG"
+    imageSrc={miningTeam}
     imageAlt="Our operations"
     imagePosition="right"
     background="white"
@@ -207,9 +212,9 @@ import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro'
     <ImageTextSlideshow
     media={[
     { type: 'video', src: '/materials/copper/mine.MP4', alt: 'Processing video' },
-    { type: 'image', src: '/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
-    { type: 'image', src: '/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' },
-    { type: 'image', src: '/materials/copper/copper-authentic-1.JPG', alt: 'Copper mining operation' },
+    { type: 'image', src: copperStoneInHand, alt: 'Copper mining operation' },
+    { type: 'image', src: copperProductTubes, alt: 'Refined copper' },
+    { type: 'image', src: copperAuthentic1, alt: 'Copper mining operation' },
     ]}
     imagePosition="right"
     background="dark"

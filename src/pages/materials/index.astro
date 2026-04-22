@@ -4,6 +4,10 @@ import PageHero from '../../components/sections/PageHero.astro';
 import CTASection from '../../components/ui/CTASection.astro';
 import ImageStrip from '../../components/sections/ImageStrip.astro';
 import MaterialsSection from '../../components/sections/MaterialsSection.astro';
+import mining2 from '../../assets/mining-2.jpg';
+import copper1 from '../../assets/copper-1.jpg';
+import copperStonePile from '../../assets/copper-stone-pile.jpg';
+import copperProductTubes from '../../assets/copper-product-tubes.jpg';
 ---
 
 <BaseLayout title="Mining Operations - Beth Hakkerem" description="Sustainable mining operations delivering high-quality materials across the region.">
@@ -12,7 +16,7 @@ import MaterialsSection from '../../components/sections/MaterialsSection.astro';
   <PageHero 
     title="Mining Operations"
     subtitle="Sustainable mining operations delivering high-quality materials for modern infrastructure, clean energy, and advanced technologies."
-    backgroundImage="/mining-2.jpg"
+    backgroundImage={mining2}
   />
 
   <!-- Overview Section -->
@@ -38,9 +42,9 @@ import MaterialsSection from '../../components/sections/MaterialsSection.astro';
         name: 'Copper',
         description: "Our copper portfolio is centered on oxide copper resources, selected for their geological accessibility, processing efficiency, and alignment with long-term copper demand. We are also advancing into higher-value copper-based materials.",
         images: [
-          '/materials/copper-1.jpg',
-          '/materials/copper/copper-stone-pile.jpg',
-          '/materials/copper/copper-product-tubes.jpg',
+          copper1,
+          copperStonePile,
+          copperProductTubes,
         ],
         //trustedBy: ['Company A', 'Company B'],
         buttonText: 'Explore Our Copper Products »',
