@@ -1,7 +1,5 @@
 ---
 
-const base = import.meta.env.BASE_URL;
-
 const quickLinks = [
   { name: 'About Us', href: '/about' },
   { name: 'Operations', href: '/operations' },
@@ -23,10 +21,10 @@ const investorLinks = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
       <!-- Company Info -->
       <div class="lg:col-span-3">
-        <a href={base} class="flex items-center space-x-3 mb-4">
+        <a href="/" class="flex items-center space-x-3 mb-4">
           <div class="w-10 h-10 rounded-lg overflow-hidden">
             <img 
-              src='/bh-company-site/logo-square.jpg'
+              src='/logo-square.jpg'
               alt="Beth Hakkerem" 
               class="w-full h-full object-cover"
             />
@@ -66,7 +64,7 @@ const investorLinks = [
         <ul class="space-y-2">
           {quickLinks.map(link => (
             <li>
-              <a href={`${base}${link.href.slice(1)}`} class="text-neutral-300 hover:text-accent-500 transition-colors">
+              <a href={link.href} class="text-neutral-300 hover:text-accent-500 transition-colors">
                 {link.name}
               </a>
             </li>
@@ -79,7 +77,7 @@ const investorLinks = [
         <ul class="space-y-2">
           {investorLinks.map(link => (
             <li>
-              <a href={`${base}${link.href.slice(1)}`} class="text-neutral-300 hover:text-accent-500 transition-colors">
+              <a href={link.href} class="text-neutral-300 hover:text-accent-500 transition-colors">
                 {link.name}
               </a>
             </li>

@@ -40,17 +40,13 @@ const navItems = [
   { name: 'Documents', href: '/documents' },
 ];
 
-// Get base path from Astro
-const base = import.meta.env.BASE_URL;
-
 // Get current path for active state
 const currentPath = Astro.url.pathname;
 
 // Function to check if link is active
 const isActive = (href: string) => {
-  const fullPath = base + href.slice(1);
-  if (href === '/' && currentPath === base) return true;
-  if (href !== '/' && currentPath.startsWith(fullPath)) return true;
+  if (href === '/' && currentPath === '/') return true;
+  if (href !== '/' && currentPath.startsWith(href)) return true;
   return false;
 };
 ---
@@ -59,10 +55,10 @@ const isActive = (href: string) => {
   <div class="container-custom">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href={base} class="flex items-center space-x-3 group relative z-50">
+      <a href="/" class="flex items-center space-x-3 group relative z-50">
         <div class="w-12 h-12 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
           <img 
-            src='/bh-company-site/logo-square.jpg'
+            src='/logo-square.jpg'
             alt="Beth Hakkerem" 
             class="w-full h-full object-cover"
           />
@@ -75,7 +71,7 @@ const isActive = (href: string) => {
         {navItems.map((item) => (
           <li class="relative group/nav">
             <a 
-              href={`${base}${item.href.slice(1)}`}
+              href={item.href}
               class={`nav-link font-medium transition-colors relative flex items-center gap-1 text-white ${
                 isActive(item.href) 
                   ? '!text-accent-500' 
@@ -101,7 +97,7 @@ const isActive = (href: string) => {
                       </div>
                     ) : (
                       <a 
-                        href={`${base}${subItem.href.slice(1)}`}
+                        href={subItem.href}
                         class="block px-4 py-2 text-neutral-700 hover:bg-accent-50 hover:text-accent-500 transition-colors font-medium"
                         data-astro-reload={subItem.href.includes('#') ? true : undefined}
                       >
@@ -141,7 +137,7 @@ const isActive = (href: string) => {
       {navItems.map((item) => (
         <li>
           <a 
-            href={`${base}${item.href.slice(1)}`}
+            href={item.href}
             class={`mobile-link block py-2 font-medium transition-colors text-neutral-700 ${
               isActive(item.href)
                 ? '!text-accent-500'
@@ -162,7 +158,7 @@ const isActive = (href: string) => {
                 ) : (
                   <li>
                     <a 
-                      href={`${base}${subItem.href.slice(1)}`}
+                      href={subItem.href}
                       class="block py-1 text-sm text-neutral-600 hover:text-accent-500 transition-colors"
                       data-astro-reload={subItem.href.includes('#') ? true : undefined}
                     >
