@@ -9,6 +9,7 @@ import ImageTextSlideShow from '../../../components/sections/ImageTextSlideshow.
 import ImageTextSection from '../../../components/sections/ImageTextSection.astro';
 import { Award, Shield, Zap, Users, ArrowRight } from 'lucide-astro';
 import CopperGallerySection from '../../../components/sections/CopperGallerySection.astro';
+import copper1 from '../../../assets/copper-1.jpg';
 ---
 
 <BaseLayout 
@@ -21,7 +22,7 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
   <PageHero 
     title="Our Copper Products"
     subtitle="From naturally occurring oxide ores to specialised isotopes and advanced alloys, our comprehensive copper portfolio serves diverse industrial needs with uncompromising quality. Each product line represents decades of geological expertise and processing innovation."
-    backgroundImage="/materials/copper-1.jpg"
+    backgroundImage={copper1}
   />
 
   <!-- Main Content -->
@@ -106,10 +107,10 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
       <ImageTextSlideShow
         media={[
           { type: 'image', src: '/materials/copper/copper-gold-upclose.JPG', alt: 'Copper oxide ore close-up' },
-          { type: 'image', src: '/materials/copper/copper-stone-pile.jpg', alt: 'Copper oxide ore extraction' },
+          { type: 'image', src: '/src/assets/materials/copper/copper-stone-pile.jpg', alt: 'Copper oxide ore extraction' },
           { type: 'video', src: '/materials/copper/mine.MP4', alt: 'Processing video' },
-          { type: 'image', src: '/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
-          { type: 'image', src: '/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' },
+          { type: 'image', src: '/src/assets/materials/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
+          { type: 'image', src: '/src/assets/materials/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' },
           { type: 'image', src: '/materials/copper/copper-authentic-1.JPG', alt: 'Copper mining operation' },
           { type: 'image', src: '/materials/copper/copper-product.JPG', alt: 'Refined copper product' },
         ]}
@@ -156,7 +157,7 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
       <!-- Copper Isotopes Section -->
       <ImageTextSlideShow
         media={[
-          { type: 'image', src: '/materials/copper/copper-product-tubes.jpg', alt: 'Copper isotope tubes' },
+          { type: 'image', src: '/src/assets/materials/copper/copper-product-tubes.jpg', alt: 'Copper isotope tubes' },
           { type: 'image', src: '/materials/copper/copper-isotope-ingot.webp', alt: 'Copper isotope ingot' },
           { type: 'image', src: '/materials/copper/copper-product.JPG', alt: 'Copper isotope sample' },
         ]}
@@ -320,7 +321,7 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
   items={[
     {
       type: 'image',
-      src: '/materials/copper/copper-stone-pile.jpg',
+      src: '/src/assets/materials/copper/copper-stone-pile.jpg',
       alt: 'Pile of copper stones',
       caption: 'Copper Stone Pile'
     },
@@ -338,13 +339,13 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
     },
     {
       type: 'image',
-      src: '/materials/copper/copper-stone-in-hand.jpg',
+      src: '/src/assets/materials/copper/copper-stone-in-hand.jpg',
       alt: 'Copper stone sample',
       caption: 'Copper Stone in Hand'
     },
     {
       type: 'image',
-      src: '/materials/copper/copper-product-tubes.jpg',
+      src: '/src/assets/materials/copper/copper-product-tubes.jpg',
       alt: 'Copper product tubes',
       caption: 'Copper Tubes'
     },
@@ -371,7 +372,7 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
       src: '/materials/copper/mine.MP4',
       alt: 'Mining operations video',
       caption: 'Mining Operations',
-      thumbnail: '/materials/copper/copper-stone-pile.jpg',
+      thumbnail: '/src/assets/materials/copper/copper-stone-pile.jpg',
     },
     {
       type: 'video',
@@ -410,7 +411,7 @@ import CopperGallerySection from '../../../components/sections/CopperGallerySect
     primaryButtonHref="mailto:nyabunzen@gmail.com"
     secondaryButtonText="Expore Our Copper Oxide Ores"
     secondaryButtonHref="/materials/copper/copper-oxide-ores"
-    backgroundImage="/mining.jpg"
+    backgroundImage="/src/assets/mining.jpg"
   />
 
   <ScrollToTop />

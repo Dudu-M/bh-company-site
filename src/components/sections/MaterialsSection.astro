@@ -1,11 +1,12 @@
 ---
 import { Check } from 'lucide-astro';
 import Button from '../ui/Button.astro';
+import { Image } from 'astro:assets';
 
 interface Material {
   name: string;
   description: string;
-  images: string[];
+  images: string[] | any[]; // Accept both string URLs and Astro Image objects
   trustedBy?: string[];
   buttonText?: string;
   buttonHref?: string;
@@ -54,11 +55,19 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
             <div class="grid grid-cols-2 gap-4">
               {material.images.map((image, imgIndex) => (
                 <div class={`relative overflow-hidden rounded-2xl ${imgIndex === 0 ? 'row-span-2' : ''}`}>
-                  <img 
-                    src={image} 
-                    alt={material.name}
-                    class={`w-full object-cover ${imgIndex === 0 ? 'h-full' : 'h-48'}`}
-                  />
+                  {typeof image === 'string' ? (
+                    <img 
+                      src={image} 
+                      alt={material.name}
+                      class={`w-full object-cover ${imgIndex === 0 ? 'h-full' : 'h-48'}`}
+                    />
+                  ) : (
+                    <Image 
+                      src={image} 
+                      alt={material.name}
+                      class={`w-full object-cover ${imgIndex === 0 ? 'h-full' : 'h-48'}`}
+                    />
+                  )}
                 </div>
               ))}
             </div>

@@ -6,7 +6,7 @@ import ImageStrip from '../../components/sections/ImageStrip.astro';
 import MaterialsSection from '../../components/sections/MaterialsSection.astro';
 import mining2 from '../../assets/mining-2.jpg';
 import copper1 from '../../assets/copper-1.jpg';
-import copperStonePile from '../../assets/copper-stone-pile.jpg';
+import copperStonePile from '../../assets/materials/copper/copper-stone-pile.jpg';
 import copperProductTubes from '../../assets/copper-product-tubes.jpg';
 ---
 
@@ -153,12 +153,12 @@ import copperProductTubes from '../../assets/copper-product-tubes.jpg';
         caption: 'Copper Sample'
       },
       { 
-        src: '/materials/copper/copper-product-tubes.jpg', 
+        src: 'src/assets/materials/copper/copper-product-tubes.jpg', 
         alt: 'Copper product tubes',
         caption: 'Copper Product Tubes'
       },
       { 
-        src: '/materials/copper/copper-stone-pile.jpg', 
+        src: 'src/assets/materials/copper/copper-stone-pile.jpg', 
         alt: 'Copper stone pile',
         caption: 'Copper Stone Pile'
       },
@@ -175,7 +175,6 @@ import copperProductTubes from '../../assets/copper-product-tubes.jpg';
     description="Connect with us to explore collaboration opportunities in our mining operations."
     primaryButtonText="Contact Us"
     primaryButtonHref="mailto:nyabunzen@gmail.com"
-    backgroundImage="/mining.jpg"
   />
 
 </BaseLayout>
