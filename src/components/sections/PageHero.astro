@@ -5,7 +5,7 @@ import defaultBackgroundImage from '../../assets/mining.jpg';
 interface Props {
   title: string;
   subtitle?: string;
-  backgroundImage?: string | any;
+  backgroundImage?: any;
   class?: string;
 }
 
@@ -23,6 +23,16 @@ const {
 >
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
+    <Image 
+    src={backgroundImage}
+    alt={title}
+    width={1920}
+    height={1080}
+    class="w-full h-full object-cover"
+    widths={[640, 1024, 1600, 1920]}
+    sizes="100vw"
+    priority
+  />
     {typeof backgroundImage === 'string' ? (
       <img
         src={backgroundImage}
