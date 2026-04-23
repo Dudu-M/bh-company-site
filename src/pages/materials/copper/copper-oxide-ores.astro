@@ -9,6 +9,8 @@ import ScrollToTop from '../../../components/ui/ScrollToTop.astro';
 import { Leaf, Mountain, Atom, TrendingUp,FlaskConical, BarChart2, Cog, Users } from 'lucide-astro';
 import ImageTextSection from '../../../components/sections/ImageTextSection.astro';
 import copper1 from '../../../assets/copper-1.jpg';
+import copperStoneInHand from '../../../assets/materials/copper/copper-stone-in-hand.jpg';
+import copperStonePile from '../../../assets/materials/copper/copper-stone-pile.jpg';
 ---
 
 <BaseLayout 
@@ -56,12 +58,12 @@ import copper1 from '../../../assets/copper-1.jpg';
       <!-- Two images side by side -->
       <div class="grid grid-cols-2 gap-4">
         <img 
-          src="/src/assets/materials/copper/copper-stone-in-hand.jpg" 
+          src={copperStoneInHand.src} 
           alt="Copper erbium alloy formula"
           class="w-full h-96 object-cover rounded-lg"
         />
         <img 
-          src="/src/assets/materials/copper/copper-stone-pile.jpg" 
+          src={copperStonePile.src} 
           alt="Copper erbium alloy products"
           class="w-full h-96 object-cover rounded-lg"
         />

@@ -10,6 +10,9 @@ import ImageTextSection from '../../../components/sections/ImageTextSection.astr
 import { Award, Shield, Zap, Users, ArrowRight } from 'lucide-astro';
 import CopperGallerySection from '../../../components/sections/CopperGallerySection.astro';
 import copper1 from '../../../assets/copper-1.jpg';
+import copperStonePile from '../../../assets/materials/copper/copper-stone-pile.jpg';
+import copperStoneInHand from '../../../assets/materials/copper/copper-stone-in-hand.jpg';
+import copperProductTubes from '../../../assets/materials/copper/copper-product-tubes.jpg';
 ---
 
 <BaseLayout 
@@ -107,10 +110,10 @@ import copper1 from '../../../assets/copper-1.jpg';
       <ImageTextSlideShow
         media={[
           { type: 'image', src: '/materials/copper/copper-gold-upclose.JPG', alt: 'Copper oxide ore close-up' },
-          { type: 'image', src: '/src/assets/materials/copper/copper-stone-pile.jpg', alt: 'Copper oxide ore extraction' },
+          { type: 'image', src: copperStonePile, alt: 'Copper oxide ore extraction' },
           { type: 'video', src: '/materials/copper/mine.MP4', alt: 'Processing video' },
-          { type: 'image', src: '/src/assets/materials/materials/copper/copper-stone-in-hand.jpg', alt: 'Copper mining operation' },
-          { type: 'image', src: '/src/assets/materials/materials/copper/copper-product-tubes.jpg', alt: 'Refined copper' },
+          { type: 'image', src: copperStoneInHand, alt: 'Copper mining operation' },
+          { type: 'image', src: copperProductTubes, alt: 'Refined copper' },
           { type: 'image', src: '/materials/copper/copper-authentic-1.JPG', alt: 'Copper mining operation' },
           { type: 'image', src: '/materials/copper/copper-product.JPG', alt: 'Refined copper product' },
         ]}
@@ -321,7 +324,7 @@ import copper1 from '../../../assets/copper-1.jpg';
   items={[
     {
       type: 'image',
-      src: '/src/assets/materials/copper/copper-stone-pile.jpg',
+      src: copperStonePile,
       alt: 'Pile of copper stones',
       caption: 'Copper Stone Pile'
     },
@@ -339,13 +342,13 @@ import copper1 from '../../../assets/copper-1.jpg';
     },
     {
       type: 'image',
-      src: '/src/assets/materials/copper/copper-stone-in-hand.jpg',
+      src: copperStoneInHand,
       alt: 'Copper stone sample',
       caption: 'Copper Stone in Hand'
     },
     {
       type: 'image',
-      src: '/src/assets/materials/copper/copper-product-tubes.jpg',
+      src: copperProductTubes,
       alt: 'Copper product tubes',
       caption: 'Copper Tubes'
     },
@@ -372,7 +375,7 @@ import copper1 from '../../../assets/copper-1.jpg';
       src: '/materials/copper/mine.MP4',
       alt: 'Mining operations video',
       caption: 'Mining Operations',
-      thumbnail: '/src/assets/materials/copper/copper-stone-pile.jpg',
+      thumbnail: copperStonePile,
     },
     {
       type: 'video',
