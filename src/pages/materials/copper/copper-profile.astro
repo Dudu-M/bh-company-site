@@ -9,6 +9,8 @@ import { Eye, CheckSquare, Shovel } from 'lucide-astro';
 import CopperOresSection from '../../../components/sections/CopperOresSection.astro';
 import CopperGallerySection from '../../../components/sections/CopperGallerySection.astro';
 import ImageTextSlideShow from '../../../components/sections/ImageTextSlideshow.astro';
+import copper1 from '../../../assets/copper-1.jpg';
+import mining4 from '../../../assets/mining-4.jpg';
 ---
 
 <BaseLayout title="Copper Profile - Beth Hakkerem" description="Learn about our mission, vision, and commitment to sustainable mining practices.">
@@ -17,7 +19,7 @@ import ImageTextSlideShow from '../../../components/sections/ImageTextSlideshow.
   <PageHero 
     title="Copper Profile"
     subtitle="Our portfolio focuses on copper resources and materials that support modern infrastructure, clean energy, and advanced technologies. We specialise in copper oxide deposits and are developing advanced copper–erbium materials to support future-facing applications."
-    backgroundImage="/materials/copper-1.jpg"
+    backgroundImage={copper1}
   />
 
   <!-- Core Asset -->
@@ -214,7 +216,7 @@ import ImageTextSlideShow from '../../../components/sections/ImageTextSlideshow.
     primaryButtonHref="mailto:nyabunzen@gmail.com"
     secondaryButtonText="View Projects"
     secondaryButtonHref="/operations"
-    backgroundImage="/mining.jpg"
+    backgroundImage={mining4}
   />
 
   <ScrollToTop />

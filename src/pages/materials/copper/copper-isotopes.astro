@@ -7,6 +7,7 @@ import TechSpecsTable from '../../../components/copper/TechSpecsTable.astro';
 import CTASection from '../../../components/ui/CTASection.astro';
 import ScrollToTop from '../../../components/ui/ScrollToTop.astro';
 import { Atom, Shield, Zap, Activity, FlaskConical, BarChart2, Microscope } from 'lucide-astro';
+import copper1 from '../../../assets/copper-1.jpg';
 ---
 
 <BaseLayout 
@@ -323,7 +324,7 @@ import { Atom, Shield, Zap, Activity, FlaskConical, BarChart2, Microscope } from
     primaryButtonHref="mailto:nyabunzen@gmail.com"
     secondaryButtonText="Speak with Our Team"
     secondaryButtonHref="mailto:nyabunzen@gmail.com?subject=Copper Isotopes Inquiry"
-    backgroundImage="/src/assets/copper-1.jpg"
+    backgroundImage={copper1}
   />
 
   <ScrollToTop />

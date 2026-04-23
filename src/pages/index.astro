@@ -10,7 +10,7 @@ import NewsSection from '../components/sections/NewsSection.astro';
 import ImageStrip from '../components/sections/ImageStrip.astro';
 import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro';
 import heroMining from '../assets/mining.webp';
-import miningTeam from '../assets/mining-team.JPG';
+import miningTeam from '../assets/mining-team.jpg';
 import machineDigging from '../assets/machine-digging.jpg';
 import copperProductTubes from '../assets/materials/copper/copper-product-tubes.jpg';
 import copperStoneInHand from '../assets/materials/copper/copper-stone-in-hand.jpg';
@@ -157,6 +157,6 @@ import copperStoneInHand from '../assets/materials/copper/copper-stone-in-hand.j
     primaryButtonText="Get a Quote"
     secondaryButtonText="View Projects"
     secondaryButtonHref="/projects"
-    backgroundImage="/src/assets/mining.jpg"
+    backgroundImage={heroMining}
   />
 </BaseLayout>

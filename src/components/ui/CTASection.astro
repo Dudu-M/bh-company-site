@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Button from './Button.astro';
+import defaultBackgroundImage from '../../assets/mining.webp';
 
 interface Props {
   title: string;
@@ -8,7 +10,7 @@ interface Props {
   primaryButtonHref?: string;
   secondaryButtonText?: string;
   secondaryButtonHref?: string;
-  backgroundImage?: string;
+  backgroundImage?: string | any;
 }
 
 const { 
@@ -18,18 +20,32 @@ const {
   primaryButtonHref = 'mailto:nyabunzen@gmail.com',
   secondaryButtonText,
   secondaryButtonHref,
-  backgroundImage = '/src/assets/mining.webp'
+  backgroundImage = defaultBackgroundImage
 } = Astro.props;
 ---
 
-<section class="relative section-spacing overflow-hidden">
+<section class="relative section-spacing overflow-hidden bg-primary-900">
   <!-- Background Image -->
-  <div class="absolute inset-0 z-0">
-    <img 
-      src={backgroundImage} 
-      alt="Background" 
-      class="w-full h-full object-cover"
-    />
+  <div class="absolute inset-0 z-0 bg-primary-900">
+    {typeof backgroundImage === 'string' ? (
+      <img
+        src={backgroundImage}
+        alt="Background"
+        class="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+    ) : (
+      <Image
+        src={backgroundImage}
+        alt="Background"
+        class="w-full h-full object-cover"
+        widths={[640, 1024, 1600, 1920]}
+        sizes="100vw"
+        loading="eager"
+        priority
+      />
+    )}
   </div>
   
   <!-- Gradient Overlay - Top to bottom -->
