@@ -7,9 +7,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://Dudu-M.github.io',
-  build: {
-    inlineStylesheets: 'auto',
-  },
-  compressHTML: true,
+  // site: 'https://Dudu-M.github.io',
+  // build: {
+  //   inlineStylesheets: 'auto',
+  // },
+  // compressHTML: true,
 });
