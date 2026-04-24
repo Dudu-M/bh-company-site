@@ -81,13 +81,13 @@ const iconMap = {
       </div>
 
       <!-- Right: Sticky Image Container -->
-      <div class="relative lg:sticky lg:top-32 h-fit hidden lg:block">
+      <div class="relative lg:sticky lg:top-26 h-fit hidden lg:block">
         <div class="relative h-[600px] w-full overflow-hidden rounded-2xl shadow-2xl">
           {objectives.map((objective, index) => (
             <img 
               src={objective.image} 
               alt={objective.title}
-              class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+              class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
               data-objective-image={index}
             />
           ))}
@@ -103,7 +103,7 @@ const iconMap = {
   // Intersection Observer to detect which card is in view
   const observerOptions = {
     root: null,
-    rootMargin: '-20% 0px -60% 0px',
+    rootMargin: '-50% 0px -40% 0px',
     threshold: 0
   };
 
