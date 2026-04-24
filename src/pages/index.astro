@@ -22,9 +22,11 @@ import ImageTextSlideshow from '../components/sections/ImageTextSlideshow.astro'
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
     <img 
-      src="/mining.jpg" 
+      src="/mining-hero.jpg" 
       alt="Mining operations" 
       class="w-full h-full object-cover"
+      fetchpriority="high"
+      loading="eager"
     />
   </div>
   
