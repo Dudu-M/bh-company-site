@@ -1,11 +1,16 @@
 ---
 import { Unlock, Handshake, Leaf, Shield } from 'lucide-astro';
 
+interface ImageLike {
+  src: string;
+  [key: string]: unknown;
+}
+
 interface Objective {
   icon: string;
   title: string;
   description: string;
-  image: string;
+  image: string | ImageLike;
 }
 
 interface Props {
@@ -25,6 +30,28 @@ const {
 } = Astro.props;
 
 const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
+
+const resolveImage = (image: string | ImageLike): string => {
+  if (typeof image === 'string') {
+    return image;
+  }
+
+  if (image && typeof image === 'object') {
+    if ('src' in image && typeof image.src === 'string') {
+      return image.src;
+    }
+    if ('default' in image && typeof image.default === 'string') {
+      return image.default;
+    }
+    try {
+      return String(image);
+    } catch {
+      return '';
+    }
+  }
+
+  return '';
+};
 
 const iconMap = {
   'unlock': Unlock,
@@ -54,11 +81,12 @@ const iconMap = {
       <div class="space-y-8" id="objectives-container">
         {objectives.map((objective, index) => {
           const Icon = iconMap[objective.icon as keyof typeof iconMap];
+          const imageSrc = resolveImage(objective.image);
           return (
             <div 
               class="objective-card bg-neutral-50 p-8 md:p-10 rounded-2xl slide-up"
               style={`animation-delay: ${index * 0.15}s`}
-              data-image={objective.image}
+              data-image={imageSrc}
               data-index={index}
             >
               <!-- Icon -->
@@ -83,14 +111,17 @@ const iconMap = {
       <!-- Right: Sticky Image Container -->
       <div class="relative lg:sticky lg:top-32 h-fit hidden lg:block">
         <div class="relative h-[600px] w-full overflow-hidden rounded-2xl shadow-2xl">
-          {objectives.map((objective, index) => (
-            <img 
-              src={objective.image} 
-              alt={objective.title}
-              class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
-              data-objective-image={index}
-            />
-          ))}
+          {objectives.map((objective, index) => {
+            const imageSrc = resolveImage(objective.image);
+            return (
+              <img 
+                src={imageSrc}
+                alt={objective.title}
+                class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+                data-objective-image={index}
+              />
+            );
+          })}
         </div>
       </div>
 
