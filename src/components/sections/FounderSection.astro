@@ -97,7 +97,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
                     </a>
                   )}
 
-                  {member.email && (
+                  {member.phone && (
                     <a
                       href={member.phone ? (member.whatsapp ? `https://wa.me/${member.whatsapp.replace(/\D/g, '')}` : `tel:${member.phone}`) : '#'}
                       target={member.phone && member.whatsapp ? '_blank' : undefined}
@@ -110,7 +110,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-neutral-50';
                     </a>
                   )}
 
-                  {member.email && (  
+                  {member.linkedin && (  
                     <a
                       href={member.linkedin ?? '#'}
                       target={member.linkedin ? '_blank' : undefined}
